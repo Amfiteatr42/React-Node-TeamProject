@@ -1,10 +1,10 @@
-import { MainTitle } from './HomePage.styled';
+import { HeroContainer, MainTitle } from './HomePage.styled';
 
 const HomePage = () => {
   return (
-    <div>
+    <HeroContainer>
       <MainTitle>Take good care of your small pets</MainTitle>
-    </div>
+    </HeroContainer>
   );
 };
 

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { persistor, store } from 'redux/store.js';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from 'components/App';
-// import 'modern-normalize/modern-normalize.css';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

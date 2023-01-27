@@ -1,3 +1,4 @@
+import HomePage from 'pages/HomePage/HomePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import NewsPage from 'pages/NewsPage/NewsPage';
 import NoticesPage from 'pages/NoticesPage/NoticesPage';
@@ -13,6 +14,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
+        <Route index element={<HomePage />} />
         <Route
           path="register"
           element={<RestrictedRoute element={<RegistrationPage />} />}

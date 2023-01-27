@@ -4,11 +4,10 @@ export const MainTitle = styled.h1`
   font-weight: 700;
   font-size: 32px;
   line-height: 1.38;
+  padding: 0 20px;
 `;
 
 export const HeroContainer = styled.div`
-  background-color: beige;
   height: 100vh;
-  padding: 0;
   padding-top: 60px;
 `;

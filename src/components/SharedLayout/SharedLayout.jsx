@@ -8,7 +8,7 @@ export function SharedLayout() {
   return (
     <>
       <header>blabla</header>
-      <Suspense>
+      <Suspense fallback={null}>
         <Outlet />
       </Suspense>
     </>

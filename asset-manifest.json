@@ -1,13 +1,28 @@
 {
   "files": {
     "main.css": "/React-Node-TeamProject/static/css/main.dedfd122.css",
-    "main.js": "/React-Node-TeamProject/static/js/main.5c41132c.js",
+    "main.js": "/React-Node-TeamProject/static/js/main.c9160b12.js",
+    "static/media/hero-girl-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-girl-tablet@2x.6500f4f40613c60a0661.png",
+    "static/media/hero-girl-desk@2x.png": "/React-Node-TeamProject/static/media/hero-girl-desk@2x.ae9f2ee5925572cf3c81.png",
+    "static/media/hero-waves-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-waves-tablet@2x.c463a7a2419f2737e6ad.png",
+    "static/media/hero-girl-tablet.png": "/React-Node-TeamProject/static/media/hero-girl-tablet.9fa1149c185138d2ceef.png",
+    "static/media/hero-girl-mob@2x.png": "/React-Node-TeamProject/static/media/hero-girl-mob@2x.53f93c68e05934ede402.png",
+    "static/media/hero-wave-big-desk@2x.png": "/React-Node-TeamProject/static/media/hero-wave-big-desk@2x.a51372c2e1b5a3beb55e.png",
+    "static/media/hero-girl-desk.png": "/React-Node-TeamProject/static/media/hero-girl-desk.4b962aedb87370f2cbdc.png",
+    "static/media/hero-waves-tablet.png": "/React-Node-TeamProject/static/media/hero-waves-tablet.ddb5cf335deaae8b9469.png",
+    "static/media/hero-wave-small-desk@2x.png": "/React-Node-TeamProject/static/media/hero-wave-small-desk@2x.3e9a1968218e305eb3a9.png",
+    "static/media/hero-waves-mob@2x.png": "/React-Node-TeamProject/static/media/hero-waves-mob@2x.d215f04cc3d92b31d12e.png",
+    "static/media/hero-wave-big-desk.png": "/React-Node-TeamProject/static/media/hero-wave-big-desk.c98faf2ee1a631b41bd1.png",
+    "static/media/hero-girl-mob.png": "/React-Node-TeamProject/static/media/hero-girl-mob.87cc6a236812ca0948a6.png",
+    "static/media/hero-wave-small-desk.png": "/React-Node-TeamProject/static/media/hero-wave-small-desk.64612f6139daaec20f44.png",
+    "static/media/hero-waves-mob.png": "/React-Node-TeamProject/static/media/hero-waves-mob.98b883d85968e1b919ad.png",
+    "static/media/hero-heart-desk@2x.png": "/React-Node-TeamProject/static/media/hero-heart-desk@2x.39a65ca1ed6d2e2be642.png",
     "index.html": "/React-Node-TeamProject/index.html",
     "main.dedfd122.css.map": "/React-Node-TeamProject/static/css/main.dedfd122.css.map",
-    "main.5c41132c.js.map": "/React-Node-TeamProject/static/js/main.5c41132c.js.map"
+    "main.c9160b12.js.map": "/React-Node-TeamProject/static/js/main.c9160b12.js.map"
   },
   "entrypoints": [
     "static/css/main.dedfd122.css",
-    "static/js/main.5c41132c.js"
+    "static/js/main.c9160b12.js"
   ]
 }

@@ -1,4 +1,4 @@
-const { default: styled } = require('styled-components');
+import styled from 'styled-components';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -39,4 +39,8 @@ export const CloseBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  :hover {
+    fill: red;
+  }
 `;

@@ -44,7 +44,7 @@ export function LearnMoreModal() {
       </table>
       <p>
         Comments: laksjfla kjlakf ka lakdfl akjfllkajsl jalksjflak gn mx
-        mxncz,nwi fo{' '}
+        mxncz,nwi fo
       </p>
       <button type="button">Contact</button>
       <button type="button">

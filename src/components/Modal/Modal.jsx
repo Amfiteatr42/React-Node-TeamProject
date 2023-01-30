@@ -13,6 +13,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 */
 
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Backdrop, CloseBtn, ModalWindow } from './Modal.styled';
 import { RxCross1 } from 'react-icons/rx';
 
@@ -37,7 +38,7 @@ export function Modal({ children, onCloseModal }) {
     }
   }
 
-  return (
+  return createPortal(
     <Backdrop onClick={closeOnBackdropClick}>
       <ModalWindow>
         <CloseBtn type="button" onClick={onCloseModal}>
@@ -45,6 +46,7 @@ export function Modal({ children, onCloseModal }) {
         </CloseBtn>
         {children}
       </ModalWindow>
-    </Backdrop>
+    </Backdrop>,
+    document.querySelector('#modal-root')
   );
 }

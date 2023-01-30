@@ -1,0 +1,10 @@
+div{
+    margin-bottom: 40px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+div:l {
+color: antiquewhite;
+}

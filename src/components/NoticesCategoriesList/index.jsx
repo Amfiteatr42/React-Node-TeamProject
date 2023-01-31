@@ -1,4 +1,4 @@
-// import NoticeItem from 'components/NoticeCategoriesItem';
+import NoticeItem from 'components/NoticeCategoriesItem';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,9 +11,9 @@ export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [noticesData, setNoticesData] = useState([]);
-  const [noticesSlice, setNoticesSlice] = useState([]);
+  // const [noticesSlice, setNoticesSlice] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
-  const userNotices = useSelector(noticesSelectors.getUserNotices);
+  // const userNotices = useSelector(noticesSelectors.getUserNotices);
   //   const favorite = useSelector(authSelectors.getUserFavorite);
   const favorite = false;
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
@@ -24,27 +24,29 @@ export default function NoticesCategoriesList() {
 
   useEffect(() => {
     resetNoticesData(pathnameArr);
+    // eslint-disable-next-line
   }, [pathname]);
 
   useEffect(() => {
     setNoticesData(category);
   }, [category]);
 
-  useEffect(() => {
-    if (pathnameArr[2] === 'favorite') {
-      setNoticesData(favorite);
-    }
-  }, [favorite]);
+  // useEffect(() => {
+  //   if (pathnameArr[2] === 'favorite') {
+  //     setNoticesData(favorite);
+  //   }
+  // }, [favorite]);
 
-  useEffect(() => {
-    if (pathnameArr[2] === 'own') {
-      setNoticesData(userNotices);
-    }
-  }, [userNotices]);
+  // useEffect(() => {
+  //   if (pathnameArr[2] === 'own') {
+  //     setNoticesData(userNotices);
+  //   }
+  // }, [userNotices]);
 
   const resetNoticesData = async pathnameArr => {
     if (pathnameArr[2] === 'sell') {
-      dispatch(noticesOperations.getNoticesCategories({ categoryID: '1' }));
+      dispatch(noticesOperations.getNoticesCategories({ categoryId: '1' }));
+      return console.log(category);
     }
     if (pathnameArr[2] === 'lost-found') {
       dispatch(
@@ -63,6 +65,7 @@ export default function NoticesCategoriesList() {
       dispatch(noticesOperations.getUserNotices({ token }));
     }
   };
+
   return (
     <>
       {isLoading ? (
@@ -83,8 +86,24 @@ export default function NoticesCategoriesList() {
           />
         </div>
       ) : (
+        // <div className={s.NoticeList}>
+        //   {/* <p className={s.NoticeText}>Not notices</p> */}
+        //   {category.map(({ title, categoryId, _id }) => {
+        //     return (
+        //       <li key={_id}>
+        //         {title}:{categoryId}
+        //       </li>
+        //     );
+        //   })}
+        // </div>
         <div className={s.NoticeList}>
-          <p className={s.NoticeText}>Not notices</p>
+          {noticesData.length ? (
+            noticesData.map(item => (
+              <NoticeItem key={item._id} petData={item} />
+            ))
+          ) : (
+            <p className={s.NoticeText}>Not notices</p>
+          )}
         </div>
       )}
     </>

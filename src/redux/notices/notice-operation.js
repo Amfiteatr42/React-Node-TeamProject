@@ -2,26 +2,41 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://api-petly.onrender.com/';
+axios.defaults.baseURL = 'https://api-petly.onrender.com/api';
 
+// export const getNoticesCategories = createAsyncThunk(
+//   '/api/ads/?categoryId',
+//   async ({ categoryID, query = '' }) => {
+//     try {
+//       let data;
+//       if (query) {
+//         data = await axios.get(`/api/ads/?categoryId=${categoryID}&q=${query}`);
+//       } else {
+//         // data = await axios.get(`/notices?category=${category}`);
+//         // data = await axios.get(`/api/ads/?category=${category}`);
+//         // data = await axios.get(`/api/ads/?categoryId=1`);
+//         data = await axios.get(`/ads`);
+//         // data = await axios.get(`/api/ads/?categoryId=${categoryID}`);
+//         // data = await axios.get(`/ads/notices?category=${category}`);
+//       }
+//       return console.log(data.data.data);
+//     } catch (error) {
+//       toast.error(error.response.data.message);
+//     }
+//   }
+// );
+const getCat = () => {
+  return axios.get(`/ads`).then(res => res.data.data);
+  // .get(`/ads/?categoryId=${categoryID}`)
+};
 export const getNoticesCategories = createAsyncThunk(
-  '/api/ads/?categoryId',
-  async ({ categoryID, query = '' }) => {
+  '/ads',
+  async (_, thunkApi) => {
     try {
-      let data;
-      if (query) {
-        data = await axios.get(`/api/ads/?categoryId=${categoryID}&q=${query}`);
-      } else {
-        // data = await axios.get(`/notices?category=${category}`);
-        // data = await axios.get(`/api/ads/?category=${category}`);
-        // data = await axios.get(`/api/ads/?categoryId=1`);
-        data = await axios.get(`/api/ads`);
-        // data = await axios.get(`/api/ads/?categoryId=${categoryID}`);
-        // data = await axios.get(`/ads/notices?category=${category}`);
-      }
-      return data.data;
+      const items = await getCat();
+      return items;
     } catch (error) {
-      toast.error(error.response.data.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );

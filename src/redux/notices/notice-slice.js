@@ -1,21 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { noticesOperations } from 'redux/notices';
 
-const initialState = {
-  notices: [],
-  userNotices: [],
-  isLoading: false,
-};
-
 const noticesSlice = createSlice({
   name: 'notices',
-  initialState,
+  initialState: {
+    notices: [],
+    userNotices: [],
+    isLoading: false,
+  },
   extraReducers: {
     [noticesOperations.getNoticesCategories.pending](state) {
       state.isLoading = true;
     },
     [noticesOperations.getNoticesCategories.fulfilled](state, action) {
-      state.notices = action.payload.notices;
+      state.notices = action.payload;
       state.isLoading = false;
     },
     [noticesOperations.getNoticesCategories.rejected](state) {
@@ -57,4 +55,5 @@ const noticesSlice = createSlice({
   },
 });
 
-export default noticesSlice.reducer;
+// export default noticesSlice.reducer;
+export const noticesReducer = noticesSlice.reducer;

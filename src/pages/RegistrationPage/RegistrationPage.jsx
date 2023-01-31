@@ -49,11 +49,14 @@ const RegistrationPage = () => {
             name="name"
             type="name"
             value={name}
+            placeholder="Name"
             onChange={e => setName(e.target.value)}
           />
+          
           <AuthInput
             name="city"
             type="city"
+            placeholder="City, region"
             value={city}
             onChange={e => setCity(e.target.value)}
           />
@@ -61,10 +64,11 @@ const RegistrationPage = () => {
             name="Mobile phone"
             type="phone"
             value={phone}
+            placeholder="Mobile phone"
             onChange={e => setPhone(e.target.value)}
           />
           </Box>
-          <AuthButton name="sumdit">sumdit</AuthButton>
+          <AuthButton style={{marginBottom: "16px"}} name="sumdit">sumdit</AuthButton>
         </AuthForm>
       ) : (
         <AuthForm>
@@ -72,18 +76,21 @@ const RegistrationPage = () => {
           <AuthInput
             name="email"
             type="email"
+            placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
           <AuthInput
             name="password"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
           <AuthInput
             name="Confirm Password"
             type="password"
+            placeholder="Confirm Password"
             value={password2}
             onChange={e => setPassword2(e.target.value)}
           />

@@ -13,7 +13,7 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: 'mockname',
   initialState: {
-    username: '',
+    user: '',
     isLoggedIn: false,
     token: null,
     error: null,
@@ -23,7 +23,7 @@ const authSlice = createSlice({
     [Login.pending]: handlePending,
     [Login.pending]: handleRejected,
     [Login.fulfilled](state, action) {
-      state.username = action.payload.user;
+      state.user = action.payload.user;
       state.id = action.payload.id;
       state.token = action.payload.token;
       state.isLoggedIn = true;
@@ -32,7 +32,7 @@ const authSlice = createSlice({
     [Register.pending]: handlePending,
     [Register.pending]: handleRejected,
     [Register.fulfilled](state, action) {
-      state.username = action.payload.user;
+      state.user = action.payload.user;
       state.id = action.payload.id;
       state.token = action.payload.token;
       state.isLoggedIn = true;
@@ -41,22 +41,21 @@ const authSlice = createSlice({
     [Reset.pending]: handlePending,
     [Reset.rejected]: handleRejected,
     [Reset.fulfilled](state, action) {
-        state.username = '';
+        state.user = '';
         state.token = null;
         state.isLoggedIn = false;
         state.id = null;
         state.error = null;
     },
     [fetchCurrentUser.pending](state, action) {
-      state.registerUser = false;
       state.isLoggedIn = false;
   },
     [fetchCurrentUser.rejected]: handleRejected,
     [fetchCurrentUser.fulfilled](state, action) {
-        state.username = action.payload.username;
+        state.user = action.payload.user;
         state.isLoggedIn = true;
+        state.id = action.payload.id;
         state.error = null;
-  
     },
   },
 });

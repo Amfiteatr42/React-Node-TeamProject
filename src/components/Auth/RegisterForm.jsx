@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { AuthButton, AuthForm, AuthInput, AuthTitleh2, Box } from "stylesheets/Auth.styled";
+import { NavLink } from "react-router-dom";
+import { AuthButton, AuthForm, AuthInput, AuthTitleh2, AuthTitleh3, Box } from "stylesheets/Auth.styled";
 
 
 const RegisterForm = ({hendeLSumdit}) => {
@@ -85,6 +86,15 @@ const RegisterForm = ({hendeLSumdit}) => {
       <AuthButton name="button" value={next} onClick={hendeLNext}>
         {next ? 'Back' : 'Next'}
       </AuthButton>
+      <AuthTitleh3>
+        Don't have an account?
+        <NavLink
+          style={{ borderBottom: '1px solid', color: '#3091EB' }}
+          to="/login"
+        >
+          login
+        </NavLink>
+      </AuthTitleh3>
     </>
   );
 };

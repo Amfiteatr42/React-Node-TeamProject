@@ -1,10 +1,11 @@
 import { useState } from 'react';
-
+import { NavLink } from 'react-router-dom';
 import {
   AuthButton,
   AuthForm,
   AuthInput,
   AuthTitleh2,
+  AuthTitleh3,
   Box,
 } from 'stylesheets/Auth.styled';
 
@@ -33,6 +34,15 @@ const LoginForm = ({ hendeLSumdit }) => {
         </Box>
         <AuthButton name="submit">Login</AuthButton>
       </AuthForm>
+      <AuthTitleh3>
+        Don't have an account?
+        <NavLink
+          style={{ borderBottom: '1px solid', color: '#3091EB' }}
+          to="/register"
+        >
+          Register
+        </NavLink>
+      </AuthTitleh3>
     </>
   );
 };

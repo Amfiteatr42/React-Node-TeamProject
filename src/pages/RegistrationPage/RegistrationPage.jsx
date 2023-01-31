@@ -1,107 +1,28 @@
-import {
-  AuthBox,
-  AuthButton,
-  AuthForm,
-  AuthInput,
-  AuthTitleh2,
-  AuthTitleh3,
-  Box,
-} from 'stylesheets/Auth.styled';
-import { useState } from 'react';
+import { AuthBox, AuthTitleh3 } from 'stylesheets/Auth.styled';
+
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Register } from 'redux/auth/operations';
+import RegisterForm from 'components/Auth/RegisterForm';
 
 const RegistrationPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
-
-  const [next, setNext] = useState(false);
   const dispatch = useDispatch();
   const hendeLSumdit = e => {
     e.preventDefault();
     dispatch(Register({}));
   };
-  const hendeLNext = e => {
-    if (password === '') {
-      return;
-    }
-    if (password === password2) {
-      const open = e.target.value;
-      if (open === 'true') {
-        setNext(false);
-      } else {
-        setNext(true);
-      }
-    }
-  };
+
   return (
     <AuthBox>
-      <AuthTitleh2>Register</AuthTitleh2>
-      {next ? (
-        <AuthForm onSubmit={hendeLSumdit}>
-          <Box>
-          <AuthInput
-            name="name"
-            type="name"
-            value={name}
-            placeholder="Name"
-            onChange={e => setName(e.target.value)}
-          />
-          
-          <AuthInput
-            name="city"
-            type="city"
-            placeholder="City, region"
-            value={city}
-            onChange={e => setCity(e.target.value)}
-          />
-          <AuthInput
-            name="Mobile phone"
-            type="phone"
-            value={phone}
-            placeholder="Mobile phone"
-            onChange={e => setPhone(e.target.value)}
-          />
-          </Box>
-          <AuthButton style={{marginBottom: "16px"}} name="sumdit">sumdit</AuthButton>
-        </AuthForm>
-      ) : (
-        <AuthForm>
-          <Box>
-          <AuthInput
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <AuthInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <AuthInput
-            name="Confirm Password"
-            type="password"
-            placeholder="Confirm Password"
-            value={password2}
-            onChange={e => setPassword2(e.target.value)}
-          />
-          </Box>
-        </AuthForm>
-      )}
-      <AuthButton name="button" value={next} onClick={hendeLNext}>
-        {next ? 'Back' : 'Next'}
-      </AuthButton>
+      <RegisterForm hendeLSumdit={hendeLSumdit} />
       <AuthTitleh3>
-        Don't have an account? <NavLink to="/login">login</NavLink>
+        Don't have an account?
+        <NavLink
+          style={{ borderBottom: '1px solid', color: '#3091EB' }}
+          to="/login"
+        >
+          login
+        </NavLink>
       </AuthTitleh3>
     </AuthBox>
   );

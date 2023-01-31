@@ -11,6 +11,7 @@ import {
   AuthInput,
   AuthTitleh2,
   AuthTitleh3,
+  Box,
 } from '../../stylesheets/Auth.styled';
 
 const LoginPage = () => {
@@ -28,6 +29,7 @@ const LoginPage = () => {
     <AuthBox>
       <AuthTitleh2>Login</AuthTitleh2>
       <AuthForm onSubmit={hendeLSumdit}>
+        <Box>
         <AuthInput
           name="email"
           type="email"
@@ -40,9 +42,8 @@ const LoginPage = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <div>
+        </Box>
           <AuthButton name="sumdit">Login</AuthButton>
-        </div>
       </AuthForm>
       <AuthTitleh3>
         Don't have an account? <NavLink to="/register">Register</NavLink>

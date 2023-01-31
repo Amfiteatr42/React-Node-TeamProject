@@ -11,6 +11,7 @@ export const AuthTitleh2 = styled.h2`
   }
   
   @media screen and (min-width: 767px) {
+    margin-top: 60px;
     font-weight: 500;
     font-size: 36px;
     line-height: 49px;
@@ -27,12 +28,18 @@ export const AuthTitleh3 = styled.h3`
     line-height: 16px;
   }
   @media screen and (min-width: 767px) {
+    margin-top: 40px;
+    margin-bottom: 60px;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
   }
 `;
-
+export const Box = styled.div`
+margin-bottom: 40px;
+display: flex;
+flex-direction: column;
+`
 export const AuthBox = styled.div`
   justify-content: center;
   text-align: center;
@@ -43,12 +50,10 @@ export const AuthBox = styled.div`
   display: flex;
   flex-direction: column;
   @media screen and (min-width: 767px) {
-    width: 608px;
-    height: 517px;
+   
   }
   @media screen and (min-width: 1279px) {
     width: 618px;
-    height: 473px;
   }
 `;
 
@@ -67,15 +72,19 @@ export const AuthButton = styled.button`
     font-weight: 500;
     font-size: 2.0;
     line-height: 27px;
-    margin-bottom: 40px;
+ 
     width: 458px;
     height: 48px;
   }
 `;
 
 export const AuthForm = styled.form`
+
   input:nth-last-child(1) {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
+  }
+  button:nth-last-child(1) {
+    margin-bottom: 16px;
   }
 `;
 

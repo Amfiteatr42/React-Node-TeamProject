@@ -1,6 +1,16 @@
-import { AuthBox, AuthButton, AuthForm, AuthInput, AuthTitleh2, AuthTitleh3 } from 'stylesheets/Auth.styled';
+import {
+  AuthBox,
+  AuthButton,
+  AuthForm,
+  AuthInput,
+  AuthTitleh2,
+  AuthTitleh3,
+  Box,
+} from 'stylesheets/Auth.styled';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Register } from 'redux/auth/operations';
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState('');
@@ -11,14 +21,16 @@ const RegistrationPage = () => {
   const [phone, setPhone] = useState('');
 
   const [next, setNext] = useState(false);
-
-  const hendeLSumdit = e => {};
+  const dispatch = useDispatch();
+  const hendeLSumdit = e => {
+    e.preventDefault();
+    dispatch(Register({}));
+  };
   const hendeLNext = e => {
     if (password === '') {
       return;
     }
     if (password === password2) {
-
       const open = e.target.value;
       if (open === 'true') {
         setNext(false);
@@ -32,6 +44,7 @@ const RegistrationPage = () => {
       <AuthTitleh2>Register</AuthTitleh2>
       {next ? (
         <AuthForm onSubmit={hendeLSumdit}>
+          <Box>
           <AuthInput
             name="name"
             type="name"
@@ -50,10 +63,12 @@ const RegistrationPage = () => {
             value={phone}
             onChange={e => setPhone(e.target.value)}
           />
+          </Box>
           <AuthButton name="sumdit">sumdit</AuthButton>
         </AuthForm>
       ) : (
         <AuthForm>
+          <Box>
           <AuthInput
             name="email"
             type="email"
@@ -72,9 +87,9 @@ const RegistrationPage = () => {
             value={password2}
             onChange={e => setPassword2(e.target.value)}
           />
+          </Box>
         </AuthForm>
       )}
-
       <AuthButton name="button" value={next} onClick={hendeLNext}>
         {next ? 'Back' : 'Next'}
       </AuthButton>

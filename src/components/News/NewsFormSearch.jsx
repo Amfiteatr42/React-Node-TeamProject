@@ -6,12 +6,11 @@ import { useDispatch } from 'react-redux';
 import { setFilterNews } from 'redux/sliceNews';
 import { toast } from 'react-toastify';
 import { useState } from "react";
-import { useTranslation } from 'react-i18next';
+
 
 
 const FormSearchNews = () => {
   const [valueIn, setValueIn] = useState('');
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const onChangeNews = (e) => {
     if (e.currentTarget.value === " ") {
@@ -31,7 +30,7 @@ const onClickNews = (e) => {
 
   return (
     <div className={scss.container}>
-      <h2 className={scss.title}>{t('news')}</h2>
+      <h2 className={scss.title}>{('news')}</h2>
       <div className={scss.position}>
         <form onSubmit={onClickNews}>
           <Input

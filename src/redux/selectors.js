@@ -1,3 +1,3 @@
-export const selectors = {
- getNews: (state) => state.news.onFilterNews,
-};
+// export const selectors = {
+//  getNews: (state) => state.news.onFilterNews,
+// };

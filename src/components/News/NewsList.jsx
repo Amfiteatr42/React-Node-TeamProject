@@ -1,38 +1,50 @@
 import React from "react";
 import { NewsItem } from './NewsItem.jsx';
 import scss from './News.module.scss'
-import { useGetNewsListQuery } from 'redux/fetchNews'
-import{ useSelector } from 'react-redux';
-import { selectors } from 'redux/selectors';
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from 'axios'
+
+// import { useGetNewsListQuery } from 'redux/fetchNews'
+// import{ useSelector } from 'react-redux';
+// import { selectors } from 'redux/selectors';
 
 
 
 export const NewsList = () => {
-    const { data } = useGetNewsListQuery();
+    // const { data } = useGetNewsListQuery();
+  const [news, setNews] = useState([]);
 
-    const onFilter = useSelector(selectors.getNews);
+  useEffect(() => {
+    const { data } = axios.get('https://api-petly.onrender.com/api/news');
 
-    const getVisibleNews = () => {
-        const normalizedFil = onFilter.toLocaleLowerCase()
-        return data.filter(news =>
-            news.title.toLocaleLowerCase().includes(normalizedFil))
-    };
+  setNews(data)
+}, []);
+
+
+    // const onFilter = useSelector(selectors.getNews);
+
+    // const getVisibleNews = () => {
+    //     const normalizedFil = onFilter.toLocaleLowerCase()
+    //     return data.filter(news =>
+    //         news.title.toLocaleLowerCase().includes(normalizedFil))
+    // };
 
 
     return (
         <>
-            {!data ? (
+            {!news ? (
                 <div className={scss.notNewsFound}>
                     <h3 className={scss.notNewsFoundText}>Waiting please</h3>
                 </div>
             ) : (
                <ul className={scss.newsList}>
-                        {(getVisibleNews().length === 0) ? (
+                        {(news().length === 0) ? (
                             <div className={scss.notNewsFound}>
                     <h3 className={scss.notNewsFoundText}>Sorry</h3>
                 </div>
                             ) : (
-                                getVisibleNews().map(({ url, title, description, date, linkNews }) => {
+                                news().map(({ url, title, description, date, linkNews }) => {
                     return (
                         <NewsItem
                             key={url}
@@ -40,6 +52,7 @@ export const NewsList = () => {
                             title={title}
                             description={description}
                             date={date}
+                            linkNews={linkNews}
                         />
                     )
                 }

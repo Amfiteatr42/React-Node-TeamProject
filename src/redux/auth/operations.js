@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit/dist';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api-petly.onrender.com/api/users/';
+const DASEURL = "https://api-petly.onrender.com/api/users/"
 
 const token = {
   set(token) {
@@ -16,7 +16,7 @@ export const Login = createAsyncThunk(
   'auth/login',
   async (sign, { rejectWithValue }) => {
     try {
-      const user = await axios.post('login', sign);
+      const user = await axios.post(`${DASEURL}login`, sign);
       console.log(user);
       token.set(user.data.longToken);
       return user;
@@ -30,7 +30,7 @@ export const Register = createAsyncThunk(
   'auth/register',
   async (sign, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('signup', sign);
+      const { data } = await axios.post(`${DASEURL}signup`, sign);
       const { user } = verification(data);
       console.log(user, 'work');
       token.set(user.data.longToken);
@@ -44,7 +44,7 @@ export const Register = createAsyncThunk(
 
 const verification = async ({ data, verificationEmailToken }) => {
   const { _id } = data;
-  const user = await axios.get(`verify/${_id}/${verificationEmailToken}`);
+  const user = await axios.get(`${DASEURL}verify/${_id}/${verificationEmailToken}`);
   return user;
 };
 
@@ -71,7 +71,7 @@ export const fetchCurrentUser = createAsyncThunk(
     }
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('current');
+      const { data } = await axios.get(`${DASEURL}current`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

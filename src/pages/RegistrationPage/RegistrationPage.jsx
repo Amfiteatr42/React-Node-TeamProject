@@ -6,14 +6,28 @@ import RegisterForm from 'components/Auth/RegisterForm';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
-  const hendeLSumdit = e => {
+
+  const handleSubmit = (e, data) => {
     e.preventDefault();
-    dispatch(Register({}));
+    const beginWithoutDigit = /^\D.*$/;
+    const withoutSpecialChars = /^[^-() /]*$/;
+    const containsLetters = /^.*[a-zA-Z]+.*$/;
+    const { password } = e;
+    console.log(e);
+    if (
+      beginWithoutDigit.test(password) &&
+      withoutSpecialChars.test(password) &&
+      containsLetters.test(password)
+    ) {
+      dispatch(Register(data));
+    } else {
+      return
+    }
   };
 
   return (
     <AuthBox>
-      <RegisterForm hendeLSumdit={hendeLSumdit} />
+      <RegisterForm handleSubmit={handleSubmit} />
     </AuthBox>
   );
 };

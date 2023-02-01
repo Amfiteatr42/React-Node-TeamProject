@@ -12,10 +12,11 @@ import {
 const LoginForm = ({ hendeLSumdit }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const data = { email , password };
   return (
     <>
       <AuthTitleh2>Login</AuthTitleh2>
-      <AuthForm onSubmit={e => hendeLSumdit(e, email, password)}>
+      <AuthForm onSubmit={e => hendeLSumdit(e, data)}>
         <Box>
           <AuthInput
             name="email"
@@ -32,7 +33,7 @@ const LoginForm = ({ hendeLSumdit }) => {
             onChange={e => setPassword(e.target.value)}
           />
         </Box>
-        <AuthButton name="submit">Login</AuthButton>
+        <AuthButton type="submit">Login</AuthButton>
       </AuthForm>
       <AuthTitleh3>
         Don't have an account?

@@ -1,14 +1,19 @@
 import LoginForm from 'components/Auth/LoginForm';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Login } from 'redux/auth/operations';
+import { fetchCurrentUser, Login } from 'redux/auth/operations';
 import { AuthBox } from '../../stylesheets/Auth.styled';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const hendeLSumdit = (e, email, password) => {
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
+  const hendeLSumdit = (e, data) => {
     e.preventDefault();
-    dispatch(Login(email, password));
+    dispatch(Login(data));
   };
 
   return (

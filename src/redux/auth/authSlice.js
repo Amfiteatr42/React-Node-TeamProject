@@ -14,7 +14,7 @@ const authSlice = createSlice({
   name: 'mockname',
   initialState: {
     user: {},
-    isLoggedIn: "false",
+    isLoggedIn: false,
     token: null,
     error: null,
   },

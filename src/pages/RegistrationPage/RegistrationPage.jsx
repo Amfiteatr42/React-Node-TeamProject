@@ -1,34 +1,28 @@
-import { AuthBox } from 'stylesheets/Auth.styled';
+import { BoxAuth } from 'stylesheets/Auth.styled';
 
 import { useDispatch } from 'react-redux';
 import { Register } from 'redux/auth/operations';
 import RegisterForm from 'components/Auth/RegisterForm';
+import { Container } from 'stylesheets/Container.styled';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (e, data) => {
-    e.preventDefault();
-    const beginWithoutDigit = /^\D.*$/;
-    const withoutSpecialChars = /^[^-() /]*$/;
-    const containsLetters = /^.*[a-zA-Z]+.*$/;
-    const { password } = e;
-    console.log(e);
-    if (
-      beginWithoutDigit.test(password) &&
-      withoutSpecialChars.test(password) &&
-      containsLetters.test(password)
-    ) {
-      dispatch(Register(data));
-    } else {
-      return
+  const hendeLSumdit = e => {
+    const { password, cPassword, email, userName, city, phone } = e;
+    if (password === cPassword) {
+      console.log(e);
+      dispatch(Register({ password, email, userName, city, phone }));
     }
+    console.log(e);
   };
 
   return (
-    <AuthBox>
-      <RegisterForm handleSubmit={handleSubmit} />
-    </AuthBox>
+    <Container>
+      <BoxAuth>
+        <RegisterForm hendeLSumdit={hendeLSumdit} />
+      </BoxAuth>
+    </Container>
   );
 };
 

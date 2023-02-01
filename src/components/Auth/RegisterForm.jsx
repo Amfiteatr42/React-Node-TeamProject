@@ -1,124 +1,143 @@
 // import { Formik, Form } from 'formik';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Formik } from 'formik';
 import {
   AuthButton,
   AuthForm,
-  AuthInput,
+  Input,
   AuthTitleh2,
   AuthTitleh3,
   Box,
+  AuthBox,
+  link,
+  ErrorH3,
 } from 'stylesheets/Auth.styled';
+import { ValidateRegister } from './validate/Validate';
 
-const RegisterForm = ({ handleSubmit }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userpassword, setUserpassword] = useState('');
-  const [userName, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
-
+const RegisterForm = ({ hendeLSumdit }) => {
   const [next, setNext] = useState(false);
   const hendeLNext = e => {
-    if (password === '') {
-      return;
-    }
-    if (password === userpassword) {
-      const open = e.target.value;
-      if (open === 'true') {
-        setNext(false);
-      } else {
-        setNext(true);
-      }
+    const open = e.target.value;
+    if (open === 'true') {
+      setNext(false);
+    } else {
+      setNext(true);
     }
   };
-
-  const data = { email, password, userName, city, phone };
   return (
-    <>
+    <AuthBox>
       <AuthTitleh2>Register</AuthTitleh2>
       <div>
-        <AuthForm onSubmit={e=>handleSubmit(e,data)}>
-          {next ? (
-            <>
-              <Box>
-                <AuthInput
-                  name="name"
-                  type="name"
-                  required
-                  value={userName}
-                  placeholder="Name"
-                  onChange={e => setName(e.target.value)}
-                />
-
-                <AuthInput
-                  name="city"
-                  type="city"
-                  required
-                  placeholder="City, region"
-                  value={city}
-                  onChange={e => setCity(e.target.value)}
-                />
-                <AuthInput
-                  style={{ marginBottom: '0px' }}
-                  name="Mobile phone"
-                  type="phone"
-                  required
-                  value={phone}
-                  placeholder="Mobile phone"
-                  onChange={e => setPhone(e.target.value)}
-                />
-              </Box>
-              <AuthButton style={{ marginBottom: '16px' }} type="submit">
-                submit
-              </AuthButton>
-            </>
-          ) : (
-            <>
-              <Box>
-                <AuthInput
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                />
-                <AuthInput
-                  name="password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <AuthInput
-                  style={{ marginBottom: '0px' }}
-                  name="Confirm Password"
-                  type="password"
-                  required
-                  placeholder="Confirm Password"
-                  value={userpassword}
-                  onChange={e => setUserpassword(e.target.value)}
-                />
-              </Box>
-            </>
+        <Formik
+          initialValues={{
+            userName: '',
+            phone: '',
+            city: '',
+            email: '',
+            password: '',
+            cPassword: '',
+          }}
+          validationSchema={ValidateRegister}
+          onSubmit={values => {
+            hendeLSumdit(values);
+          }}
+        >
+          {({
+            touched,
+            errors,
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
+            <AuthForm onSubmit={handleSubmit}>
+              {next ? (
+                <>
+                  <Box>
+                    <Input
+                      name="userName"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.userName}
+                      placeholder="Name"
+                    />
+                    {touched.userName && errors.userName && (
+                      <ErrorH3>{errors.userName}</ErrorH3>
+                    )}
+                    <Input
+                      name="city"
+                      type="city"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="City, region"
+                      value={values.city}
+                    />{' '}
+                    {touched.city && errors.city && <ErrorH3>{errors.city}</ErrorH3>}
+                    <Input
+                      style={{ marginBottom: '0px' }}
+                      name="phone"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      type="phone"
+                      value={values.phone}
+                      placeholder="Mobile phone"
+                    />
+                    {touched.phone && errors.phone && <ErrorH3>{errors.phone}</ErrorH3>}
+                  </Box>
+                  <AuthButton type="submit" style={{ marginBottom: '16px' }}>
+                    submit
+                  </AuthButton>
+                </>
+              ) : (
+                <>
+                  <Box>
+                    <Input
+                      name="email"
+                      type="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Email"
+                      value={values.email}
+                    />
+                    {touched.email && errors.email && <ErrorH3>{errors.email}</ErrorH3>}
+                    <Input
+                      name="password"
+                      type="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Password"
+                      value={values.password}
+                    />
+                    {touched.password && errors.password && (
+                      <ErrorH3>{errors.password}</ErrorH3>
+                    )}
+                    <Input
+                      style={{ marginBottom: '0px' }}
+                      name="cPassword"
+                      type="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Confirm Password"
+                      value={values.cPassword}
+                    />
+                  </Box>
+                </>
+              )}
+            </AuthForm>
           )}
-        </AuthForm>
+        </Formik>
       </div>
       <AuthButton name="button" value={next} onClick={hendeLNext}>
         {next ? 'Back' : 'Next'}
       </AuthButton>
       <AuthTitleh3>
         Don't have an account?
-        <NavLink
-          style={{ borderBottom: '1px solid', color: '#3091EB' }}
-          to="/login"
-        >
+        <NavLink style={link} to="/login">
           login
         </NavLink>
       </AuthTitleh3>
-    </>
+    </AuthBox>
   );
 };
 

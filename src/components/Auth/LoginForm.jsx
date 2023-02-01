@@ -1,50 +1,74 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Formik } from 'formik';
 import {
   AuthButton,
   AuthForm,
-  AuthInput,
+  Input,
   AuthTitleh2,
   AuthTitleh3,
   Box,
+  AuthBox,
+  link,
 } from 'stylesheets/Auth.styled';
+import { ValidateLogin } from './validate/Validate';
 
 const LoginForm = ({ hendeLSumdit }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const data = { email , password };
   return (
-    <>
+    <AuthBox>
       <AuthTitleh2>Login</AuthTitleh2>
-      <AuthForm onSubmit={e => hendeLSumdit(e, data)}>
-        <Box>
-          <AuthInput
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <AuthInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </Box>
-        <AuthButton type="submit">Login</AuthButton>
-      </AuthForm>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={ValidateLogin}
+        onSubmit={values => {
+          console.log(values);
+          hendeLSumdit(values);
+        }}>
+        {({
+          touched,
+          errors,
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => (
+          <AuthForm onSubmit={handleSubmit}>
+            <Box>
+              <Input
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                type="email"
+                placeholder="Email"
+              />
+               {touched.email && errors.email && <div>{errors.email}</div>}
+              <Input
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+               {touched.password && errors.password && <div>{errors.password}</div>}
+            </Box>
+            <AuthButton type="submit" style={{ marginBottom:"0px" }}>Login</AuthButton>
+          </AuthForm>
+        )}
+      </Formik>
       <AuthTitleh3>
         Don't have an account?
         <NavLink
-          style={{ borderBottom: '1px solid', color: '#3091EB' }}
+         style={link}
           to="/register"
         >
           Register
         </NavLink>
       </AuthTitleh3>
-    </>
+    </AuthBox>
   );
 };
 

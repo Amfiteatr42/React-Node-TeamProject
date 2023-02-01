@@ -9,7 +9,7 @@ export const Container = styled.div`
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     width: 335px;
     margin-top: 0px;
     display: flex;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     height: 100%;
     justify-content: flex-start;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     width: 392px;
   }
 `;
@@ -26,17 +26,17 @@ export const Title = styled.a`
   padding-top: 14px;
   display: block;
   font-size: 12px;
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   text-align: center;
   text-decoration-line: underline;
-  color: ${props => props.theme.colors.accent};
+  color: #f59256;
   overflow-wrap: break-word;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     padding-top: 0px;
     margin-top: 16px;
     font-size: 16px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
   }
 `;
@@ -45,17 +45,17 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
 export const WrapperIMG = styled.div`
   flex-grow: 0;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -63,13 +63,13 @@ export const WrapperContent = styled.div`
   flex-grow: 1;
   font-weight: 500;
   font-size: 12px;
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   color: #111111;
   width: 150px;
-  overflow-wrap: break-word ${props => props.theme.breakpoints.tab} {
+  overflow-wrap: break-word @media screen and (min-width: 768px) {
     font-size: 14px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -80,14 +80,14 @@ export const Img = styled.img`
   margin-top: 40px;
   margin-left: 4px;
   margin-right: 12px;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     margin-top: 54px;
     margin-left: 4px;
     margin-right: 14px;
     width: 120px;
     height: 85px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     width: 158px;
     height: 112px;
     margin-top: 59px;
@@ -106,9 +106,9 @@ export const SpanWeek = styled.span`
   display: inline-block;
   width: 19px;
   margin-right: 12px;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 export const ListFullTime = styled.ul`
@@ -119,12 +119,12 @@ export const ListFullTime = styled.ul`
   padding: 12px;
   font-weight: 500;
   font-size: 12px;
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   text-align: center;
   color: #000000;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -133,9 +133,9 @@ export const ItemTime = styled.li`
   &:nth-child(1) {
     margin-top: 0px;
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -144,14 +144,14 @@ export const P = styled.p`
   &:nth-child(1) {
     margin-top: 12px;
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
     margin-top: 8px;
     &:nth-child(1) {
       margin-top: 16px;
     }
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
     margin-top: 12px;
     &:nth-child(1) {
@@ -170,10 +170,10 @@ export const Data = styled.div`
       display: block;
     }
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
   }
 `;
@@ -184,25 +184,25 @@ export const Address = styled.a`
   font-weight: 500;
   font-size: 12px;
   /* text-decoration-line: underline; */
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   color: #111111;
   :hover {
     color: #ff6101;
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
   }
 `;
 
 export const IconAddress = styled(GoLocation)`
-  fill: ${props => props.theme.colors.accent};
+  fill: #f59256;
   margin-left: 10px;
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -212,15 +212,15 @@ export const Email = styled.a`
   font-weight: 500;
   font-size: 12px;
   /* text-decoration-line: underline; */
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   color: #111111;
   :hover {
     color: #ff6101;
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
   }
 `;
@@ -231,16 +231,16 @@ export const Phone = styled.a`
   font-weight: 500;
   font-size: 12px;
   /* text-decoration-line: underline; */
-  line-height: ${props => props.theme.lineHeights.main};
+  line-height: 1.38;
   color: #111111;
   margin-bottom: 12px;
   :hover {
     color: #ff6101;
   }
-  ${props => props.theme.breakpoints.tab} {
+  @media screen and (min-width: 768px) {
     font-size: 14px;
   }
-  ${props => props.theme.breakpoints.desc} {
+  @media screen and (min-width: 1280px) {
     font-size: 16px;
   }
 `;

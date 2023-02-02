@@ -43,7 +43,7 @@ const LoginPage = () => {
               handleSubmit,
             }) => (
               <LoginForm
-              handleSubmit={handleSubmit}
+                handleSubmit={handleSubmit}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 values={values}

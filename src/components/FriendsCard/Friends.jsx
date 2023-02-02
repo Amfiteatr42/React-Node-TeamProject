@@ -15,26 +15,33 @@ import {
   SpanWeek,
   ItemTime,
   P,
+  DataBox,
 } from './Friends.styled';
 
-// import { v4 as uuidv4 } from 'uuid';
-
 const Friends = ({ friends }) => {
-  const { title, address, addressUrl, email, imageUrl, phone, url, workDays } =
-    friends;
+  const {
+    name,
+    adress,
+    adressUrl,
+    email,
+    imageUrl,
+    phone,
+    friendUrl,
+    workingHours,
+  } = friends;
 
   const buttonAddress = () => {
-    if (!addressUrl) {
+    if (!adressUrl) {
       return '';
     }
     return (
-      <a href={addressUrl} target="_blank" rel="noreferrer">
+      <a href={adressUrl} target="_blank" rel="noreferrer">
         <IconAddress />
       </a>
     );
   };
   const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  const newWorkDays = workDays?.map((item, i) => {
+  const newWorkDays = workingHours?.map((item, i) => {
     return { ...item, week: week[i] };
   });
 
@@ -52,7 +59,7 @@ const Friends = ({ friends }) => {
     }
     const result = arr?.map((item, index) => {
       if (item.week) {
-        if (!item.isOpen) {
+        if (item.isOpen) {
           return (
             <ItemTime key={index}>
               <SpanWeek>{item.week}</SpanWeek>
@@ -60,7 +67,7 @@ const Friends = ({ friends }) => {
             </ItemTime>
           );
         }
-        if (item.isOpen) {
+        if (!item.isOpen) {
           return (
             <ItemTime key={index}>
               <SpanWeek>{item.week}</SpanWeek>
@@ -81,10 +88,11 @@ const Friends = ({ friends }) => {
   };
 
   const timeOne = arr => {
-    const result = arr?.find(item => item.isOpen);
-    return result ? (
+    // const result = arr?.find(item => item.isOpen);
+
+    return true ? (
       <p>
-        {result?.from}- {result?.to}
+        {arr[0]?.from}- {arr[0]?.to}
       </p>
     ) : (
       '-----------------------'
@@ -93,26 +101,29 @@ const Friends = ({ friends }) => {
 
   return (
     <Container>
-      <Title href={url} target="_blank">
-        {title}
+      <Title href={friendUrl} target="_blank">
+        {name}
       </Title>
       <Wrapper>
         <WrapperIMG>
           <Img src={imageUrl}></Img>
         </WrapperIMG>
         <WrapperContent>
-          <P> Time:</P>
-          <Data>
-            {newWorkDays ? timeOne(newWorkDays) : '-----------------------'}
-            <WrapperTimeHover>
-              <ListFullTime>
-                {fullTime(newWorkDays ? newWorkDays : week)}
-              </ListFullTime>
-            </WrapperTimeHover>
-          </Data>
+          <DataBox>
+            <P> Time:</P>
+            <Data>
+              {newWorkDays ? timeOne(newWorkDays) : '-----------------------'}
+              <WrapperTimeHover>
+                <ListFullTime>
+                  {fullTime(newWorkDays ? newWorkDays : week)}
+                </ListFullTime>
+              </WrapperTimeHover>
+            </Data>
+          </DataBox>
+
           <P> Adress:{buttonAddress()} </P>
-          <Address href={addressUrl} target="_blank">
-            {address || '-----------------------'}
+          <Address href={adressUrl} target="_blank">
+            {adress || '-----------------------'}
           </Address>
           <P> Email:</P>
           <Email href={email ? 'mailto:' + email : null}>

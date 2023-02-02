@@ -154,9 +154,9 @@ const RegisterForm = ({
         {next ? 'Back' : 'Next'}
       </AuthButton>
       <AuthTitleh3>
-        Don't have an account?
+        Already have an account?
         <NavLink style={link} to="/login">
-          login
+          Login
         </NavLink>
       </AuthTitleh3>
     </AuthBox>

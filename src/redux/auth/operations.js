@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit/dist';
 import axios from 'axios';
 
-const BASEURL = "https://api-petly.onrender.com/api/users/"
+const BASEURL = 'https://api-petly.onrender.com/api/users/';
 
 const token = {
   set(token) {
@@ -30,7 +30,9 @@ export const Register = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`${BASEURL}signup`, sign);
-      const user = await axios.get(`${BASEURL}verify/${data.data._id}/${data.verificationEmailToken}`);
+      const user = await axios.get(
+        `${BASEURL}verify/${data.data._id}/${data.verificationEmailToken}`
+      );
       token.set(user.data.longToken);
       return user;
     } catch (error) {
@@ -39,6 +41,18 @@ export const Register = createAsyncThunk(
   }
 );
 
+export const updateUserInfo = createAsyncThunk(
+  'auth/update',
+  async (info, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch(`${BASEURL}update`, info);
+      token.set(data.longToken);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.messsage);
+    }
+  }
+);
 
 export const Reset = createAsyncThunk(
   'auth/Signout',
@@ -52,7 +66,6 @@ export const Reset = createAsyncThunk(
   }
 );
 
-
 export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -65,7 +78,7 @@ export const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.patch(`${BASEURL}refresh`);
-      return data
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/React-Node-TeamProject/static/css/main.dedfd122.css",
+    "main.css": "/React-Node-TeamProject/static/css/main.4fd33451.css",
     "main.js": "/React-Node-TeamProject/static/js/main.bd098dda.js",
     "static/media/hero-girl-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-girl-tablet@2x.6500f4f40613c60a0661.png",
     "static/media/hero-girl-desk@2x.png": "/React-Node-TeamProject/static/media/hero-girl-desk@2x.ae9f2ee5925572cf3c81.png",
@@ -19,11 +19,11 @@
     "static/media/sprite.svg": "/React-Node-TeamProject/static/media/sprite.29221b499b1730e0c2805150c1dbb766.svg",
     "static/media/hero-heart-desk@2x.png": "/React-Node-TeamProject/static/media/hero-heart-desk@2x.39a65ca1ed6d2e2be642.png",
     "index.html": "/React-Node-TeamProject/index.html",
-    "main.dedfd122.css.map": "/React-Node-TeamProject/static/css/main.dedfd122.css.map",
+    "main.4fd33451.css.map": "/React-Node-TeamProject/static/css/main.4fd33451.css.map",
     "main.bd098dda.js.map": "/React-Node-TeamProject/static/js/main.bd098dda.js.map"
   },
   "entrypoints": [
-    "static/css/main.dedfd122.css",
+    "static/css/main.4fd33451.css",
     "static/js/main.bd098dda.js"
   ]
 }

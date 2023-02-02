@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCurrentUser, Login, Register, Reset, updateUserInfo} from './operations';
 import {
   addToFavorite,
   deleteFromFavorite,

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit/dist';
 import axios from 'axios';
 
-const DASEURL = "https://api-petly.onrender.com/api/users/"
+const BASEURL = "https://api-petly.onrender.com/api/users/"
 
 const token = {
   set(token) {
@@ -16,7 +16,7 @@ export const Login = createAsyncThunk(
   'auth/login',
   async (sign, { rejectWithValue }) => {
     try {
-      const user = await axios.post(`${DASEURL}login`, sign);
+      const user = await axios.post(`${BASEURL}login`, sign);
       console.log(user);
       token.set(user.data.longToken);
       return user;
@@ -30,7 +30,7 @@ export const Register = createAsyncThunk(
   'auth/register',
   async (sign, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`${DASEURL}signup`, sign);
+      const { data } = await axios.post(`${BASEURL}signup`, sign);
       const { user } = verification(data);
       console.log(user, 'work');
       token.set(user.data.longToken);
@@ -44,7 +44,7 @@ export const Register = createAsyncThunk(
 
 const verification = async ({ data, verificationEmailToken }) => {
   const { _id } = data;
-  const user = await axios.get(`${DASEURL}verify/${_id}/${verificationEmailToken}`);
+  const user = await axios.get(`${BASEURL}verify/${_id}/${verificationEmailToken}`);
   return user;
 };
 
@@ -60,8 +60,9 @@ export const Reset = createAsyncThunk(
   }
 );
 
+
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/current',
+  'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -71,29 +72,10 @@ export const fetchCurrentUser = createAsyncThunk(
     }
     token.set(persistedToken);
     try {
-      const { data } = await axios.get(`${DASEURL}current`);
-      return data;
+      const { data } = await axios.patch(`${BASEURL}refresh`);
+      return data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-//  const refreshUser = createAsyncThunk(
-//   'auth/refresh',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
-
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue();
-//     }
-//     token.set(persistedToken);
-//     try {
-//       const { data } = await axios.get('refresh');
-//       return data.longToken;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );

@@ -1,49 +1,53 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import {
   AuthButton,
   AuthForm,
-  AuthInput,
-  AuthTitleh2,
-  AuthTitleh3,
+  Input,
   Box,
+  Error,
+  Label,
 } from 'stylesheets/Auth.styled';
 
-const LoginForm = ({ hendeLSumdit }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const data = { email , password };
+const LoginForm = ({
+  handleSubmit,
+  handleBlur,
+  handleChange,
+  values,
+  touched,
+  errors,
+}) => {
   return (
     <>
-      <AuthTitleh2>Login</AuthTitleh2>
-      <AuthForm onSubmit={e => hendeLSumdit(e, data)}>
+      <AuthForm onSubmit={handleSubmit}>
         <Box>
-          <AuthInput
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <AuthInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
+          <Label>
+            <Input
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              type="email"
+              placeholder="Email"
+            />
+            {touched.email && errors.email && <Error>{errors.email}</Error>}
+          </Label>
+          <Label>
+            <Input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            {touched.password && errors.password && (
+              <Error>{errors.password}</Error>
+            )}
+          </Label>
         </Box>
-        <AuthButton type="submit">Login</AuthButton>
+        <AuthButton type="submit" style={{ marginBottom: '0px' }}>
+          Login
+        </AuthButton>
       </AuthForm>
-      <AuthTitleh3>
-        Don't have an account?
-        <NavLink
-          style={{ borderBottom: '1px solid', color: '#3091EB' }}
-          to="/register"
-        >
-          Register
-        </NavLink>
-      </AuthTitleh3>
     </>
   );
 };

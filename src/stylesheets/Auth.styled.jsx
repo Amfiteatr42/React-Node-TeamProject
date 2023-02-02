@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const link = {
+  textDecoration: 'underline',
+  color: '#3091EB',
+  marginLeft: '3px',
+};
+
 export const AuthTitleh2 = styled.h2`
   font-family: 'Manrope';
   font-style: normal;
@@ -11,7 +17,7 @@ export const AuthTitleh2 = styled.h2`
   }
 
   @media screen and (min-width: 767px) {
-    margin-top: 60px;
+    padding-top: 60px;
     font-weight: 500;
     font-size: 36px;
     line-height: 49px;
@@ -30,7 +36,23 @@ export const AuthTitleh3 = styled.h3`
   }
   @media screen and (min-width: 767px) {
     margin-top: 40px;
-    margin-bottom: 60px;
+    padding-bottom: 60px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+`;
+
+export const Error = styled.h3`
+  font-family: 'Manrope';
+  font-style: normal;
+  color: red;
+  @media screen and (min-width: 320px) {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  @media screen and (min-width: 767px) {
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
@@ -60,9 +82,22 @@ export const AuthBox = styled.div`
     width: 618px;
   }
 `;
+export const BoxAuth = styled.div`
+  @media screen and (min-width: 320px) {
+    margin-top: 42px;
+  }
+  @media screen and (min-width: 767px) {
+    padding-top: 204px;
+  }
+  @media screen and (min-width: 1279px) {
+    padding-top: 80px;
+  }
 
+  justify-content: center;
+  display: flex;
+`;
 export const AuthButton = styled.button`
-border: none;
+  border: none;
   color: #ffffff;
   font-family: 'Manrope';
   font-style: normal;
@@ -85,7 +120,7 @@ border: none;
 `;
 
 export const AuthForm = styled.form`
-  input:nth-last-child(1) {
+  label:nth-last-child(1) {
     margin-bottom: 0px;
   }
   button:nth-last-child(1) {
@@ -93,13 +128,16 @@ export const AuthForm = styled.form`
   }
 `;
 
-export const AuthInput = styled.input`
-  padding: 10px 30px;
+export const Label = styled.label`
   margin-bottom: 16px;
+`;
+export const Input = styled.input`
+  padding: 10px 30px;
+
   background: #fdf7f2;
+
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
-
   @media screen and (min-width: 320px) {
     width: 280px;
     height: 40px;

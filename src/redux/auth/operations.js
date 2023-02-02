@@ -17,7 +17,6 @@ export const Login = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const user = await axios.post(`${BASEURL}login`, sign);
-      console.log(user);
       token.set(user.data.longToken);
       return user;
     } catch (error) {
@@ -31,10 +30,8 @@ export const Register = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`${BASEURL}signup`, sign);
-      const { user } = verification(data);
-      console.log(user, 'work');
+      const user = await axios.get(`${BASEURL}verify/${data.data._id}/${data.verificationEmailToken}`);
       token.set(user.data.longToken);
-
       return user;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -42,11 +39,6 @@ export const Register = createAsyncThunk(
   }
 );
 
-const verification = async ({ data, verificationEmailToken }) => {
-  const { _id } = data;
-  const user = await axios.get(`${BASEURL}verify/${_id}/${verificationEmailToken}`);
-  return user;
-};
 
 export const Reset = createAsyncThunk(
   'auth/Signout',

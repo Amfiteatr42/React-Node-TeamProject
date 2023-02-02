@@ -23,7 +23,7 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [Login.pending]: handlePending,
-    [Login.pending]: handleRejected,
+    [Login.rejected]: handleRejected,
     [Login.fulfilled](state, action) {
       state.user = action.payload.data.data;
       state.token = action.payload.data.longToken;
@@ -31,9 +31,14 @@ const authSlice = createSlice({
       state.error = null;
     },
     [Register.pending]: handlePending,
-    [Register.pending]: handleRejected,
+    [Register.rejected](state, action) {
+      state.user = action.payload.data.data;
+      state.token = action.payload.data.longToken;
+      state.error = null;
+    },
     [Register.fulfilled](state, action) {
-      state.token = action.payload.token;
+      state.user = action.payload.data.data;
+      state.token = action.payload.data.longToken;
       state.isLoggedIn = true;
       state.error = null;
     },

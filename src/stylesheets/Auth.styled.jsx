@@ -4,7 +4,6 @@ export const link = {
   textDecoration: 'underline',
   color: '#3091EB',
   marginLeft: '3px',
-  // marginLeft: ' 5px',
 };
 
 export const AuthTitleh2 = styled.h2`
@@ -43,17 +42,11 @@ export const AuthTitleh3 = styled.h3`
     line-height: 16px;
   }
 `;
-export const Box = styled.div`
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-`;
 
-export const ErrorH3 = styled.h3`
-
+export const Error = styled.h3`
   font-family: 'Manrope';
   font-style: normal;
-  color: rgba(17, 17, 17, 0.6);
+  color: red;
   @media screen and (min-width: 320px) {
     font-weight: 400;
     font-size: 12px;
@@ -64,6 +57,11 @@ export const ErrorH3 = styled.h3`
     font-size: 12px;
     line-height: 16px;
   }
+`;
+export const Box = styled.div`
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 `;
 export const AuthBox = styled.div`
   justify-content: center;
@@ -122,18 +120,22 @@ export const AuthButton = styled.button`
 `;
 
 export const AuthForm = styled.form`
-  input:nth-last-child(1) {
+  label:nth-last-child(1) {
     margin-bottom: 0px;
   }
   button:nth-last-child(1) {
     margin-bottom: 16px;
   }
 `;
+
+export const Label = styled.label`
+  margin-bottom: 16px;
+`;
 export const Input = styled.input`
   padding: 10px 30px;
-  marginbottom: 16px;
+
   background: #fdf7f2;
-  margin-bottom: 16px;
+
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   @media screen and (min-width: 320px) {

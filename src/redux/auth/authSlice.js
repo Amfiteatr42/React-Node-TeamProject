@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchCurrentUser, Login, Register, Reset, updateUserInfo} from './operations';
 import {
   addToFavorite,
   deleteFromFavorite,
@@ -26,7 +27,6 @@ const authSlice = createSlice({
   name: 'mockname',
   initialState: {
     user: {},
-    favorite: [],
     isLoggedIn: false,
     isRefreshing: false,
     token: null,
@@ -34,7 +34,7 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [Login.pending]: handlePending,
-    [Login.rejected]: handleRejected,
+    [Login.pending]: handleRejected,
     [Login.fulfilled](state, action) {
       state.user = action.payload.data.data;
       state.token = action.payload.data.longToken;
@@ -42,10 +42,9 @@ const authSlice = createSlice({
       state.error = null;
     },
     [Register.pending]: handlePending,
-    [Register.rejected]: handleRejected,
+    [Register.pending]: handleRejected,
     [Register.fulfilled](state, action) {
-      state.user = action.payload.data.data;
-      state.token = action.payload.data.longToken;
+      state.token = action.payload.token;
       state.isLoggedIn = true;
       state.error = null;
     },
@@ -54,38 +53,23 @@ const authSlice = createSlice({
     [Reset.fulfilled](state, action) {
       state.user = {};
       state.token = null;
-      state.isRefreshing = false;
+      state.isRefreshing =false;
       state.isLoggedIn = false;
       state.id = null;
       state.error = null;
     },
     [fetchCurrentUser.pending](state, action) {
       state.isLoggedIn = false;
-      state.isRefreshing = true;
     },
     [fetchCurrentUser.rejected]: handleRejected,
     [fetchCurrentUser.fulfilled](state, action) {
       state.isLoggedIn = true;
-      state.isRefreshing = false;
+      state.isRefreshing = true;
       state.user = action.payload.data;
       state.token = action.payload.longToken;
       state.error = null;
     },
-    [updateUserInfo.pending]: handlePending,
-    [updateUserInfo.rejected]: handleRejected,
-    [updateUserInfo.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload };
-      state.error = null;
-    },
-    [getFavorite.fulfilled](state, action) {
-      state.favorite = action.payload.favorite;
-    },
-    [addToFavorite.fulfilled](state, action) {
-      state.favorite = action.payload.data.favoriteAds;
-    },
-    [deleteFromFavorite.fulfilled](state, action) {
-      state.favorite = state.favorite.filter(el => el !== action.payload);
-    },
+   
   },
 });
 

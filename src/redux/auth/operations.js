@@ -79,3 +79,31 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+export const updateUserInfo = createAsyncThunk('auth/update', async (info, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.patch(`${BASEURL}update`, info);
+      token.set(data.longToken);
+    return data;
+  } catch (error) {
+    return rejectWithValue(error.messsage)
+  }
+})
+//  const refreshUser = createAsyncThunk(
+//   'auth/refresh',
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const persistedToken = state.auth.token;
+
+//     if (persistedToken === null) {
+//       return thunkAPI.rejectWithValue();
+//     }
+//     token.set(persistedToken);
+//     try {
+//       const { data } = await axios.get('refresh');
+//       return data.longToken;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );

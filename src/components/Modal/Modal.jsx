@@ -14,8 +14,8 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Backdrop, CloseBtn, ModalWindow } from './Modal.styled';
-import { RxCross1 } from 'react-icons/rx';
+import { Backdrop, CloseBtn, ModalWindow, Svg } from './Modal.styled';
+
 
 export function Modal({ children, onCloseModal }) {
   useEffect(() => {
@@ -42,7 +42,7 @@ export function Modal({ children, onCloseModal }) {
     <Backdrop onClick={closeOnBackdropClick}>
       <ModalWindow>
         <CloseBtn type="button" onClick={onCloseModal}>
-          <RxCross1 />
+          <Svg />
         </CloseBtn>
         {children}
       </ModalWindow>

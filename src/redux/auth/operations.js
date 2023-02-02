@@ -84,3 +84,47 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+
+export const getFavorite = createAsyncThunk('/favorite', async () => {
+  try {
+    const { data } = await axios.get(`${BASEURL}favorite`);
+    return data;
+  } catch (error) {
+    // toast.error(error.response.data.message);
+  }
+});
+export const addToFavorite = createAsyncThunk(
+  'addToFavorite',
+  async (petId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.post(`${BASEURL}favorite/${petId}`);
+      // const { data } = await axios.get(
+      //   'https://api-petly.onrender.com/api/ads'
+      // );
+      return data;
+    } catch (error) {
+      // toast.error(error.response.data.message);
+    }
+  }
+);
+export const deleteFromFavorite = createAsyncThunk(
+  'deleteFromFavorite',
+  async (petId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    token.set(persistedToken);
+    try {
+      await axios.delete(`${BASEURL}favorite/${petId}`);
+      const { data } = await axios.get(
+        'https://api-petly.onrender.com/api/ads'
+      );
+      return data;
+    } catch (error) {
+      // toast.error(error.response.data.message);
+    }
+  }
+);

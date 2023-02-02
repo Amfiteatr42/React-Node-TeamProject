@@ -27,7 +27,7 @@ const [friends, setFriends] = useState([]);
   return (
     friends && (
       <Wrapper>
-        <Title>Our friend</Title>
+        <Title>Our friends</Title>
         <WrapperList>
           <ListCard>
             {friends.map(value => (

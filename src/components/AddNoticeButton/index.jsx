@@ -1,6 +1,6 @@
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
-// import authSelectors from '../../redux/auth/auth-selectors';
+import { getAuthIsLoggedIn } from 'redux/auth/selectors';
 import s from './index.module.css';
 import { ReactComponent as Plus } from '../../images/svg/plus.svg';
 import { useMediaQuery } from 'react-responsive';
@@ -12,8 +12,8 @@ import ModalPage from 'pages/ModalPage';
 export default function AddNoticeButton() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const text = 'Add pet';
-  //   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(getAuthIsLoggedIn);
+  // const isLoggedIn = false;
   const [isOpen, setOpen] = useState(false);
 
   const handleClick = () => {

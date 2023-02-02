@@ -7,9 +7,12 @@ import { ReactComponent as Close } from '../../images/svg/close.svg';
 export default function ModalPage({ children, onClose }) {
   const modalRoot = useRef(document.querySelector('#modal-root'));
 
-  useEffect(() => {
-    window.addEventListener('keydown', closeModalEscKey);
-  }, []);
+  useEffect(
+    () => {
+      window.addEventListener('keydown', closeModalEscKey);
+    }, // eslint-disable-next-line
+    []
+  );
 
   function closeModalEscKey(e) {
     if (e.currentTarget === e.target) {

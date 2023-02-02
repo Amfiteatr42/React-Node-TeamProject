@@ -1,12 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
 import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
 import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-import { noticesOperations } from 'redux/notices';
-// import { authSelectors } from 'redux/auth';
+// import { noticesOperations } from 'redux/notices';
+// import { getAuthUser } from 'redux/auth/selectors';
 
 const PET_MODAL_KEYS = [
   {
@@ -60,10 +60,10 @@ export default function ModalNotice({
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
 
-  //   const user = useSelector(authSelectors.getUser);
-  //   const owner = user._id === petData.owner._id;
-  //   const ownerPhone = petData.owner.phone.replace(/\D/g, '');
-  const dispatch = useDispatch();
+  // const user = useSelector(getAuthUser);
+  // const owner = user._id === petData.owner._id;
+  // const ownerPhone = petData.owner.phone.replace(/\D/g, '');
+  // const dispatch = useDispatch();
 
   const handleModalToggle = () => {
     setContactModalShow(!contactModalShow);

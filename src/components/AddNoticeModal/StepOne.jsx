@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from './index.module.css';
 import * as yup from 'yup';
-import { useState } from 'react';
+// import { useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import { parse } from 'date-fns';
 
@@ -48,7 +48,7 @@ const validationSchema = yup.object({
 });
 
 const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
-  const [breedValue, setBreedValue] = useState(formData.breed);
+  // const [breedValue, setBreedValue] = useState(formData.breed);
 
   return (
     <div>

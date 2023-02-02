@@ -12,7 +12,10 @@ import { SharedLayout } from './SharedLayout/SharedLayout';
 
 import NoticesCategoriesList from './NoticesCategoriesList';
 
-import { lazy, useEffect } from 'react';
+import {
+  lazy,
+  // useEffect
+} from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const NoticesPage = lazy(() => import('../pages/NoticesPage/NoticesPage'));

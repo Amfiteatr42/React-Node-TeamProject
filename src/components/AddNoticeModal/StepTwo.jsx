@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { noticesOperations } from 'redux/notices';
 import { useDispatch, useSelector } from 'react-redux';
-// import { authSelectors } from 'redux/auth';
+import { getAuthToken } from 'redux/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Plus } from '../../images/svg/big-plus.svg';
 
@@ -22,15 +22,14 @@ const validationSchema = yup.object({
     .max(6)
     .matches(/^[1-9]+[0-9]*\$$/g, 'Only number characters and $ are allowed')
     .notRequired(),
-  image: yup
-    .mixed()
-    .required('Image is Required!(jpg,jpeg,png)')
-    .test(
-      'fileFormat',
-      'Unsupported file type',
-      value =>
-        value === null || (value && SUPPORTED_FORMATS.includes(value.type))
-    ),
+  image: yup.mixed(),
+  // .required('Image is Required!(jpg,jpeg,png)')
+  // .test(
+  //   'fileFormat',
+  //   'Unsupported file type',
+  //   value =>
+  //     value === null || (value && SUPPORTED_FORMATS.includes(value.type))
+  // ),
   comments: yup
     .string()
     .min(4)
@@ -39,6 +38,7 @@ const validationSchema = yup.object({
     .required('Field is required!'),
 });
 
+// eslint-disable-next-line
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
 
 const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
@@ -46,9 +46,7 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
   const [fileInput, setFileInput] = useState(formData.image);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const token = useSelector(authSelectors.getUserToken);
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc0OTMxMTc4fQ.I9kaulBObpq4MOHq4raD3iTwanceICRkB5S9Zs2XOvM';
+  const token = useSelector(getAuthToken);
 
   const handleAddAvatar = (e, setFieldValue) => {
     const [file] = e.target.files;

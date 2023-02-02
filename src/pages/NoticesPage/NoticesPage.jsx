@@ -10,17 +10,20 @@ export default function NoticesPage() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (
-      pathname === '/notices/lost-found' ||
-      pathname === '/notices/for-free' ||
-      pathname === '/notices/favotire' ||
-      pathname === '/notices/own'
-    ) {
-    } else {
-      navigate('/notices/sell');
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (
+        pathname === '/notices/lost-found' ||
+        pathname === '/notices/for-free' ||
+        pathname === '/notices/favotire' ||
+        pathname === '/notices/own'
+      ) {
+      } else {
+        navigate('/notices/sell');
+      }
+    }, // eslint-disable-next-line
+    []
+  );
 
   return (
     <Container>

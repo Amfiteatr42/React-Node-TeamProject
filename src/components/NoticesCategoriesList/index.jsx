@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { noticesOperations, noticesSelectors } from '../../redux/notices';
-// import { authSelectors } from './../../redux/auth';
+import { getUserFavorite } from 'redux/auth/selectors';
 import s from './index.module.css';
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -11,16 +11,19 @@ export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [noticesData, setNoticesData] = useState([]);
-  // const [noticesSlice, setNoticesSlice] = useState([]);
+  // const [favoriteData, setFavoriteData] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
-  // const userNotices = useSelector(noticesSelectors.getUserNotices);
-  //   const favorite = useSelector(authSelectors.getUserFavorite);
-  const favorite = false;
+  const userNotices = useSelector(noticesSelectors.getUserNotices);
+  const favorite = useSelector(getUserFavorite);
+  // const favorite = Object.values(favoriteAds);
+  // console.log(favorite);
+  // const favorite = false;
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
   const pathnameArr = pathname.split('/');
 
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc0OTMxMTc4fQ.I9kaulBObpq4MOHq4raD3iTwanceICRkB5S9Zs2XOvM';
+  // useEffect(() => {
+  //   setFavoriteData(inFavorites);
+  // }, [inFavorites]);
 
   useEffect(() => {
     resetNoticesData(pathnameArr);
@@ -31,38 +34,35 @@ export default function NoticesCategoriesList() {
     setNoticesData(category);
   }, [category]);
 
-  // useEffect(() => {
-  //   if (pathnameArr[2] === 'favorite') {
-  //     setNoticesData(favorite);
-  //   }
-  // }, [favorite]);
+  useEffect(() => {
+    if (pathnameArr[2] === 'favorite') {
+      setNoticesData(favorite);
+    } // eslint-disable-next-line
+  }, [favorite]);
 
-  // useEffect(() => {
-  //   if (pathnameArr[2] === 'own') {
-  //     setNoticesData(userNotices);
-  //   }
-  // }, [userNotices]);
+  useEffect(() => {
+    if (pathnameArr[2] === 'own') {
+      setNoticesData(userNotices);
+    } // eslint-disable-next-line
+  }, [userNotices]);
 
   const resetNoticesData = async pathnameArr => {
     if (pathnameArr[2] === 'sell') {
-      dispatch(noticesOperations.getNoticesCategories({ categoryId: '1' }));
+      dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
       return console.log(category);
     }
     if (pathnameArr[2] === 'lost-found') {
-      dispatch(
-        noticesOperations.getNoticesCategories({ category: 'lost/found' })
-      );
+      dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
     }
     if (pathnameArr[2] === 'for-free') {
-      dispatch(
-        noticesOperations.getNoticesCategories({ category: 'in_good_hands' })
-      );
+      dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
     }
     if (pathnameArr[2] === 'favorite') {
+      // dispatch(noticesOperations.addToFavorite({ token }));
       setNoticesData(favorite);
     }
     if (pathnameArr[2] === 'own') {
-      dispatch(noticesOperations.getUserNotices({ token }));
+      dispatch(noticesOperations.getUserNotices());
     }
   };
 
@@ -86,16 +86,6 @@ export default function NoticesCategoriesList() {
           />
         </div>
       ) : (
-        // <div className={s.NoticeList}>
-        //   {/* <p className={s.NoticeText}>Not notices</p> */}
-        //   {category.map(({ title, categoryId, _id }) => {
-        //     return (
-        //       <li key={_id}>
-        //         {title}:{categoryId}
-        //       </li>
-        //     );
-        //   })}
-        // </div>
         <div className={s.NoticeList}>
           {noticesData.length ? (
             noticesData.map(item => (

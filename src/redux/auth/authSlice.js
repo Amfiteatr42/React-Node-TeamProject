@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  addToFavorite,
+  deleteFromFavorite,
   fetchCurrentUser,
+  getFavorite,
   Login,
+  
   Register,
   Reset,
   updateUserInfo,
@@ -22,6 +26,7 @@ const authSlice = createSlice({
   name: 'mockname',
   initialState: {
     user: {},
+    favorite: [],
     isLoggedIn: false,
     isRefreshing: false,
     token: null,
@@ -71,6 +76,15 @@ const authSlice = createSlice({
     [updateUserInfo.fulfilled](state, action) {
       state.user = { ...state.user, ...action.payload };
       state.error = null;
+    },
+    [getFavorite.fulfilled](state, action) {
+      state.favorite = action.payload.favorite;
+    },
+    [addToFavorite.fulfilled](state, action) {
+      state.favorite = action.payload.data.favoriteAds;
+    },
+    [deleteFromFavorite.fulfilled](state, action) {
+      state.favorite = state.favorite.filter(el => el !== action.payload);
     },
   },
 });

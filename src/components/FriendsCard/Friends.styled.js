@@ -66,10 +66,12 @@ export const WrapperContent = styled.div`
   line-height: 1.38;
   color: #111111;
   width: 150px;
-  overflow-wrap: break-word @media screen and (min-width: 768px) {
+  overflow-wrap: break-word;
+  @media screen and (min-width: 768px) {
     font-size: 14px;
   }
   @media screen and (min-width: 1280px) {
+    font-size: 16px;
   }
 `;
 
@@ -139,6 +141,28 @@ export const ItemTime = styled.li`
   }
 `;
 
+export const Data = styled.div`
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+  }
+`;
+
+export const DataBox = styled.div`
+  div {
+  }
+  &:hover {
+    color: #f59256;
+    div {
+      display: block;
+    }
+  }
+`;
+
 export const P = styled.p`
   margin-top: 4px;
   &:nth-child(1) {
@@ -158,23 +182,8 @@ export const P = styled.p`
       margin-top: 16px;
     }
   }
-`;
-
-export const Data = styled.div`
-  position: relative;
-  div {
-  }
-  &:hover {
+  ${DataBox}:hover & {
     color: #f59256;
-    div {
-      display: block;
-    }
-  }
-  @media screen and (min-width: 768px) {
-    font-size: 14px;
-  }
-  @media screen and (min-width: 1280px) {
-    font-size: 16px;
   }
 `;
 

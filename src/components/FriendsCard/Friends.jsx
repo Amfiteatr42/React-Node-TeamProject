@@ -15,8 +15,8 @@ import {
   SpanWeek,
   ItemTime,
   P,
+  DataBox,
 } from './Friends.styled';
-
 
 const Friends = ({ friends }) => {
   const {
@@ -59,7 +59,7 @@ const Friends = ({ friends }) => {
     }
     const result = arr?.map((item, index) => {
       if (item.week) {
-        if (!item.isOpen) {
+        if (item.isOpen) {
           return (
             <ItemTime key={index}>
               <SpanWeek>{item.week}</SpanWeek>
@@ -67,7 +67,7 @@ const Friends = ({ friends }) => {
             </ItemTime>
           );
         }
-        if (item.isOpen) {
+        if (!item.isOpen) {
           return (
             <ItemTime key={index}>
               <SpanWeek>{item.week}</SpanWeek>
@@ -88,10 +88,11 @@ const Friends = ({ friends }) => {
   };
 
   const timeOne = arr => {
-    const result = arr?.find(item => item.isOpen);
-    return result ? (
+    // const result = arr?.find(item => item.isOpen);
+
+    return true ? (
       <p>
-        {result?.from}- {result?.to}
+        {arr[0]?.from}- {arr[0]?.to}
       </p>
     ) : (
       '-----------------------'
@@ -108,15 +109,18 @@ const Friends = ({ friends }) => {
           <Img src={imageUrl}></Img>
         </WrapperIMG>
         <WrapperContent>
-          <P> Time:</P>
-          <Data>
-            {newWorkDays ? timeOne(newWorkDays) : '-----------------------'}
-            <WrapperTimeHover>
-              <ListFullTime>
-                {fullTime(newWorkDays ? newWorkDays : week)}
-              </ListFullTime>
-            </WrapperTimeHover>
-          </Data>
+          <DataBox>
+            <P> Time:</P>
+            <Data>
+              {newWorkDays ? timeOne(newWorkDays) : '-----------------------'}
+              <WrapperTimeHover>
+                <ListFullTime>
+                  {fullTime(newWorkDays ? newWorkDays : week)}
+                </ListFullTime>
+              </WrapperTimeHover>
+            </Data>
+          </DataBox>
+
           <P> Adress:{buttonAddress()} </P>
           <Address href={adressUrl} target="_blank">
             {adress || '-----------------------'}

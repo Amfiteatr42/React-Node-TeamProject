@@ -9,6 +9,7 @@ import {
   Box,
   AuthBox,
   link,
+  ErrorH3,
 } from 'stylesheets/Auth.styled';
 import { ValidateLogin } from './validate/Validate';
 
@@ -44,7 +45,7 @@ const LoginForm = ({ hendeLSumdit }) => {
                 type="email"
                 placeholder="Email"
               />
-               {touched.email && errors.email && <div>{errors.email}</div>}
+               {touched.email && errors.email && <ErrorH3>{errors.email}</ErrorH3>}
               <Input
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -53,7 +54,7 @@ const LoginForm = ({ hendeLSumdit }) => {
                 type="password"
                 placeholder="Password"
               />
-               {touched.password && errors.password && <div>{errors.password}</div>}
+               {touched.password && errors.password && <ErrorH3>{errors.password}</ErrorH3>}
             </Box>
             <AuthButton type="submit" style={{ marginBottom:"0px" }}>Login</AuthButton>
           </AuthForm>

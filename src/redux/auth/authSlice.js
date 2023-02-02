@@ -42,6 +42,7 @@ const authSlice = createSlice({
     [Reset.fulfilled](state, action) {
       state.user = {};
       state.token = null;
+      state.isRefreshing =false;
       state.isLoggedIn = false;
       state.id = null;
       state.error = null;
@@ -54,7 +55,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isRefreshing = true;
       state.user = action.payload.data;
-      // state.token = action.payload.longToken;
+      state.token = action.payload.longToken;
       state.error = null;
     },
   },

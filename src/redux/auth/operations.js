@@ -60,8 +60,9 @@ export const Reset = createAsyncThunk(
   }
 );
 
+
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/current',
+  'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -71,29 +72,10 @@ export const fetchCurrentUser = createAsyncThunk(
     }
     token.set(persistedToken);
     try {
-      const { data } = await axios.get(`${BASEURL}current`);
-      return data;
+      const { data } = await axios.patch(`${BASEURL}refresh`);
+      return data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-//  const refreshUser = createAsyncThunk(
-//   'auth/refresh',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
-
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue();
-//     }
-//     token.set(persistedToken);
-//     try {
-//       const { data } = await axios.get('refresh');
-//       return data.longToken;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );

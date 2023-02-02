@@ -11,10 +11,8 @@ const RegistrationPage = () => {
   const hendeLSumdit = e => {
     const { password, cPassword, email, userName, city, phone } = e;
     if (password === cPassword) {
-      console.log(e);
       dispatch(Register({ password, email, userName, city, phone }));
     }
-    console.log(e);
   };
 
   return (

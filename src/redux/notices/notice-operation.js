@@ -51,8 +51,10 @@ export const createNotices = createAsyncThunk(
         },
       };
 
-      await axios.post(`/ads/add`, values, header);
-      const { data } = await axios.get('/ads/my');
+      // await axios.post(`/ads/add`, values, header);
+      // const { data } = await axios.get('/ads/my');
+
+      const { data } = await axios.post(`/ads/add`, values, header);
       toast.success('New notice added!');
       return data;
     } catch (error) {

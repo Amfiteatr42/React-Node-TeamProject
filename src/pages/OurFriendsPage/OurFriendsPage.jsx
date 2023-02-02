@@ -6,31 +6,39 @@ import {
   Wrapper,
   WrapperList,
 } from './OurFriendsPage.styled';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getOurFriends } from 'redux/ourFriend/ourFriendOperations';
-import { selectOurFriends } from 'redux/ourFriend/ourFriendsSelectors';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://api-petly.onrender.com/api/';
+
 
 const OurFriendsPage = () => {
-  const dispatch = useDispatch();
-  const dataFriends = useSelector(selectOurFriends);
+const [friends, setFriends] = useState([]);
+
   useEffect(() => {
-    dispatch(getOurFriends());
-  }, [dispatch]);
+    async function fetchData() {
+      const { data } = await axios.get('/friends');
+      console.log(data.data);
+      setFriends(data.data);   
+  }
+  fetchData();
+}, []);
 
   return (
-    <Wrapper>
-      <Title>Our friend</Title>
-      <WrapperList>
-        <ListCard>
-          {dataFriends?.map(value => (
-            <ItemCard key={value?._id}>
-              <Friends friends={value} />
-            </ItemCard>
-          ))}
-        </ListCard>
-      </WrapperList>
-    </Wrapper>
+    friends && (
+      <Wrapper>
+        <Title>Our friend</Title>
+        <WrapperList>
+          <ListCard>
+            {friends.map(value => (
+              <ItemCard key={value?._id}>
+                <Friends friends={value} />
+              </ItemCard>
+            ))}
+          </ListCard>
+        </WrapperList>
+      </Wrapper>
+    )
   );
 };
 

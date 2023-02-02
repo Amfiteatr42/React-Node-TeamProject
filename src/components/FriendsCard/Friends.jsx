@@ -17,24 +17,31 @@ import {
   P,
 } from './Friends.styled';
 
-// import { v4 as uuidv4 } from 'uuid';
 
 const Friends = ({ friends }) => {
-  const { title, address, addressUrl, email, imageUrl, phone, url, workDays } =
-    friends;
+  const {
+    name,
+    adress,
+    adressUrl,
+    email,
+    imageUrl,
+    phone,
+    friendUrl,
+    workingHours,
+  } = friends;
 
   const buttonAddress = () => {
-    if (!addressUrl) {
+    if (!adressUrl) {
       return '';
     }
     return (
-      <a href={addressUrl} target="_blank" rel="noreferrer">
+      <a href={adressUrl} target="_blank" rel="noreferrer">
         <IconAddress />
       </a>
     );
   };
   const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  const newWorkDays = workDays?.map((item, i) => {
+  const newWorkDays = workingHours?.map((item, i) => {
     return { ...item, week: week[i] };
   });
 
@@ -93,8 +100,8 @@ const Friends = ({ friends }) => {
 
   return (
     <Container>
-      <Title href={url} target="_blank">
-        {title}
+      <Title href={friendUrl} target="_blank">
+        {name}
       </Title>
       <Wrapper>
         <WrapperIMG>
@@ -111,8 +118,8 @@ const Friends = ({ friends }) => {
             </WrapperTimeHover>
           </Data>
           <P> Adress:{buttonAddress()} </P>
-          <Address href={addressUrl} target="_blank">
-            {address || '-----------------------'}
+          <Address href={adressUrl} target="_blank">
+            {adress || '-----------------------'}
           </Address>
           <P> Email:</P>
           <Email href={email ? 'mailto:' + email : null}>

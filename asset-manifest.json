@@ -1,7 +1,10 @@
 {
   "files": {
-    "main.css": "/React-Node-TeamProject/static/css/main.4fd33451.css",
-    "main.js": "/React-Node-TeamProject/static/js/main.69e23072.js",
+    "main.css": "/React-Node-TeamProject/static/css/main.0f41738a.css",
+    "main.js": "/React-Node-TeamProject/static/js/main.5e9bb396.js",
+    "static/css/676.eca56ac3.chunk.css": "/React-Node-TeamProject/static/css/676.eca56ac3.chunk.css",
+    "static/js/676.09955efb.chunk.js": "/React-Node-TeamProject/static/js/676.09955efb.chunk.js",
+    "static/js/898.95dae026.chunk.js": "/React-Node-TeamProject/static/js/898.95dae026.chunk.js",
     "static/media/hero-girl-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-girl-tablet@2x.6500f4f40613c60a0661.png",
     "static/media/hero-girl-desk@2x.png": "/React-Node-TeamProject/static/media/hero-girl-desk@2x.ae9f2ee5925572cf3c81.png",
     "static/media/hero-waves-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-waves-tablet@2x.c463a7a2419f2737e6ad.png",
@@ -18,12 +21,20 @@
     "static/media/hero-waves-mob.png": "/React-Node-TeamProject/static/media/hero-waves-mob.98b883d85968e1b919ad.png",
     "static/media/sprite.svg": "/React-Node-TeamProject/static/media/sprite.29221b499b1730e0c2805150c1dbb766.svg",
     "static/media/hero-heart-desk@2x.png": "/React-Node-TeamProject/static/media/hero-heart-desk@2x.39a65ca1ed6d2e2be642.png",
+    "static/media/heartBtnM.svg": "/React-Node-TeamProject/static/media/heartBtnM.78448d8203262178c1f49940fd8bd716.svg",
     "index.html": "/React-Node-TeamProject/index.html",
-    "main.4fd33451.css.map": "/React-Node-TeamProject/static/css/main.4fd33451.css.map",
-    "main.69e23072.js.map": "/React-Node-TeamProject/static/js/main.69e23072.js.map"
+    "static/media/close.svg": "/React-Node-TeamProject/static/media/close.11cc6d45b64cc973e8232e8687ebd1ba.svg",
+    "static/media/search.svg": "/React-Node-TeamProject/static/media/search.cb13bdd6b45133efdb444da1ea3b2aac.svg",
+    "static/media/big-plus.svg": "/React-Node-TeamProject/static/media/big-plus.9697edc2757a8c2fdec9c9578b298e71.svg",
+    "static/media/plus.svg": "/React-Node-TeamProject/static/media/plus.18dde0ab6d2ab0cd36f9fdac9bc7c4b1.svg",
+    "main.0f41738a.css.map": "/React-Node-TeamProject/static/css/main.0f41738a.css.map",
+    "main.5e9bb396.js.map": "/React-Node-TeamProject/static/js/main.5e9bb396.js.map",
+    "676.eca56ac3.chunk.css.map": "/React-Node-TeamProject/static/css/676.eca56ac3.chunk.css.map",
+    "676.09955efb.chunk.js.map": "/React-Node-TeamProject/static/js/676.09955efb.chunk.js.map",
+    "898.95dae026.chunk.js.map": "/React-Node-TeamProject/static/js/898.95dae026.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4fd33451.css",
-    "static/js/main.69e23072.js"
+    "static/css/main.0f41738a.css",
+    "static/js/main.5e9bb396.js"
   ]
 }

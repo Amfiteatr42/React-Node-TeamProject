@@ -2,8 +2,7 @@ import { default as styled } from 'styled-components';
 
 export const HeaderContainer = styled.header`
     margin: 0 auto;
-    background-color: #FDF7F2;
-     
+    background-color: #FDF7F2;     
 `;
 
 export const HeaderList = styled.ul`
@@ -25,3 +24,4 @@ export const HeaderList = styled.ul`
 export const HeaderItem = styled.li`
     margin-right: 0;
 `;
+

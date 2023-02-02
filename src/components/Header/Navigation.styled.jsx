@@ -127,14 +127,8 @@ export const MobMenuBox = styled.div`
     width: 768px;
     }
 
-    
-    
-
     @media (min-width: 1280px) {
         display: none;
-    }
-    
-
-    
+    } 
 `;
 

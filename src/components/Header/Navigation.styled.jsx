@@ -1,7 +1,6 @@
 import { default as styled } from 'styled-components';
 
 export const NavigationList = styled.ul`
-    position: relative;
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
@@ -117,20 +116,19 @@ export const UserNavBox = styled.div`
 
 export const MobMenuBox = styled.div`
     position: absolute;
-    top: 47px;
-    left: -99px;
-    @media (min-width: 768px) and (max-width: 1279.99px) {
-    left: -127px;
-    }
-
-    width: 100vw;
+    top: 77px;
+    left: 0;
+    width: 320px;
     height: auto;
     background-color: #FDF7F2;
-    @media (min-width: 1279.99px) {
-        display: none;
-    }
-    
 
+    @media (min-width: 768px) and (max-width: 1279.99px) {
     
+    width: 768px;
+    }
+
+    @media (min-width: 1280px) {
+        display: none;
+    } 
 `;
 

@@ -1,13 +1,14 @@
 import { default as styled } from 'styled-components';
 
 export const HeaderContainer = styled.header`
-    
-    background-color: #FDF7F2;
-     
+    margin: 0 auto;
+    background-color: #FDF7F2;     
 `;
 
 export const HeaderList = styled.ul`
+    position: relative;
     width: 320px;
+    margin: 0 auto;
     @media (min-width: 768px) and (max-width: 1279.99px) {
     width: 768px;
     };
@@ -23,3 +24,4 @@ export const HeaderList = styled.ul`
 export const HeaderItem = styled.li`
     margin-right: 0;
 `;
+

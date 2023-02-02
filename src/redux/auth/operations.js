@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit/dist';
 import axios from 'axios';
 
-const BASEURL = "https://api-petly.onrender.com/api/users/"
+const BASEURL = 'https://api-petly.onrender.com/api/users/';
 
 const token = {
   set(token) {
@@ -17,7 +17,6 @@ export const Login = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const user = await axios.post(`${BASEURL}login`, sign);
-      console.log(user);
       token.set(user.data.longToken);
       return user;
     } catch (error) {
@@ -31,10 +30,10 @@ export const Register = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`${BASEURL}signup`, sign);
-      const { user } = verification(data);
-      console.log(user, 'work');
+      const user = await axios.get(
+        `${BASEURL}verify/${data.data._id}/${data.verificationEmailToken}`
+      );
       token.set(user.data.longToken);
-
       return user;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -42,11 +41,18 @@ export const Register = createAsyncThunk(
   }
 );
 
-const verification = async ({ data, verificationEmailToken }) => {
-  const { _id } = data;
-  const user = await axios.get(`${BASEURL}verify/${_id}/${verificationEmailToken}`);
-  return user;
-};
+export const updateUserInfo = createAsyncThunk(
+  'auth/update',
+  async (info, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch(`${BASEURL}update`, info);
+      token.set(data.longToken);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.messsage);
+    }
+  }
+);
 
 export const Reset = createAsyncThunk(
   'auth/Signout',
@@ -60,7 +66,6 @@ export const Reset = createAsyncThunk(
   }
 );
 
-
 export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -73,9 +78,53 @@ export const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.patch(`${BASEURL}refresh`);
-      return data
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const getFavorite = createAsyncThunk('/favorite', async () => {
+  try {
+    const { data } = await axios.get(`${BASEURL}favorite`);
+    return data;
+  } catch (error) {
+    // toast.error(error.response.data.message);
+  }
+});
+export const addToFavorite = createAsyncThunk(
+  'addToFavorite',
+  async (petId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.post(`${BASEURL}favorite/${petId}`);
+      // const { data } = await axios.get(
+      //   'https://api-petly.onrender.com/api/ads'
+      // );
+      return data;
+    } catch (error) {
+      // toast.error(error.response.data.message);
+    }
+  }
+);
+export const deleteFromFavorite = createAsyncThunk(
+  'deleteFromFavorite',
+  async (petId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    token.set(persistedToken);
+    try {
+      await axios.delete(`${BASEURL}favorite/${petId}`);
+      const { data } = await axios.get(
+        'https://api-petly.onrender.com/api/ads'
+      );
+      return data;
+    } catch (error) {
+      // toast.error(error.response.data.message);
     }
   }
 );

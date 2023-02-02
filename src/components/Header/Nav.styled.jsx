@@ -34,7 +34,7 @@ export const NavItem = styled.li`
     justify-content: flex-start;
 
     font-family: 'Manrope';
-    font-weight: 400;
+    font-weight: 500;
     font-size: 20px;
     line-height: 1.35;
     letter-spacing: 0.04em;
@@ -43,7 +43,7 @@ export const NavItem = styled.li`
     &:hover {
         color: #F59256;
         text-decoration-line: underline;
-        font-weight: 700;
+        font-weight: 500;
     }
 
     @media (max-width: 768px) {

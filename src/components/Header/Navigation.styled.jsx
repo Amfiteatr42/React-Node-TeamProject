@@ -121,6 +121,7 @@ export const MobMenuBox = styled.div`
     width: 320px;
     height: auto;
     background-color: #FDF7F2;
+    z-index: 100;
 
     @media (min-width: 768px) and (max-width: 1279.99px) {
     

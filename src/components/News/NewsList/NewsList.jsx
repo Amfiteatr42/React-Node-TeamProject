@@ -10,14 +10,18 @@ import {
 } from './NewsList.styled';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { RxCrossCircled } from 'react-icons/rx';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRef } from 'react';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isCloseIcon, setIsCloseIcon] = useState('');
 
-  // const iconClose = e.currentTarget.value ? news : search;
+  // const inputEl = useRef(null);
+  const iconClose = search ? search.target?.value : isCloseIcon;
 
   useEffect(() => {
     const data = axios.get('https://api-petly.onrender.com/api/news');
@@ -45,19 +49,25 @@ const NewsList = () => {
     }
     const normalizedFilter = search.toLowerCase();
 
-    const fullNews = news;
-
     const filteredNews = news.filter(item => {
       return (
         item.text.toLowerCase().includes(normalizedFilter) ||
         item.title.toLowerCase().includes(normalizedFilter)
       );
     });
+    if (filteredNews.length === 0) {
+      toast.error('Not Found');
+      return;
+    }
+
     setNews(filteredNews);
+    setIsCloseIcon(prev => !prev);
   };
 
   const searchDelete = e => {
     e.preventDefault();
+    setIsCloseIcon(prev => !prev);
+    return;
   };
 
   return (
@@ -69,12 +79,15 @@ const NewsList = () => {
           placeholder="Search"
           onChange={handleSearchChange}
         />
-        <ButtonNews type="submit">
-          <BiSearchAlt2 size="22px" />
-        </ButtonNews>
-        {/* <ButtonDelete type="button" onClick={searchDelete}>
-          <RxCrossCircled size="22px" />
-        </ButtonDelete> */}
+        {iconClose ? (
+          <ButtonDelete type="button" onClick={searchDelete}>
+            <RxCrossCircled size="22px" />
+          </ButtonDelete>
+        ) : (
+          <ButtonNews type="submit">
+            <BiSearchAlt2 size="22px" />
+          </ButtonNews>
+        )}
       </FormNews>
       <UlNews>
         {news
@@ -91,6 +104,7 @@ const NewsList = () => {
           })
           .sort((a, b) => new Date(b.date) - new Date(a.date))}
       </UlNews>
+      <ToastContainer />
     </>
   );
 };

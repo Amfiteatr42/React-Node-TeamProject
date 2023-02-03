@@ -7,7 +7,6 @@ const NewsPage = () => {
     <NewsSection>
       <Container>
         <NewsHeader>News</NewsHeader>
-        {/* <NewsSearch /> */}
         <NewsList />
       </Container>
     </NewsSection>

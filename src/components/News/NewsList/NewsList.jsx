@@ -12,7 +12,6 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRef } from 'react';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -61,6 +60,7 @@ const NewsList = () => {
     }
 
     setNews(filteredNews);
+    setLoading(false);
     setIsCloseIcon(prev => !prev);
   };
 
@@ -89,6 +89,7 @@ const NewsList = () => {
           </ButtonNews>
         )}
       </FormNews>
+      {loading && <p>Loading...</p>}
       <UlNews>
         {news
           .map(({ _id, link, title, text, date }) => {

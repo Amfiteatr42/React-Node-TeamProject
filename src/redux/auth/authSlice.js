@@ -17,6 +17,7 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.error = action.payload;
   state.isLoggedIn = false;
+  state.isRefreshing = false;
 };
 
 const authSlice = createSlice({
@@ -26,17 +27,21 @@ const authSlice = createSlice({
     favorite: [],
     isLoggedIn: false,
     isRefreshing: false,
+    isLoginError: null,
     token: null,
     error: null,
   },
   extraReducers: {
     [Login.pending]: handlePending,
-    [Login.rejected]: handleRejected,
+    [Login.rejected](state, action) {
+      state.isLoginError = action.payload;
+      state.isLoggedIn = false;
+    },
     [Login.fulfilled](state, action) {
       state.user = action.payload.data.data;
       state.token = action.payload.data.longToken;
       state.isLoggedIn = true;
-      state.error = null;
+      state.isLoginError = null;
     },
     [Register.pending]: handlePending,
     [Register.rejected]: handleRejected,

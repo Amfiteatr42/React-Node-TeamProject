@@ -18,11 +18,11 @@ import { ValidateRegister } from './validate/Validate';
 
 const RegisterForm = ({
   hendeLSumdit,
-  error,
   hendelPassword,
   hendeLNext,
   next,
   chek,
+  nextStyle,
 }) => {
   return (
     <AuthBox>
@@ -101,7 +101,7 @@ const RegisterForm = ({
                     </Label>
                   </Box>
                   <AuthButton type="submit" style={{ marginBottom: '16px' }}>
-                    {error ? 'Register' : 'The password does not match'}
+                   Register
                   </AuthButton>
                 </>
               ) : (
@@ -154,7 +154,7 @@ const RegisterForm = ({
           )}
         </Formik>
       </div>
-      <AuthButton name="button" value={next} onClick={hendeLNext}>
+      <AuthButton name="button" style={nextStyle} value={next} onClick={hendeLNext}>
         {next ? 'Back' : 'Next'}
       </AuthButton>
       <AuthTitleh3>

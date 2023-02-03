@@ -124,7 +124,7 @@ export const deleteFromFavorite = createAsyncThunk(
     try {
       await axios.delete(`${BASEURL}favorite/${petId}`);
       const { data } = await axios.get(
-        'https://api-petly.onrender.com/api/ads'
+        'https://api-petly.onrender.com/api/notice'
       );
       return data;
     } catch (error) {

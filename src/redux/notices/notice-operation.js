@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 axios.defaults.baseURL = 'https://api-petly.onrender.com/';
 
 export const getNoticesCategories = createAsyncThunk(
-  '/ads/?categoryId',
+  '/notice/?categoryId',
   async ({ category, query = '' }) => {
     try {
       let data;
       if (query) {
-        data = await axios.get(`/ads/?categoryId=${category}&q=${query}`);
+        data = await axios.get(`/notice/?categoryId=${category}&q=${query}`);
       } else {
-        data = await axios.get(`/ads/?categoryId=${category}`);
+        data = await axios.get(`/notice/?categoryId=${category}`);
       }
       return data.data.data;
     } catch (error) {
@@ -32,7 +32,7 @@ export const getUserNotices = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.get(`/ads/my`, header);
+      const { data } = await axios.get(`/notice/my`, header);
       return data;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -51,8 +51,10 @@ export const createNotices = createAsyncThunk(
         },
       };
 
-      await axios.post(`/ads/add`, values, header);
-      const { data } = await axios.get('/ads/my');
+      // await axios.post(`/ads/add`, values, header);
+      // const { data } = await axios.get('/ads/my');
+
+      const { data } = await axios.post(`/notice/add`, values, header);
       toast.success('New notice added!');
       return data;
     } catch (error) {
@@ -66,8 +68,8 @@ export const deleteUserNotices = createAsyncThunk(
   'notices/deleteUserNotices',
   async petId => {
     try {
-      await axios.delete(`ads/remove/${petId}`);
-      const { data } = await axios.get('/ads/my');
+      await axios.delete(`notice/remove/${petId}`);
+      const { data } = await axios.get('/notice/my');
       toast.success('Notice deleted!');
       return data;
     } catch (error) {

@@ -6,6 +6,7 @@ import { noticesOperations, noticesSelectors } from '../../redux/notices';
 import { getUserFavorite } from 'redux/auth/selectors';
 import s from './index.module.css';
 import { RotatingLines } from 'react-loader-spinner';
+import { getAuthToken } from 'redux/auth/selectors';
 
 export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
@@ -20,6 +21,7 @@ export default function NoticesCategoriesList() {
   // const favorite = false;
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
   const pathnameArr = pathname.split('/');
+  const token = useSelector(getAuthToken);
 
   // useEffect(() => {
   //   setFavoriteData(inFavorites);
@@ -49,7 +51,7 @@ export default function NoticesCategoriesList() {
   const resetNoticesData = async pathnameArr => {
     if (pathnameArr[2] === 'sell') {
       dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
-      return console.log(category);
+      // return console.log(category);
     }
     if (pathnameArr[2] === 'lost-found') {
       dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
@@ -62,7 +64,8 @@ export default function NoticesCategoriesList() {
       setNoticesData(favorite);
     }
     if (pathnameArr[2] === 'own') {
-      dispatch(noticesOperations.getUserNotices());
+      dispatch(noticesOperations.getUserNotices({ token }));
+      // setNoticesData(userNotices);
     }
   };
 

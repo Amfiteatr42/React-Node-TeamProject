@@ -25,7 +25,7 @@ export const Icon = styled(AiOutlinePlus)`
   height: 71px;
   fill: var(--gray-2);
 `;
-export const Button = styled.button`
+export const Button = styled.label`
   display: flex;
   align-items: center;
   margin-left: auto;

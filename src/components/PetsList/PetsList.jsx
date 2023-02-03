@@ -19,11 +19,10 @@ export const PetsList = () => {
   const pets = useSelector(getPets);
   const dispatch = useDispatch();
 
-
   return (
     <>
       <Box>
-        {pets.map(({ _id, imgURL, name, dateOfBirth, breed, comment }) => (
+       { pets&& pets.map(({ _id, imgURL, name, dateOfBirth, breed, comment }) => (
           <Li  key={_id}>
             <Content>{imgURL ? <Img src={imgURL} /> : <Icon />}</Content>
             <List>
@@ -49,7 +48,8 @@ export const PetsList = () => {
               />
             </Button>
           </Li>
-        ))}
+       ))}
+        <Span>No pets</Span>
       </Box>
     </>
   );

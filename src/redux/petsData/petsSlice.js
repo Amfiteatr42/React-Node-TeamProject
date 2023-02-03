@@ -4,6 +4,7 @@ import { addPets, fetchPets, removePets } from './petsOperation';
 // заглушка Slice
 const handelPending = state => {
   state.isLoading = true;
+
 };
 const handelReject = (state, { payload }) => {
   state.isLoading = false;
@@ -12,7 +13,7 @@ const handelReject = (state, { payload }) => {
 const petsSlice = createSlice({
   name: 'mockname',
   initialState: {
-    mock: [ {}],
+    mock: [{}],
     isLoading: false,
     error: null,
   },
@@ -30,8 +31,8 @@ const petsSlice = createSlice({
       .addCase(addPets.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-     console.log( state.mock.push(payload))
-        state.mock.push(payload);
+     console.log(state.mock)
+      state.mock.push(payload);
       }).addCase(fetchPets.fulfilled,  (state, { payload }) => {
         state.isLoading = false;
         state.error = null;

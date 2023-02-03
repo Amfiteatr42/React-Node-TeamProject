@@ -15,27 +15,27 @@ const token = {
 export const fetchPets = createAsyncThunk('userpets/fetchAll', async (_, { rejectWithValue }) =>
 {
     try {
-        const res = await axios.get(`${URL}userpets/add`);
-        // token.set(res.data.longToken);
+        const res = await axios.get(`${URL}userspets/add`);
+        token.set(res.data.longToken);
         console.log(res.data)
         return res.data;
     } catch (error) {
         return rejectWithValue(error.messsage)
     }
 })
-export const addPets = createAsyncThunk('userpets/add', async (pet, { rejectWithValue }) => {
+export const addPets = createAsyncThunk('userspets/add', async (pet, { rejectWithValue }) => {
     try {
-        const res = await axios.post(`${URL}userpets/add`, pet);
-       // token.set(res.data.longToken);
+        const res = await axios.post(`${URL}userspets/add`, pet);
+        token.set(res.data.longToken);
          console.log(res.data)
         return res.data;
     } catch (error) {
         return rejectWithValue(error.messsage)
     }
 })
-export const removePets = createAsyncThunk('userpets/remove', async (_id, { rejectWithValue }) => {
+export const removePets = createAsyncThunk('userspets/remove', async (_id, { rejectWithValue }) => {
     try {
-        const res = await axios.delete(`${URL}userpets/remove/${_id}`);
+        const res = await axios.delete(`${URL}userspets/remove/${_id}`);
          console.log(res.data)
            token.unset();
         return res.data;

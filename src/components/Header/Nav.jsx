@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { NavList, NavItem } from './Nav.styled.jsx';
-import setIsMobMenuOpen from './Navigation';
+import PropTypes from 'prop-types';
  
-export default function Nav() {
+export default function Nav(props) {
+    const { setIsMobMenuOpen } = props;
 
     return (
         <NavList>
@@ -24,4 +25,8 @@ export default function Nav() {
         </NavList>
         
     )
-}
+};
+
+Nav.propTypes = {
+    setIsMobMenuOpen: PropTypes.func.isRequired,
+};

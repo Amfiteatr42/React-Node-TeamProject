@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { UserNavBox, UserNavContainer, SvgIcon, Text } from './UserNav.styled.jsx';
 import sprite from '../../assets/images/header/sprite.svg';
-import setIsMobMenuOpen from './Navigation';
+import PropTypes from 'prop-types';
 
-export default function UserNav() {
+export default function UserNav(props) {
+    const { setIsMobMenuOpen } = props;
 
     return (
         <UserNavBox>
@@ -19,4 +20,8 @@ export default function UserNav() {
         
           
     )
-}
+};
+
+UserNav.propTypes = {
+    setIsMobMenuOpen: PropTypes.func.isRequired,
+};

@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { LoginContainer, RegContainer, Text, RegText, AuthList, LoginItem, RegItem } from './AuthNav.styled.jsx';
-import setIsMobMenuOpen from './Navigation';
+import PropTypes from 'prop-types';
 
-export default function AuthNav() {
+export default function AuthNav(props) {
+    const { setIsMobMenuOpen } = props;
 
     return (
         <AuthList>
@@ -24,4 +25,8 @@ export default function AuthNav() {
         </AuthList>
         
     )
-}
+};
+
+AuthNav.propTypes = {
+    setIsMobMenuOpen: PropTypes.func.isRequired,
+};

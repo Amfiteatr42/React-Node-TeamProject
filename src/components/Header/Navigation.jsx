@@ -17,12 +17,12 @@ export default function Navigation() {
         <NavigationList>
 
             <NavigationItem>
-                <Nav />
+                <Nav setIsMobMenuOpen={setIsMobMenuOpen} />
             </NavigationItem>
 
             {isMobMenuOpen === false ? 
             <NavigationItemUser>
-                {isLoggedIn === true ? <UserNavBox><UserNav /></UserNavBox> : <UserNavBox><AuthNav /></UserNavBox>}
+                {isLoggedIn === true ? <UserNavBox><UserNav setIsMobMenuOpen={setIsMobMenuOpen} /></UserNavBox> : <UserNavBox><AuthNav setIsMobMenuOpen={setIsMobMenuOpen} /></UserNavBox>}
             </NavigationItemUser> : <></>}
 
             <BurgerBtnItem>
@@ -50,10 +50,10 @@ export default function Navigation() {
                 <MobMenuBox>
                     <MobMenuContainer>
                     <UserAuthNavBox>
-                        {isLoggedIn === true ? <UserNav /> : <AuthNav />}
+                        {isLoggedIn === true ? <UserNav setIsMobMenuOpen={setIsMobMenuOpen} /> : <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} />}
                     </UserAuthNavBox>
                     
-                    <Nav/> 
+                    <Nav setIsMobMenuOpen={setIsMobMenuOpen} />
                     </MobMenuContainer>
                 </MobMenuBox>
                 

@@ -1,5 +1,3 @@
-// import { Formik, Form } from 'formik';
-// import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
@@ -13,6 +11,8 @@ import {
   link,
   Error,
   Label,
+  BoxChek,
+  Chek,
 } from 'stylesheets/Auth.styled';
 import { ValidateRegister } from './validate/Validate';
 
@@ -22,6 +22,7 @@ const RegisterForm = ({
   hendelPassword,
   hendeLNext,
   next,
+  chek,
 }) => {
   return (
     <AuthBox>
@@ -38,7 +39,7 @@ const RegisterForm = ({
           }}
           validate={e => {
             if (e.password) {
-              hendelPassword(e.cPassword, e.password);
+              hendelPassword(e.password, e.cPassword);
             }
             return;
           }}
@@ -143,6 +144,9 @@ const RegisterForm = ({
                         value={values.cPassword}
                       />
                     </Label>
+                    <BoxChek>
+                      <Chek style={chek}></Chek>
+                    </BoxChek>
                   </Box>
                 </>
               )}

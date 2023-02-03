@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 
+import wavesMob2x from '../../src/assets/images/homepage/hero-waves-mob@2x.png';
+import AuthTablet2x from '../../src/assets/images/homepage/auth-tablet@2x.png';
+import AuthDesk1x from '../../src/assets/images/homepage/auth-desk@1x.png';
+
 export const link = {
   textDecoration: 'underline',
   color: '#3091EB',
   marginLeft: '3px',
+};
+
+export const margin = {
+  marginTop: "15px"
+
 };
 
 export const AuthTitleh2 = styled.h2`
@@ -64,6 +73,8 @@ export const Box = styled.div`
   flex-direction: column;
 `;
 export const AuthBox = styled.div`
+  position: relative;
+  z-index: 1;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -83,6 +94,7 @@ export const AuthBox = styled.div`
   }
 `;
 export const BoxAuth = styled.div`
+  z-index: 5;
   @media screen and (min-width: 320px) {
     margin-top: 42px;
   }
@@ -97,6 +109,7 @@ export const BoxAuth = styled.div`
   display: flex;
 `;
 export const AuthButton = styled.button`
+
   border: none;
   color: #ffffff;
   font-family: 'Manrope';
@@ -133,9 +146,7 @@ export const Label = styled.label`
 `;
 export const Input = styled.input`
   padding: 10px 30px;
-
   background: #fdf7f2;
-
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   @media screen and (min-width: 320px) {
@@ -147,3 +158,48 @@ export const Input = styled.input`
     height: 52px;
   }
 `;
+
+export const AutContainer = styled.div`
+width: 100%;
+margin: 0 auto;
+background-repeat: no-repeat;
+background-position: bottom;
+background-size: 620px;
+@media screen and (min-width: 320px) {
+  background-image:  url(${wavesMob2x});
+  max-width:  620px;
+  margin-top:-150px;
+  height:470px;
+  position:relative;
+  background-size: 280px;
+}
+
+@media screen and (min-width: 767px) {
+  max-width: 768px;
+  margin-top:-250px;
+  height:538px;
+  background-image:  url(${AuthTablet2x});
+  background-size: 768px;
+}
+@media screen and (min-width: 1279px) {
+  margin-top:-250px;
+  height:538px;
+  max-width: 1280px;
+  background-image: url(${AuthDesk1x});
+   background-size:  auto;
+}
+`;
+
+export const BoxChek = styled.div`
+height: 5px;
+margin-top: 5px;
+border-radius: 40px;
+`
+export const Chek = styled.div`
+
+width: 0px;
+transform: 3ms;
+height: 5px;
+transform-style: 5ms;
+`
+

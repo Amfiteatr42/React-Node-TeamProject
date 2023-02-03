@@ -2,22 +2,27 @@ import LoginForm from 'components/Auth/LoginForm';
 import { ValidateLogin } from 'components/Auth/validate/Validate';
 import { Formik } from 'formik';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Login } from 'redux/auth/operations';
+import { getAuthError } from 'redux/auth/selectors';
 import { Container } from 'stylesheets/Container.styled';
 import {
+  AutContainer,
   AuthBox,
+  AuthButton,
   AuthTitleh2,
   AuthTitleh3,
   BoxAuth,
   link,
+  margin,
 } from '../../stylesheets/Auth.styled';
 
 const LoginPage = () => {
+  const authEror = useSelector(getAuthError);
   const dispatch = useDispatch();
 
-  const hendeLSumdit = e => {
+  const hendeLSumdit = async e => {
     dispatch(Login(e));
   };
 
@@ -26,6 +31,7 @@ const LoginPage = () => {
       <BoxAuth>
         <AuthBox>
           <AuthTitleh2>Login</AuthTitleh2>
+
           <Formik
             initialValues={{
               email: '',
@@ -52,6 +58,9 @@ const LoginPage = () => {
               />
             )}
           </Formik>
+          {authEror && (
+            <AuthButton style={margin}>Email or password is wrong</AuthButton>
+          )}
           <AuthTitleh3>
             Don't have an account?
             <NavLink style={link} to="/register">
@@ -60,6 +69,7 @@ const LoginPage = () => {
           </AuthTitleh3>
         </AuthBox>
       </BoxAuth>
+      <AutContainer></AutContainer>
     </Container>
   );
 };

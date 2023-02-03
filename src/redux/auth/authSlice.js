@@ -5,7 +5,6 @@ import {
   fetchCurrentUser,
   getFavorite,
   Login,
-  
   Register,
   Reset,
   updateUserInfo,
@@ -23,7 +22,7 @@ const handleRejected = (state, action) => {
 };
 
 const authSlice = createSlice({
-  name: 'mockname',
+  name: 'auth',
   initialState: {
     user: {},
     favorite: [],
@@ -59,7 +58,7 @@ const authSlice = createSlice({
       state.id = null;
       state.error = null;
     },
-    [fetchCurrentUser.pending](state, action) {
+    [fetchCurrentUser.pending](state) {
       state.isLoggedIn = false;
       state.isRefreshing = true;
     },
@@ -68,7 +67,6 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isRefreshing = false;
       state.user = action.payload.data;
-      state.token = action.payload.longToken;
       state.error = null;
     },
     [updateUserInfo.pending]: handlePending,

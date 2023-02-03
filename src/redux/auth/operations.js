@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit/dist';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const BASEURL = 'https://api-petly.onrender.com/api/users/';
 
@@ -36,6 +37,10 @@ export const Register = createAsyncThunk(
       token.set(user.data.longToken);
       return user;
     } catch (error) {
+      if (error.response.data.err.code === 11000) {
+        toast.error(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -67,24 +72,23 @@ export const Reset = createAsyncThunk(
 );
 
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
+  'auth/current',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue('no token saved in localstorage');
     }
     token.set(persistedToken);
     try {
-      const { data } = await axios.patch(`${BASEURL}refresh`);
+      const { data } = await axios(`${BASEURL}current`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
 
 export const getFavorite = createAsyncThunk('/favorite', async () => {
   try {

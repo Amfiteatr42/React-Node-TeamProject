@@ -1,29 +1,46 @@
-import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { RxCrossCircled } from 'react-icons/rx';
+import { toast } from 'react-toastify';
 import { ButtonNews, FormNews, InputNews } from './NewsSearch.styled';
 
 const NewsSearch = () => {
   const [search, setSearch] = useState([]);
 
-  const input = useRef();
+  const handleSearchChange = e => {
+    setSearch(e.currentTarget.value.toLowerCase());
+  };
 
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
-
-  const handleSearch = e => {
+  const handleSubmitForm = e => {
     e.preventDefault();
-    setSearch(input.current.value);
-    console.log(input.current.value);
+    if (search.trim() === '') {
+      toast.error('No news for this query');
+      return;
+    }
+    setSearch([]);
+  };
+
+  const searchDelete = e => {
+    e.preventDefault();
+    setSearch('');
   };
 
   return (
     <div>
-      <FormNews>
-        <InputNews type="text" placeholder="Search" ref={input} />
-        <ButtonNews type="button" onClick={handleSearch}>
+      <FormNews onSubmit={handleSubmitForm}>
+        <InputNews
+          value={search}
+          type="text"
+          placeholder="Search"
+          onChange={handleSearchChange}
+        />
+        <ButtonNews type="submit">
           <BiSearchAlt2 size="20px" />
         </ButtonNews>
+        <button type="button" onClick={searchDelete}>
+          <RxCrossCircled />
+        </button>
       </FormNews>
     </div>
   );

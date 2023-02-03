@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { format } from 'date-fns';
 import {
   DateNews,
   DateReadMore,
@@ -13,10 +13,10 @@ const NewsItem = ({ url, title, description, date }) => {
   return (
     <ListNews>
       <Line />
-      <HeaderNews>{title}</HeaderNews>
-      <DescrNews>{description}</DescrNews>
+      <HeaderNews text={title} length={40} tooltip={40} />
+      <DescrNews text={description} length={200} tail={'...'} />
       <DateReadMore>
-        <DateNews>{moment(date).format('DD/MM/YYYY')}</DateNews>
+        <DateNews>{format(new Date(date), 'dd/MM/yyyy')}</DateNews>
         <LinkNews href={url} target="_blank" rel="noreferrer noopener">
           Read more
         </LinkNews>

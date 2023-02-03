@@ -1,6 +1,6 @@
 import { remove } from '../../assets/icons/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { removePets } from 'redux/petsData/petsOperation';
+import { fetchPets, removePets } from 'redux/petsData/petsOperation';
 import { getPets } from 'redux/petsData/petsSelector';
 
 import {
@@ -15,41 +15,52 @@ import {
   Content,
   Icon,
 } from './PetsList.styled';
+import { useEffect } from 'react';
+
 export const PetsList = () => {
   const pets = useSelector(getPets);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchPets());
+  }, [dispatch]);
 
   return (
     <>
       <Box>
-        {pets.map(({ _id, imgURL, name, dateOfBirth, breed, comment }) => (
-          <Li  key={_id}>
-            <Content>{imgURL ? <Img src={imgURL} /> : <Icon />}</Content>
-            <List>
-              <Item>
-                <Span>Name:</Span> {name}
-              </Item>
-              <Item>
-                <Span>Date of birth:</Span> {dateOfBirth}
-              </Item>
-              <Item>
-                <Span>Breed:</Span> {breed}
-              </Item>
-              <Item>
-                <Span> Comments:</Span> {comment}
-              </Item>
-            </List>
-            <Button>
-              <Svg
-                src={remove}
-                onClick={() => dispatch(removePets(_id))}
-                width={30}
-                height={30}
-              />
-            </Button>
-          </Li>
-        ))}
+        {pets &&
+          pets.map(
+            ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (
+              <Li key={idx}>
+                <Content>
+                  {imgURL ? <Img src={imgURL.url} /> : <Icon />}
+                </Content>
+                <List>
+                  <Item>
+                    <Span>Name:</Span> {name}
+                  </Item>
+                  <Item>
+                    <Span>Date of birth:</Span> {dateOfBirth}
+                  </Item>
+                  <Item>
+                    <Span>Breed:</Span> {breed}
+                  </Item>
+                  <Item>
+                    <Span> Comments:</Span> {comment}
+                  </Item>
+                </List>
+                <Button>
+                  <Svg
+                    src={remove}
+                    onClick={() => dispatch(removePets(_id))}
+                    width={30}
+                    height={30}
+                  />
+                </Button>
+              </Li>
+            )
+          )}
+        <Span>No pets</Span>
       </Box>
     </>
   );

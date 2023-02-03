@@ -11,7 +11,7 @@ export const UserDataItem = () => {
       <User
         active={active}
         setActive={setActive}
-        name={'name'}
+        name={'userName'}
         label={'Name:'}
         user={user.userName || "Anna"}
       />

@@ -8,9 +8,10 @@ import { useState } from 'react';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState(false);
   const [next, setNext] = useState(false);
   const [chek, setChek] = useState({});
+  const [userPassword, setUserPassword] = useState({});
+  const [nextStyle, setNextStyle] = useState({ backgroundColor: 'red' });
 
   const hendelPassword = (password, cPassword) => {
     const good = { width: '100%', backgroundColor: '#24cca7' };
@@ -29,27 +30,43 @@ const RegistrationPage = () => {
     if (password.length >= 12 && password.length <= 32) {
       setChek(good);
     }
-    password === cPassword ? setError(true) : setError(false);
+    setUserPassword({ password, cPassword });
+    if (!hendelPasswordOn(password, cPassword)) {
+      setNextStyle({ backgroundColor: 'red' });
+      return;
+    }
+    setNextStyle({ backgroundColor: '#f59256' });
   };
 
   const hendeLSumdit = ({ password, email, userName, city, phone }) => {
-    if (error) {
-      dispatch(Register({ password, email, userName, city, phone }));
+    dispatch(Register({ password, email, userName, city, phone }));
+  };
+
+  const hendelPasswordOn = (password, cPassword) => {
+    if (password === undefined) {
+      return;
+    }
+    if (password === cPassword) {
+      return true;
     }
   };
 
   const hendeLNext = e => {
     const open = e.target.value;
-    open === 'true' ? setNext(false) : setNext(true);
+    const { password, cPassword } = userPassword;
+    if (hendelPasswordOn(password, cPassword)) {
+      open === 'true' ? setNext(false) : setNext(true);
+    }
   };
 
   return (
     <Container>
       <BoxAuth>
         <RegisterForm
-        chek={chek}
+        nextStyle={nextStyle}
+          userPassword={userPassword}
+          chek={chek}
           hendeLSumdit={hendeLSumdit}
-          error={error}
           hendelPassword={hendelPassword}
           hendeLNext={hendeLNext}
           next={next}

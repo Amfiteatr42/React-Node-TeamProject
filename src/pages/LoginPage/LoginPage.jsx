@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Login } from 'redux/auth/operations';
-import { getAuthError } from 'redux/auth/selectors';
+import {  getAuthLoginError } from 'redux/auth/selectors';
 import { Container } from 'stylesheets/Container.styled';
 import {
   AutContainer,
@@ -19,7 +19,7 @@ import {
 } from '../../stylesheets/Auth.styled';
 
 const LoginPage = () => {
-  const authEror = useSelector(getAuthError);
+  const LoginError = useSelector(getAuthLoginError);
   const dispatch = useDispatch();
 
   const hendeLSumdit = async e => {
@@ -58,7 +58,7 @@ const LoginPage = () => {
               />
             )}
           </Formik>
-          {authEror && (
+          {LoginError && (
             <AuthButton style={margin}>Email or password is wrong</AuthButton>
           )}
           <AuthTitleh3>

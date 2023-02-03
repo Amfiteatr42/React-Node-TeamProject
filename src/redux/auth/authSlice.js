@@ -72,8 +72,13 @@ const authSlice = createSlice({
       state.user = action.payload.data;
       state.error = null;
     },
-    [updateUserInfo.pending]: handlePending,
-    [updateUserInfo.rejected]: handleRejected,
+    [updateUserInfo.pending](state, action) {
+      state.isLoggedIn = true;
+    },
+    [updateUserInfo.rejected](state, action) {
+      state.isLoggedIn = true;
+      state.error = action.payload;
+    },
     [updateUserInfo.fulfilled](state, action) {
       state.user = { ...state.user, ...action.payload };
       state.error = null;

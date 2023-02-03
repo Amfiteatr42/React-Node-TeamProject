@@ -1,4 +1,4 @@
-import { BoxAuth } from 'stylesheets/Auth.styled';
+import { AutContainer, BoxAuth } from 'stylesheets/Auth.styled';
 
 import { useDispatch } from 'react-redux';
 import { Register } from 'redux/auth/operations';
@@ -10,8 +10,25 @@ const RegistrationPage = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(false);
   const [next, setNext] = useState(false);
+  const [chek, setChek] = useState({});
 
   const hendelPassword = (password, cPassword) => {
+    const good = { width: '100%', backgroundColor: '#24cca7' };
+    const normally = { width: '45%', backgroundColor: 'orange' };
+    const badly = { width: '25%', backgroundColor: 'red' };
+    const refresh = { width: '0%', backgroundColor: '#E5F1EF' };
+    if (password.length > 0 && password.length < 3) {
+      setChek(refresh);
+    }
+    if (password.length > 3 && password.length < 7) {
+      setChek(badly);
+    }
+    if (password.length >= 7 && password.length <= 12) {
+      setChek(normally);
+    }
+    if (password.length >= 12 && password.length <= 32) {
+      setChek(good);
+    }
     password === cPassword ? setError(true) : setError(false);
   };
 
@@ -30,6 +47,7 @@ const RegistrationPage = () => {
     <Container>
       <BoxAuth>
         <RegisterForm
+        chek={chek}
           hendeLSumdit={hendeLSumdit}
           error={error}
           hendelPassword={hendelPassword}
@@ -37,6 +55,7 @@ const RegistrationPage = () => {
           next={next}
         />
       </BoxAuth>
+      <AutContainer></AutContainer>
     </Container>
   );
 };

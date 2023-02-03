@@ -51,7 +51,7 @@ export const updateUserInfo = createAsyncThunk(
   async (info, { rejectWithValue }) => {
     try {
       const { data } = await axios.patch(`${BASEURL}update`, info);
-      token.set(data.longToken);
+      // token.set(data.longToken);
       return data;
     } catch (error) {
       return rejectWithValue(error.messsage);

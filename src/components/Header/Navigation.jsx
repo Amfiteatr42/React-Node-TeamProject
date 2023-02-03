@@ -38,7 +38,7 @@ export default function Navigation() {
             </UserNavBox>
           ) : (
             <UserNavBox>
-              <AuthNav />
+              <AuthNav setIsMobMenuOpen={setIsMobMenuOpen}/>
             </UserNavBox>
           )}
         </NavigationItemUser>

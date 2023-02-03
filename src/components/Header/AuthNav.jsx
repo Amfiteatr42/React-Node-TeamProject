@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { LoginContainer, RegContainer, Text, RegText, AuthList, LoginItem, RegItem } from './AuthNav.styled.jsx';
-import setIsMobMenuOpen from './Navigation';
 
-export default function AuthNav() {
+export default function AuthNav({ setIsMobMenuOpen }) {
 
     return (
         <AuthList>

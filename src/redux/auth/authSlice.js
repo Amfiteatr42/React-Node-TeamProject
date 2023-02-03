@@ -12,11 +12,9 @@ import {
 
 const handlePending = state => {
   state.isLoggedIn = false;
-  state.isRefreshing = false;
 };
 
 const handleRejected = (state, action) => {
-  state.isRefreshing = false;
   state.error = action.payload;
   state.isLoggedIn = false;
 };
@@ -50,17 +48,17 @@ const authSlice = createSlice({
     },
     [Reset.pending]: handlePending,
     [Reset.rejected]: handleRejected,
-    [Reset.fulfilled](state, action) {
+    [Reset.fulfilled](state) {
       state.user = {};
       state.token = null;
       state.isRefreshing = false;
       state.isLoggedIn = false;
-      state.id = null;
       state.error = null;
+      state.favorite = [];
     },
     [fetchCurrentUser.pending](state) {
-      state.isLoggedIn = false;
       state.isRefreshing = true;
+      state.isLoggedIn = true;
     },
     [fetchCurrentUser.rejected]: handleRejected,
     [fetchCurrentUser.fulfilled](state, action) {

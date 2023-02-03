@@ -60,10 +60,10 @@ export const updateUserInfo = createAsyncThunk(
 );
 
 export const Reset = createAsyncThunk(
-  'auth/Signout',
+  'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.delete('');
+      await axios.post('logout');
       token.unset();
     } catch (error) {
       return rejectWithValue(error.message);

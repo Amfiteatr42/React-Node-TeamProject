@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { noticesOperations } from 'redux/notices';
 import { ReactComponent as Search } from '../../images/svg/search.svg';
+// import { ReactComponent as Clear } from '../../images/svg/close.svg';
 
 export default function NoticesSearch() {
   const [query, setQuery] = useState('');
@@ -53,6 +54,23 @@ export default function NoticesSearch() {
             onInput={e => setQuery(e.target.value)}
             required
           />
+          {/* {query ? (
+            <button
+              className={s.SearchBtn}
+              type="submit"
+              // onClick={setQuery('')}
+            >
+              <Clear />
+            </button>
+          ) : (
+            <button
+              className={s.SearchBtn}
+              type="submit"
+              // onClick={e => setQuery(e.target.value)}
+            >
+              <Search />
+            </button>
+          )} */}
           <button className={s.SearchBtn} type="submit">
             <Search />
           </button>

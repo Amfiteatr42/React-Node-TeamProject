@@ -63,17 +63,15 @@ const validationSchema = yup.object({
     .max(today),
 });
 
-
 export const ModalAddsPet = ({ onCloseModal }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
- 
 
-  const handleSubmit = (form ) => {
-   dispatch(addPets(...form));
+  const handleSubmit = form => {
+    dispatch(addPets(form));
     onCloseModal();
   };
-/*  [avatarUsers.pending](state, action) {
+  /*  [avatarUsers.pending](state, action) {
         state.isLoggedIn = true;
   state.isRefreshing = false;
     },
@@ -111,17 +109,17 @@ export const ModalAddsPet = ({ onCloseModal }) => {
   return (
     <Formik
       onSubmit={handleSubmit}
-    validationSchema={validationSchema}
+      validationSchema={validationSchema}
       initialValues={{
         name: '',
-        dateOfBirth:  '',
+        dateOfBirth: '',
         comment: '',
         breed: '',
-        imgURL: '',
+        petImg: '',
       }}
     >
       {({ handleSubmit, handleChange, values, setFieldValue }) => (
-        <Form onSubmit={handleSubmit} >
+        <Form onSubmit={handleSubmit}>
           {page === 1 && (
             <>
               <Title>Add pet</Title>
@@ -141,8 +139,6 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 id="date"
                 placeholder={'Type date of birth'}
                 value={values.dateOfBirth}
-               
-            
                 onChange={handleChange}
               ></Input>
               <Label>Breed</Label>
@@ -169,18 +165,18 @@ export const ModalAddsPet = ({ onCloseModal }) => {
               <Title>Add pet</Title>
               <Text>Add photo and some comments</Text>
               <LabelImg>
-                {!values.imgURL && <Icon />}
-                {values.imgURL && (
+                {!values.petImg && <Icon />}
+                {values.petImg && (
                   <LoadImg>
-                    <AddPhoto file={values.imgURL} />
+                    <AddPhoto file={values.petImg} />
                   </LoadImg>
                 )}
                 <InputFile
                   type="file"
-                  name="imgURL"
+                  name="petImg"
                   accept=".png, .jpg, .jpeg"
                   onChange={event => {
-                    setFieldValue('imgURL', event.currentTarget.files[0]);
+                    setFieldValue('petImg', event.currentTarget.files[0]);
                   }}
                 />{' '}
               </LabelImg>
@@ -196,7 +192,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 <Button type="button" onClick={() => setPage(1)}>
                   Back
                 </Button>
-                <AccentBtn  type="submit">Done</AccentBtn>
+                <AccentBtn type="submit">Done</AccentBtn>
               </ContainerButtons>
             </>
           )}

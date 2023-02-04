@@ -4,7 +4,6 @@ import { addPets, fetchPets, removePets } from './petsOperation';
 // заглушка Slice
 const handelPending = state => {
   state.isLoading = true;
-
 };
 const handelReject = (state, { payload }) => {
   state.isLoading = false;
@@ -24,16 +23,18 @@ const petsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(addPets.pending, handelPending).addCase(fetchPets.pending, handelPending)
+      .addCase(addPets.pending, handelPending)
+      .addCase(fetchPets.pending, handelPending)
       .addCase(removePets.pending, handelPending)
-      .addCase(addPets.rejected, handelReject).addCase(fetchPets.rejected, handelReject)
+      .addCase(addPets.rejected, handelReject)
+      .addCase(fetchPets.rejected, handelReject)
       .addCase(removePets.rejected, handelReject)
       .addCase(addPets.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-     console.log(state.mock)
-      state.mock.push(payload);
-      }).addCase(fetchPets.fulfilled,  (state, { payload }) => {
+        state.mock.push(payload.data);
+      })
+      .addCase(fetchPets.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.mock = payload;
@@ -41,9 +42,9 @@ const petsSlice = createSlice({
       .addCase(removePets.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.mock = state.mock.filter(el => el._id !== payload._id);
+        state.mock = state.mock.filter(el => el._id !== payload.data._id);
       });
   },
 });
-  
+
 export const petsReducer = petsSlice.reducer;

@@ -7,6 +7,7 @@ import {
   Login,
   Register,
   Reset,
+  updateAvatar,
   updateUserInfo,
 } from './operations';
 
@@ -80,6 +81,16 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
     [updateUserInfo.fulfilled](state, action) {
+      state.user = { ...state.user, ...action.payload };
+      state.error = null;
+    },
+    [updateAvatar.pending](state) {
+      state.isLoggedIn = true;
+    },
+    [updateAvatar.rejected](state, action) {
+      state.error = action.payload;
+    },
+    [updateAvatar.fulfilled](state, action) {
       state.user = { ...state.user, ...action.payload };
       state.error = null;
     },

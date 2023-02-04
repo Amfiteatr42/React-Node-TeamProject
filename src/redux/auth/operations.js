@@ -59,6 +59,23 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
+export const updateAvatar = createAsyncThunk(
+  'auth/update',
+  async (info, { rejectWithValue }) => {
+    try {
+      const { data } = await axios({
+        method: 'patch',
+        url: `${BASEURL}avatar`,
+        data: info,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(error.messsage);
+    }
+  }
+);
+
 export const Reset = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {

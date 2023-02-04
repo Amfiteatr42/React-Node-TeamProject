@@ -10,7 +10,8 @@ import {
   SvgUpdate,
 } from './UserDataItem.styled';
 import { useOutClick } from '../../hooks/outClick';
-
+import * as yup from 'yup';
+import { parse } from 'date-fns';
 export const User = ({ label, name, user, active, setActive }) => {
   const [value, setValue] = useState();
   const wrapperRef = useRef(null);
@@ -22,12 +23,32 @@ export const User = ({ label, name, user, active, setActive }) => {
 
   useOutClick(wrapperRef, handelClick);
 
-  const handleDataFormat = date => {
+const validationSchema = yup.string({
+  birthday: yup
+    .date()
+    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
+      if (originalValue) {
+        return originalValue.length === 10;
+      }
+    })
+    .transform(function (value, originalValue) {
+      if (this.isType(value)) {
+        return value;
+      }
+      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
+      return result;
+    })
+    .typeError('Please enter a valid date')
+    .required()
+    .min('1950-11-13', 'Date is too early')
+    .max(new Date()),
+});
+ const handleDataFormat = date => {
     if (!date?.length) return;
     const d = date?.split('-');
-    return ([d[0], d[1], d[2]] = [d[2], d[1], d[0]].join('.')); // DD.MM.YYYY
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); 
   };
-
+ 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
@@ -52,11 +73,12 @@ export const User = ({ label, name, user, active, setActive }) => {
     }
   };
 
-  const onUdateInput = name => () => {
-    const edits = name === 'birthday' ? handleDataFormat(value) : value;
+  const udateInput = (name) => ()=> {
+
+    const valid = name === 'birthday' ? validationSchema.validate(value) : value;
     setActive('');
-    if (!edits || edits === user) return;
-    dispatch(updateUserInfo({ [name]: edits || user }));
+
+    dispatch(updateUserInfo({ [name]: valid || user }));
   };
 
   const activeBtn = name => () => setActive(name);
@@ -70,12 +92,12 @@ export const User = ({ label, name, user, active, setActive }) => {
           disabled={active !== name}
           type={'text'}
           name={name}
-          value={value || (name === 'birthday' ? '00.00.0000' : user) || ''}
+          value={value || (name === 'birthday' ? handleDataFormat(user) : user) || ''}
           onChange={handleChange}
         />
         <Button>
           {active === name ? (
-            <SvgUpdate onClick={onUdateInput(name)} />
+            <SvgUpdate onClick={udateInput(name)} />
           ) : (
             <Svg onClick={activeBtn(name)} active={active} />
           )}

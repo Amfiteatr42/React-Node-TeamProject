@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
 import SVG from 'react-inlinesvg';
+import girlTablet2x from '../../assets/images/homepage/hero-girl-tablet@2x.png';
+import wavesTablet2x from '../../assets/images/homepage/hero-waves-tablet@2x.png';
+
 export const Li = styled.li`
   position: relative;
   width: 280px;
@@ -35,11 +38,13 @@ export const Img = styled.img`
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
   margin-bottom: 20px;
-
+border-radius: 20px;
   @media screen and (min-width: 767px) {
     width: 161px;
     height: 161px;
+      margin-bottom: 0;
     margin-right: 32px;
+    border-radius: var(--radius);
   }
 `;
 export const Item = styled.li`
@@ -113,5 +118,31 @@ export const Content = styled.div`
     height: 161px;
     border-radius: var(--radius);
     margin-right: 32px;
+     margin-bottom: 0;
   }
 `;
+export const Div = styled.div`
+background-image: url(${girlTablet2x}),  url(${wavesTablet2x});
+ background-repeat: no-repeat;
+background-size: 320px;
+    height: 480px;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-position: bottom;
+    @media screen and (min-width: 768px) {
+       width: 700px;
+    }
+    @media screen and (min-width: 1279px) {
+       width: 800px;
+    }
+
+`
+export const Text = styled.p`
+font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.35;
+    color: var(--black);
+    text-align: center;
+`

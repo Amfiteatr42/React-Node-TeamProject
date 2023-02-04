@@ -13,13 +13,19 @@ import {
   Svg,
   Li,
   Content,
-  Icon,
+  Icon, Div, Text
 } from './PetsList.styled';
 import { useEffect } from 'react';
 
 export const PetsList = () => {
   const pets = useSelector(getPets);
   const dispatch = useDispatch();
+
+ const handleDataFormat = date => {
+    if (!date?.length) return;
+    const d = date?.split('-');
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); // DD.MM.YYYY
+  };
 
   useEffect(() => {
     dispatch(fetchPets());
@@ -28,7 +34,7 @@ export const PetsList = () => {
   return (
     <>
       <Box>
-        {pets &&
+        {pets.length > 0 &&
           pets.map(
             ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (
               <Li key={idx}>
@@ -40,7 +46,7 @@ export const PetsList = () => {
                     <Span>Name:</Span> {name}
                   </Item>
                   <Item>
-                    <Span>Date of birth:</Span> {dateOfBirth}
+                    <Span>Date of birth:</Span> {handleDataFormat(dateOfBirth)}
                   </Item>
                   <Item>
                     <Span>Breed:</Span> {breed}
@@ -60,8 +66,8 @@ export const PetsList = () => {
               </Li>
             )
           )}
-        <Span>No pets</Span>
       </Box>
+      {pets.length === 0 && <><Text>I don`t have pet</Text><Div></Div> </>}
     </>
   );
 };

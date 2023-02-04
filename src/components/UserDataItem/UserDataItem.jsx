@@ -6,6 +6,7 @@ import { Package } from './UserDataItem.styled';
 export const UserDataItem = () => {
   const [active, setActive] = useState('');
   const user = useSelector(getAuthUser);
+ // console.log(user.birthday)
   return (
     <Package>
       <User
@@ -13,21 +14,21 @@ export const UserDataItem = () => {
         setActive={setActive}
         name={'userName'}
         label={'Name:'}
-        user={user.userName || "Anna"}
+        user={user.userName}
       />
       <User
         active={active}
         setActive={setActive}
         name={'email'}
         label={'Email:'}
-        user={user.email ||'sv@ukr.net'}
+        user={user.email}
       />
       <User
         active={active}
         setActive={setActive}
         name={'birthday'}
         label={'Birthday:'}
-        user={'13.10.2002'}
+        user={user.birthday}
       />
 
       <User
@@ -35,14 +36,14 @@ export const UserDataItem = () => {
         setActive={setActive}
         name={'phone'}
         label={'Phone:'}
-        user={user.phone ||'+380000000000'}
+        user={user.phone}
       />
       <User
         active={active}
         setActive={setActive}
         name={'city'}
         label={'City:'}
-        user={user.city || "Kiev"}
+        user={user.city}
       />
     </Package>
   );

@@ -12,15 +12,13 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isCloseIcon, setIsCloseIcon] = useState('');
-
-  // const inputEl = useRef(null);
-  const iconClose = search ? search.target?.value : isCloseIcon;
+  const [isCloseIcon, setIsCloseIcon] = useState(true);
 
   useEffect(() => {
     const data = axios.get('https://api-petly.onrender.com/api/news');
@@ -61,13 +59,11 @@ const NewsList = () => {
 
     setNews(filteredNews);
     setLoading(false);
-    setIsCloseIcon(prev => !prev);
+    setIsCloseIcon(false);
   };
 
   const searchDelete = e => {
     e.preventDefault();
-    setIsCloseIcon(prev => !prev);
-    return;
   };
 
   return (
@@ -79,17 +75,17 @@ const NewsList = () => {
           placeholder="Search"
           onChange={handleSearchChange}
         />
-        {iconClose ? (
-          <ButtonDelete type="button" onClick={searchDelete}>
-            <RxCrossCircled size="22px" />
-          </ButtonDelete>
-        ) : (
+        {isCloseIcon ? (
           <ButtonNews type="submit">
             <BiSearchAlt2 size="22px" />
           </ButtonNews>
+        ) : (
+          <ButtonDelete type="button" onClick={searchDelete}>
+            <RxCrossCircled size="22px" />
+          </ButtonDelete>
         )}
       </FormNews>
-      {loading && <p>Loading...</p>}
+      {loading && LoaderSpinner()}
       <UlNews>
         {news
           .map(({ _id, link, title, text, date }) => {

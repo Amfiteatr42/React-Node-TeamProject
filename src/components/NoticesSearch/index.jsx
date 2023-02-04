@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { noticesOperations } from 'redux/notices';
 import { ReactComponent as Search } from '../../images/svg/search.svg';
+import { ReactComponent as Clear } from '../../images/svg/cleanSearch.svg';
 
 export default function NoticesSearch() {
   const [query, setQuery] = useState('');
@@ -16,13 +17,13 @@ export default function NoticesSearch() {
     evt.preventDefault();
     if (pathnameArr[2] === 'sell') {
       dispatch(
-        noticesOperations.getNoticesCategories({ category: 'sell', query })
+        noticesOperations.getNoticesCategories({ category: '1', query })
       );
     }
     if (pathnameArr[2] === 'lost-found') {
       dispatch(
         noticesOperations.getNoticesCategories({
-          category: 'lost/found',
+          category: '2',
           query,
         })
       );
@@ -30,7 +31,7 @@ export default function NoticesSearch() {
     if (pathnameArr[2] === 'for-free') {
       dispatch(
         noticesOperations.getNoticesCategories({
-          category: 'in_good_hands',
+          category: '3',
           query,
         })
       );
@@ -47,15 +48,39 @@ export default function NoticesSearch() {
             className={s.SearchInput}
             type="text"
             name="search"
-            autoFocus
             placeholder="Search"
             value={query}
             onInput={e => setQuery(e.target.value)}
-            required
+            // autoFocus
+            // required
           />
-          <button className={s.SearchBtn} type="submit">
+          {!query ? (
+            <button
+              className={s.SearchBtn}
+              type="submit"
+              onClick={() => setQuery('')}
+            >
+              <Clear />
+            </button>
+          ) : (
+            <button
+              className={s.SearchBtn}
+              type="submit"
+              // onClick={e => setQuery(e.target.value)}
+            >
+              <Search />
+            </button>
+          )}
+          {/* <button className={s.SearchBtn} type="submit">
             <Search />
           </button>
+          <button
+            className={s.ClearBtn}
+            type="submit"
+            onClick={() => setQuery('')}
+          >
+            <Clear />
+          </button> */}
         </form>
       </div>
     </>

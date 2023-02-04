@@ -37,20 +37,24 @@
 .SearchInput {
   display: flex;
   align-items: center;
-
+  outline-color: var(--active);
   height: 40px;
   width: 280px;
   margin-top: 28px;
   padding-left: 12px;
   padding-right: 12px;
-  background-color: var(--bg-basic);
+  background-color: white;
   border-radius: 20px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   line-height: 1.37;
   letter-spacing: 0.04em;
   color: var(--black-3);
 }
-
+.SearchInput:hover,
+:focus {
+  border-color: var(--active);
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 @media screen and (min-width: 768px) {
   .SearchInput {
     height: 44px;
@@ -58,6 +62,7 @@
     margin-top: 40px;
 
     border-radius: 40px;
+    border-color: transparent;
     padding-left: 20px;
     padding-right: 20px;
     font-size: 20px;
@@ -82,10 +87,31 @@
   fill: var(--black);
   background-color: transparent;
   border: none;
-  border-left: 2px solid;
+  /* border-left: 2px solid; */
+}
+.ClearBtn {
+  position: absolute;
+  cursor: pointer;
+  top: 28px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: var(--black);
+  background-color: transparent;
+  border: none;
+  /* border-left: 2px solid; */
 }
 @media screen and (min-width: 768px) {
   .SearchBtn {
+    top: 40px;
+    width: 44px;
+    height: 44px;
+    background-size: 18px 18px;
+  }
+  .ClearBtn {
     top: 40px;
     width: 44px;
     height: 44px;

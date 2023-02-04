@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { HiCamera } from 'react-icons/hi2';
+
 export const Content = styled.div`
   width: 233px;
   height: 233px;
@@ -34,9 +35,8 @@ export const Button = styled.label`
   border: none;
   @media screen and (min-width: 767px) and (max-width: 1279px) {
     position: absolute;
-   top: 420px;
+    top: 500px;
   }
-
 `;
 export const Div = styled.div`
   display: flex;
@@ -55,4 +55,10 @@ export const Svg = styled(HiCamera)`
   width: 20px;
   height: 20px;
   fill: var(--active);
+`;
+export const Img = styled.img`
+  width: 233px;
+  height: 233px;
+  border-radius: 100%;
+  filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
 `;

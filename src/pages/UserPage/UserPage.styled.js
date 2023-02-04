@@ -37,6 +37,8 @@ export const Package = styled.div`
   margin-bottom: 47px;
   @media screen and (min-width: 767px) {
     margin-bottom: 20px;
+  
+
   }
   @media screen and (min-width: 1279px) {
     margin-right: 32px;
@@ -54,6 +56,7 @@ export const Text = styled.h2`
   @media screen and (min-width: 767px) {
     margin-bottom: 40px;
     font-size: 28px;
+
   }
   @media screen and (min-width: 1279px) {
     margin-bottom: 24px;
@@ -75,8 +78,14 @@ export const Title = styled.h2`
 
 export const ContainerPets = styled.div`
   position: relative;
+   @media screen and (min-width: 1279px) {
+  height:602px;}
 `;
 export const Section = styled.section`
-
+padding: 60px 0 80px 0;
+  @media screen and (min-width: 767px) {
+padding: 88px 0 100px 0;}
+  @media screen and (min-width: 1279px) {
+    padding: 58px 0 40px 0;}
 `
 export const Div = styled.div``

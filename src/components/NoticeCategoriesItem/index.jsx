@@ -15,16 +15,16 @@ import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
 const NOTICE_ITEM_KEYS = [
   {
     label: 'Name pet:',
-    key: 'name',
+    key: 'petname',
   },
   {
     label: 'Breed:',
     key: 'breed',
   },
-  //   {
-  //     label: 'Place:',
-  //     key: 'location',
-  //   },
+  // {
+  //   label: 'Place:',
+  //   key: 'location',
+  // },
   {
     label: 'Date of birth',
     key: 'age',
@@ -48,10 +48,7 @@ export default function NoticeItem({ petData }) {
   // const isLoggedIn = false;
 
   //   const petAge = getPetAge();
-  const petAge = petData.dateofbirth;
-
-  // new Date(petData.dateOfBirth.split('.').reverse().join('.'))
-
+  const petAge = petData.dateofbirth ? petData.dateofbirth : `i don't know`;
   const dispatch = useDispatch();
 
   const [modalShow, setModalShow] = useState(false);
@@ -100,7 +97,7 @@ export default function NoticeItem({ petData }) {
       <div className={s.container}>
         <div className={s.imgWrapper}>
           <img
-            src={petData.image || modalImage}
+            src={petData.imgURL.url || modalImage}
             alt={petData.name}
             height="100%"
             style={{ height: 288, objectFit: 'cover' }}

@@ -43,6 +43,7 @@ const authSlice = createSlice({
       state.token = action.payload.data.longToken;
       state.isLoggedIn = true;
       state.isLoginError = null;
+      state.favorite = action.payload.data.favoriteAds;
     },
     [Register.pending]: handlePending,
     [Register.rejected]: handleRejected,

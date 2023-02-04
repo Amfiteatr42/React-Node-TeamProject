@@ -18,13 +18,14 @@ import {
   DataBox,
 } from './Friends.styled';
 
+
 const Friends = ({ friends }) => {
   const {
     name,
     adress,
     adressUrl,
     email,
-    imageUrl,
+    logo,
     phone,
     friendUrl,
     workingHours,
@@ -106,7 +107,7 @@ const Friends = ({ friends }) => {
       </Title>
       <Wrapper>
         <WrapperIMG>
-          <Img src={imageUrl}></Img>
+          <Img src={logo}></Img>
         </WrapperIMG>
         <WrapperContent>
           <DataBox>

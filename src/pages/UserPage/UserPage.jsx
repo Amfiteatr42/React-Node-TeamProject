@@ -7,13 +7,13 @@ import {
   Package,
   Text,
   ContainerPets,
-  Title,Section
+  Title,Section, Container
 } from './UserPage.styled';
 
 const UserPage = () => {
   return (
     <>
-     <Section>
+     <Section><Container>
       <Box>
         {' '}
         <Package>
@@ -27,7 +27,7 @@ const UserPage = () => {
           <Title> My pets:</Title>
           <PetsData />
         </ContainerPets>
-      </Box></Section>
+      </Box></Container></Section>
     </>
   );
 };

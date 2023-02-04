@@ -1,5 +1,21 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  max-width: 320px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 767px) {
+    max-width: 768px;
+    padding: 0 32px 0 0;
+  }
+  @media screen and (min-width: 1279px) {
+    max-width: 1280px;
+    padding: 0 16px 0 0;
+    margin: 0;
+  }
+`;
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
@@ -37,12 +53,10 @@ export const Package = styled.div`
   margin-bottom: 47px;
   @media screen and (min-width: 767px) {
     margin-bottom: 20px;
-  
-
   }
   @media screen and (min-width: 1279px) {
     margin-right: 32px;
-     margin-bottom: 0;
+    margin-bottom: 0;
   }
 `;
 export const Text = styled.h2`
@@ -56,10 +70,11 @@ export const Text = styled.h2`
   @media screen and (min-width: 767px) {
     margin-bottom: 40px;
     font-size: 28px;
-
+    margin-left: 32px;
   }
   @media screen and (min-width: 1279px) {
     margin-bottom: 24px;
+    margin-left: 17px;
   }
 `;
 export const Title = styled.h2`
@@ -78,14 +93,19 @@ export const Title = styled.h2`
 
 export const ContainerPets = styled.div`
   position: relative;
-   @media screen and (min-width: 1279px) {
-  height:602px;}
+  @media screen and (min-width: 1279px) {
+    height: 602px;
+  }
 `;
 export const Section = styled.section`
-padding: 60px 0 80px 0;
+  padding: 60px 0 80px 0;
   @media screen and (min-width: 767px) {
-padding: 88px 0 100px 0;}
+    padding: 88px 0 100px 0;
+  }
   @media screen and (min-width: 1279px) {
-    padding: 58px 0 40px 0;}
-`
-export const Div = styled.div``
+    padding: 58px 0 40px 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+`;
+export const Div = styled.div``;

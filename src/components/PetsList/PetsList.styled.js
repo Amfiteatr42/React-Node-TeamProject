@@ -42,6 +42,7 @@ border-radius: 20px;
   @media screen and (min-width: 767px) {
     width: 161px;
     height: 161px;
+      margin-bottom: 0;
     margin-right: 32px;
     border-radius: var(--radius);
   }
@@ -117,6 +118,7 @@ export const Content = styled.div`
     height: 161px;
     border-radius: var(--radius);
     margin-right: 32px;
+     margin-bottom: 0;
   }
 `;
 export const Div = styled.div`

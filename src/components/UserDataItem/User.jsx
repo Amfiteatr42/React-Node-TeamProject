@@ -12,7 +12,6 @@ import {
 import { useOutClick } from '../../hooks/outClick';
 import * as yup from 'yup';
 import { parse } from 'date-fns';
-
 export const User = ({ label, name, user, active, setActive }) => {
   const [value, setValue] = useState();
   const wrapperRef = useRef(null);
@@ -24,9 +23,7 @@ export const User = ({ label, name, user, active, setActive }) => {
 
   useOutClick(wrapperRef, handelClick);
 
-const today = new Date();
-
-const validationSchema = yup.object({
+const validationSchema = yup.string({
   birthday: yup
     .date()
     .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
@@ -44,9 +41,14 @@ const validationSchema = yup.object({
     .typeError('Please enter a valid date')
     .required()
     .min('1950-11-13', 'Date is too early')
-    .max(today),
+    .max(new Date()),
 });
-
+ const handleDataFormat = date => {
+    if (!date?.length) return;
+    const d = date?.split('-');
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); 
+  };
+ 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
@@ -71,10 +73,12 @@ const validationSchema = yup.object({
     }
   };
 
-  const udateInput = name => () => {
+  const udateInput = (name) => ()=> {
+
+    const valid = name === 'birthday' ? validationSchema.validate(value) : value;
     setActive('');
-   // const val = name === 'birthday' ? validationSchema.validate(value) : value;
-    dispatch(updateUserInfo({ [name]:  user }));
+
+    dispatch(updateUserInfo({ [name]: valid || user }));
   };
 
   const activeBtn = name => () => setActive(name);
@@ -88,7 +92,7 @@ const validationSchema = yup.object({
           disabled={active !== name}
           type={'text'}
           name={name}
-          value={value || user || ''}
+          value={value || (name === 'birthday' ? handleDataFormat(user) : user) || ''}
           onChange={handleChange}
         />
         <Button>

@@ -42,7 +42,7 @@ export const MainTitle = styled.h1`
 `;
 
 export const HeroContainer = styled.div`
-  height: 100vh;
+  height: 600px;
   padding-top: 60px;
   margin: 0 auto;
   background-image: url(${girlMob}), url(${wavesMob});
@@ -57,6 +57,7 @@ export const HeroContainer = styled.div`
   }
 
   @media screen and (min-width: 767px) {
+    height: 1200px;
     background-image: url(${girlTablet}), url(${wavesTablet});
     background-size: 645px, 767px;
 
@@ -68,6 +69,7 @@ export const HeroContainer = styled.div`
   }
 
   @media screen and (min-width: 1279px) {
+    height: 92vh;
     max-width: 1280px;
     padding-top: 92px;
     background-image: url(${girlDesk}), url(${wavesBigDesk}),

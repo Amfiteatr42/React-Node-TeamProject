@@ -126,12 +126,9 @@ export const addToFavorite = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.post(`${BASEURL}favorite/${petId}`);
-      // const { data } = await axios.get(
-      //   'https://api-petly.onrender.com/api/ads'
-      // );
       return data;
     } catch (error) {
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 );
@@ -142,13 +139,10 @@ export const deleteFromFavorite = createAsyncThunk(
     const persistedToken = state.auth.token;
     token.set(persistedToken);
     try {
-      await axios.delete(`${BASEURL}favorite/${petId}`);
-      const { data } = await axios.get(
-        'https://api-petly.onrender.com/api/notice'
-      );
+      const { data } = await axios.delete(`${BASEURL}favorite/${petId}`);
       return data;
     } catch (error) {
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 );

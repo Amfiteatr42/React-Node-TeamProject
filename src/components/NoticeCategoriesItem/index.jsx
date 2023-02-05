@@ -10,7 +10,8 @@ import s from './modalItem.module.css';
 import { toast } from 'react-toastify';
 import modalImage from '../../images/no-image-found.png';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-// import getPetAge from './getPetAge';
+import { format } from 'date-fns';
+import getPetAge from './getPetAge';
 
 const NOTICE_ITEM_KEYS = [
   {
@@ -39,16 +40,17 @@ const NOTICE_ITEM_KEYS = [
 
 export default function NoticeItem({ petData }) {
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
-  const userFavorite = useSelector(getUserFavorite);
-  // const userFavorite = useSelector(getFavoriteNotices);
-  const favoriteArr = userFavorite ? Object.values(userFavorite) : [];
-  // console.log(favoriteArr);
-  const inFavorites = favoriteArr.some(favor => favor === petData._id);
-  // const inFavorites = false;
-  // const isLoggedIn = false;
+  const favoriteArr = useSelector(getUserFavorite);
+  let inFavorites = false;
+  // eslint-disable-next-line
+  for (const el of favoriteArr) {
+    inFavorites = favoriteArr.some(el => el === petData._id);
+  }
 
-  //   const petAge = getPetAge();
-  const petAge = petData.dateofbirth ? petData.dateofbirth : `i don't know`;
+  const petAge = petData.dateofbirth
+    ? getPetAge(format(new Date(petData.dateofbirth), 'dd.MM.yyyy'))
+    : `missing info`;
+
   const dispatch = useDispatch();
 
   const [modalShow, setModalShow] = useState(false);
@@ -63,7 +65,6 @@ export default function NoticeItem({ petData }) {
   };
 
   const handleFavoriteToggle = () => {
-    // const pet = petData._id;
     if (!isLoggedIn) return toast.info('You must be logged in');
     if (favorite === true) {
       try {

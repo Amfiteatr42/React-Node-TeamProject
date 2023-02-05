@@ -10,7 +10,6 @@ export const getNoticesCategories = createAsyncThunk(
     try {
       let data;
       if (query) {
-        // data = await axios.get(`/notice/?categoryId=${category}&q=${query}`);
         data = await axios.get(`/notice/search/${query}`);
       } else {
         data = await axios.get(`/notice/?categoryId=${category}`);
@@ -51,9 +50,6 @@ export const createNotices = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       };
-
-      // await axios.post(`/ads/add`, values, header);
-      // const { data } = await axios.get('/ads/my');
 
       const { data } = await axios.post(`/notice/add`, values, header);
       toast.success('New notice added!');

@@ -202,7 +202,7 @@
 
 .heartItemBtnActive {
   background: none;
-  fill: var(--border);
+  fill: var(--active);
   border-radius: 50%;
 }
 

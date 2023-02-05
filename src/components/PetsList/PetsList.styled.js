@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { AiOutlinePlus } from 'react-icons/ai';
 import SVG from 'react-inlinesvg';
 import girlTablet2x from '../../assets/images/homepage/hero-girl-tablet@2x.png';
 import wavesTablet2x from '../../assets/images/homepage/hero-waves-tablet@2x.png';
@@ -93,18 +92,6 @@ export const Svg = styled(SVG)`
   fill: var(--gray-2);
 `;
 export const Span = styled.span``;
-export const Icon = styled(AiOutlinePlus)`
-  position: absolute;
-  top: 80px;
-  left: 85px;
-  width: 71px;
-  height: 71px;
-  fill: var(--gray-2);
-  @media screen and (min-width: 768px) {
-    top: 45px;
-    left: 50px;
-  }
-`;
 
 export const Content = styled.div`
   width: 240px;

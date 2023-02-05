@@ -5,6 +5,7 @@ import { Register } from 'redux/auth/operations';
 import RegisterForm from 'components/Auth/RegisterForm';
 import { Container } from 'stylesheets/Container.styled';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const RegistrationPage = () => {
   const [chek, setChek] = useState({});
   const [userPassword, setUserPassword] = useState({});
   const [nextStyle, setNextStyle] = useState({ backgroundColor: 'red' });
+
+  const nav = useNavigate();
 
   const hendelPassword = (password, cPassword) => {
     const good = { width: '100%', backgroundColor: '#24cca7' };
@@ -39,7 +42,9 @@ const RegistrationPage = () => {
   };
 
   const hendeLSumdit = ({ password, email, userName, city, phone }) => {
-    dispatch(Register({ password, email, userName, city, phone }));
+    dispatch(Register({ password, email, userName, city, phone })).then(
+      res => !res.error && nav('/user')
+    );
   };
 
   const hendelPasswordOn = (password, cPassword) => {
@@ -63,7 +68,7 @@ const RegistrationPage = () => {
     <Container>
       <BoxAuth>
         <RegisterForm
-        nextStyle={nextStyle}
+          nextStyle={nextStyle}
           userPassword={userPassword}
           chek={chek}
           hendeLSumdit={hendeLSumdit}

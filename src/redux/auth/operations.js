@@ -21,6 +21,9 @@ export const Login = createAsyncThunk(
       token.set(user.data.longToken);
       return user;
     } catch (error) {
+      if (error.response.request.status === 400) {
+        toast.error('Email or password is wrong');
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -31,7 +34,7 @@ export const Register = createAsyncThunk(
   async (sign, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`${BASEURL}signup`, sign);
-      const user = await axios.get(
+      const user = await axios.post(
         `${BASEURL}verify/${data.data._id}/${data.verificationEmailToken}`
       );
       token.set(user.data.longToken);

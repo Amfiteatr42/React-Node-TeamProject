@@ -3,27 +3,26 @@ import { ValidateLogin } from 'components/Auth/validate/Validate';
 import { Formik } from 'formik';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Login } from 'redux/auth/operations';
-import {  getAuthLoginError } from 'redux/auth/selectors';
+import { getAuthLoginError } from 'redux/auth/selectors';
 import { Container } from 'stylesheets/Container.styled';
 import {
   AutContainer,
   AuthBox,
-  AuthButton,
   AuthTitleh2,
   AuthTitleh3,
   BoxAuth,
   link,
-  margin,
 } from '../../stylesheets/Auth.styled';
 
 const LoginPage = () => {
+  const nav = useNavigate();
   const LoginError = useSelector(getAuthLoginError);
   const dispatch = useDispatch();
 
   const hendeLSumdit = async e => {
-    dispatch(Login(e));
+    dispatch(Login(e)).then(res => !res.error && nav('/user'));
   };
 
   return (
@@ -58,8 +57,10 @@ const LoginPage = () => {
               />
             )}
           </Formik>
-          {LoginError && (
-            <AuthButton style={margin}>Email or password is wrong</AuthButton>
+          {!!LoginError && (
+            <p style={{ marginTop: '25px', color: 'red' }}>
+              Email or password is wrong
+            </p>
           )}
           <AuthTitleh3>
             Don't have an account?

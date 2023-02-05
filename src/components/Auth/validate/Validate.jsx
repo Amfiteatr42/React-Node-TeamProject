@@ -16,7 +16,7 @@ export const ValidateRegister = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .required('No password provided.')
-    .min(7, 'Password is too short - should be 8 chars minimum.')
+    .min(7, 'Password is too short - should be 7 chars minimum.')
     .max(32, 'Too Long!'),
   city: Yup.string()
     .min(2, 'Too Short!')

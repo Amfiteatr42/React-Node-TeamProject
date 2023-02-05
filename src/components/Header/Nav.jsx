@@ -15,8 +15,6 @@ export default function Nav({ setIsMobMenuOpen, setIsRegActive, isRegActive }) {
           onClick={() => {
             setIsMobMenuOpen(false);
             setIsRegActive(false);
-            console.log("isRegActive: ", isRegActive);
-
           }}>
           <MenuItem>News</MenuItem>
         </NavLink>
@@ -28,7 +26,10 @@ export default function Nav({ setIsMobMenuOpen, setIsRegActive, isRegActive }) {
               textDecorationLine: isActive ? 'underline' : 'none',
               fontWeight: isActive ? '500' : '',
             })}
-          onClick={() => setIsMobMenuOpen(false)}>
+          onClick={() => {
+            setIsMobMenuOpen(false);
+            setIsRegActive(false);
+          }}>
           <MenuItem>Find pet</MenuItem>
         </NavLink>
       </NavItem>
@@ -39,8 +40,10 @@ export default function Nav({ setIsMobMenuOpen, setIsRegActive, isRegActive }) {
               textDecorationLine: isActive ? 'underline' : 'none',
               fontWeight: isActive ? '500' : '',
             })}
-          onClick={() => setIsMobMenuOpen(false)}
-        >
+          onClick={() => {
+            setIsMobMenuOpen(false);
+            setIsRegActive(false);
+          }}>
           <MenuItem>Our friends</MenuItem>
         </NavLink>  
       </NavItem>

@@ -10,12 +10,13 @@ import {
   SvgUpdate,
 } from './UserDataItem.styled';
 import { useOutClick } from '../../hooks/outClick';
-import * as yup from 'yup';
-import { parse } from 'date-fns';
+import { format } from 'date-fns';
+
 export const User = ({ label, name, user, active, setActive }) => {
   const [value, setValue] = useState();
   const wrapperRef = useRef(null);
   const dispatch = useDispatch();
+
   const handelClick = () => {
     setValue(user);
     setActive('');
@@ -23,32 +24,12 @@ export const User = ({ label, name, user, active, setActive }) => {
 
   useOutClick(wrapperRef, handelClick);
 
-const validationSchema = yup.string({
-  birthday: yup
-    .date()
-    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
-      if (originalValue) {
-        return originalValue.length === 10;
-      }
-    })
-    .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
-      return result;
-    })
-    .typeError('Please enter a valid date')
-    .required()
-    .min('1950-11-13', 'Date is too early')
-    .max(new Date()),
-});
- const handleDataFormat = date => {
+  const handleDataFormat = date => {
     if (!date?.length) return;
     const d = date?.split('-');
-    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); 
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.'));
   };
- 
+
   const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
@@ -73,11 +54,10 @@ const validationSchema = yup.string({
     }
   };
 
-  const udateInput = (name) => ()=> {
-
-    const valid = name === 'birthday' ? validationSchema.validate(value) : value;
+  const udateInput = name => ()=> {
+   const valid = name === 'birthday' ? format(new Date(value), 'dd.MM.yyyy') : value;
     setActive('');
-
+ 
     dispatch(updateUserInfo({ [name]: valid || user }));
   };
 
@@ -92,7 +72,7 @@ const validationSchema = yup.string({
           disabled={active !== name}
           type={'text'}
           name={name}
-          value={value || (name === 'birthday' ? handleDataFormat(user) : user) || ''}
+          value={value || (name === 'birthday' ? handleDataFormat(user) : user) || ''} 
           onChange={handleChange}
         />
         <Button>
@@ -106,10 +86,3 @@ const validationSchema = yup.string({
     </>
   );
 };
-/*export const updateUserInfo = createAsyncThunk('auth/update', async (info, { rejectWithValue }) => {
-    try {
-        const res = await axios.patch('api/users/update', info);
-        return res.data;
-    } catch (error) {
-        return rejectWithValue(error.messsage)
-    }*/

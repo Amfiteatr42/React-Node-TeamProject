@@ -13,6 +13,7 @@ import {
   Text,
   Icon,
   InputFile,
+  TextError,
 } from './ModalAddsPet.styled';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -25,23 +26,19 @@ import { parse } from 'date-fns';
 const today = new Date();
 
 const validationSchema = yup.object({
-  comment: yup
-    .string()
-    .min(2)
-    .max(48)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
-    .required('Field is required!'),
+  comment: yup.string().min(8).max(120),
+  //.matches(/^[ а-яА-Яa-zA-Z0-9]+$/, 'Only alphabetic characters are allowed'),
   name: yup
     .string()
     .min(2)
     .max(16)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   breed: yup
     .string()
     .min(2)
-    .max(36)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .max(16)
+    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   dateOfBirth: yup
     .date()
@@ -71,41 +68,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
     dispatch(addPets(form));
     onCloseModal();
   };
-  /*  [avatarUsers.pending](state, action) {
-        state.isLoggedIn = true;
-  state.isRefreshing = false;
-    },
-    [avatarUsers.rejected]: handleRejected,
-    [avatarUsers.fulfilled](state, action) {
-       state.isLoggedIn = true;
-       state.user.avatarURL = { ...state.user.avatarURL, ...action.payload };
-      console.log(state.user.avatarURL);
-      state.error = null;
-    } 
-       [updateUserInfo.pending](state, action) {
-        state.isLoggedIn = true;
-  state.isRefreshing = false;
-    },
-    [updateUserInfo.rejected]: handleRejected,
-    [updateUserInfo.fulfilled](state, action) {
-//state.isLoggedIn = true;
-      state.user = { ...state.user, ...action.payload };
-      console.log( state.user)
-      state.error = null;
-    },
-    export const getAuthAvatar = state => state.auth.user.avatarURL.url;
-    export const avatarUsers = createAsyncThunk(
-  'users/avatar',
-  async (avatar, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.patch(`${BASEURL}avatar`, avatar);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.messsage);
-    }
-  }
-);
-    */
+
   return (
     <Formik
       onSubmit={handleSubmit}
@@ -118,20 +81,24 @@ export const ModalAddsPet = ({ onCloseModal }) => {
         petImg: '',
       }}
     >
-      {({ handleSubmit, handleChange, values, setFieldValue }) => (
+      {({ handleSubmit, handleChange, values, setFieldValue, errors }) => (
         <Form onSubmit={handleSubmit}>
           {page === 1 && (
             <>
               <Title>Add pet</Title>
-              <Label>Name pet</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Type name pet"
-                value={values.name}
-                onChange={handleChange}
-              />
+              <Label>
+                Name pet
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Type name pet"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <TextError>{errors.name}</TextError>}
+              </Label>
+
               <Label>Date of birth</Label>
               <Input
                 type="text"
@@ -141,6 +108,9 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.dateOfBirth}
                 onChange={handleChange}
               ></Input>
+              {errors.dateOfBirth && (
+                <TextError>{errors.dateOfBirth}</TextError>
+              )}
               <Label>Breed</Label>
               <Input
                 type="text"
@@ -150,6 +120,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.breed}
                 onChange={handleChange}
               />
+              {errors.breed && <TextError>{errors.breed}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={onCloseModal}>
                   Cancel
@@ -188,6 +159,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.comment}
                 onChange={handleChange}
               ></Textarea>
+              {errors.comment && <TextError>{errors.comment}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={() => setPage(1)}>
                   Back

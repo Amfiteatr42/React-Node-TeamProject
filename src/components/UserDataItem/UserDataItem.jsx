@@ -6,7 +6,7 @@ import { Package } from './UserDataItem.styled';
 export const UserDataItem = () => {
   const [active, setActive] = useState('');
   const user = useSelector(getAuthUser);
- // console.log(user.birthday)
+  
   return (
     <Package>
       <User

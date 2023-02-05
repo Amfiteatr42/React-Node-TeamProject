@@ -11,7 +11,7 @@ import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
 const PET_MODAL_KEYS = [
   {
     label: 'Name:',
-    key: 'namePet',
+    key: 'petname',
   },
   {
     label: 'Birthday:',
@@ -75,7 +75,7 @@ export default function ModalNotice({
         <div className={s.infoWrapper}>
           <div className={s.imgWrapper}>
             <img
-              src={petData.image || modalImage}
+              src={petData.imgURL.url || modalImage}
               alt={petData.name}
               height="100%"
               style={{ objectFit: 'cover' }}

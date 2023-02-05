@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { noticesOperations, noticesSelectors } from '../../redux/notices';
-import { getUserFavorite } from 'redux/auth/selectors';
 import s from './index.module.css';
 import { RotatingLines } from 'react-loader-spinner';
-import { getAuthToken } from 'redux/auth/selectors';
+import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
 
 export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
@@ -15,17 +14,13 @@ export default function NoticesCategoriesList() {
   // const [favoriteData, setFavoriteData] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
-  const favorite = useSelector(getUserFavorite);
-  // const favorite = Object.values(favoriteAds);
-  // console.log(favorite);
-  // const favorite = false;
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
-  const pathnameArr = pathname.split('/');
-  const token = useSelector(getAuthToken);
 
-  // useEffect(() => {
-  //   setFavoriteData(inFavorites);
-  // }, [inFavorites]);
+  const inFavorite = useSelector(getUserFavorite);
+  const favorite = inFavorite.map(i => category.find(elem => elem._id === i));
+
+  const token = useSelector(getAuthToken);
+  const pathnameArr = pathname.split('/');
 
   useEffect(() => {
     resetNoticesData(pathnameArr);
@@ -36,11 +31,11 @@ export default function NoticesCategoriesList() {
     setNoticesData(category);
   }, [category]);
 
-  useEffect(() => {
-    if (pathnameArr[2] === 'favorite') {
-      setNoticesData(favorite);
-    } // eslint-disable-next-line
-  }, [favorite]);
+  // useEffect(() => {
+  //   if (pathnameArr[2] === 'favorite') {
+  //     setNoticesData(favorite);
+  //   } // eslint-disable-next-line
+  // }, [favorite]);
 
   useEffect(() => {
     if (pathnameArr[2] === 'own') {
@@ -51,7 +46,6 @@ export default function NoticesCategoriesList() {
   const resetNoticesData = async pathnameArr => {
     if (pathnameArr[2] === 'sell') {
       dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
-      // return console.log(category);
     }
     if (pathnameArr[2] === 'lost-found') {
       dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
@@ -60,7 +54,7 @@ export default function NoticesCategoriesList() {
       dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
     }
     if (pathnameArr[2] === 'favorite') {
-      // dispatch(noticesOperations.addToFavorite({ token }));
+      // dispatch(noticesOperations.getAllNoticesCategories())
       setNoticesData(favorite);
     }
     if (pathnameArr[2] === 'own') {

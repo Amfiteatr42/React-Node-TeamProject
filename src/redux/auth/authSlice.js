@@ -73,6 +73,7 @@ const authSlice = createSlice({
       state.isRefreshing = false;
       state.user = action.payload.data;
       state.error = null;
+      state.favorite = action.payload.data.favoriteAds;
     },
     [updateUserInfo.pending](state, action) {
       state.isLoggedIn = true;
@@ -102,7 +103,10 @@ const authSlice = createSlice({
       state.favorite = action.payload.data.favoriteAds;
     },
     [deleteFromFavorite.fulfilled](state, action) {
-      state.favorite = state.favorite.filter(el => el !== action.payload);
+      state.favorite = state.favorite.filter(
+        el => el !== action.payload.data.favoriteAds
+      );
+      state.favorite = action.payload.data.favoriteAds;
     },
   },
 });

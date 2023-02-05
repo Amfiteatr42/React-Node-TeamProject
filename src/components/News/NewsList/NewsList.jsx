@@ -16,6 +16,7 @@ import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
+  const [news2, setNews2] = useState([]);
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isCloseIcon, setIsCloseIcon] = useState(true);
@@ -27,12 +28,13 @@ const NewsList = () => {
       .then(({ data }) => {
         console.log(data.data);
         setNews(data.data);
+        setNews2(data.data);
       })
       .catch(error => console.log(error.message))
       .finally(() => {
         setLoading(false);
       });
-  }, [setNews]);
+  }, [setNews, setNews2]);
 
   const handleSearchChange = e => {
     setSearch(e.currentTarget.value);
@@ -64,6 +66,9 @@ const NewsList = () => {
 
   const searchDelete = e => {
     e.preventDefault();
+    setSearch('');
+    setIsCloseIcon(true);
+    setNews2(news2);
   };
 
   return (
@@ -87,19 +92,33 @@ const NewsList = () => {
       </FormNews>
       {loading && LoaderSpinner()}
       <UlNews>
-        {news
-          .map(({ _id, link, title, text, date }) => {
-            return (
-              <NewsItem
-                key={_id}
-                url={link}
-                title={title}
-                description={text}
-                date={date}
-              />
-            );
-          })
-          .sort((a, b) => new Date(b.date) - new Date(a.date))}
+        {isCloseIcon
+          ? news2
+              .map(({ _id, link, title, text, date }) => {
+                return (
+                  <NewsItem
+                    key={_id}
+                    url={link}
+                    title={title}
+                    description={text}
+                    date={date}
+                  />
+                );
+              })
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+          : news
+              .map(({ _id, link, title, text, date }) => {
+                return (
+                  <NewsItem
+                    key={_id}
+                    url={link}
+                    title={title}
+                    description={text}
+                    date={date}
+                  />
+                );
+              })
+              .sort((a, b) => new Date(b.date) - new Date(a.date))}
       </UlNews>
       <ToastContainer />
     </>

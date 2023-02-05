@@ -1,23 +1,48 @@
 import { NavLink } from 'react-router-dom';
-import { NavList, NavItem } from './Nav.styled.jsx';
+import { NavList, NavItem, MenuItem } from './Nav.styled.jsx';
 
-export default function Nav({ setIsMobMenuOpen }) {
+export default function Nav({ setIsMobMenuOpen, setIsRegActive, isRegActive }) {
   return (
     <NavList>
       <NavItem>
-        <NavLink to="news" onClick={() => setIsMobMenuOpen(false)}>
-          <span>News</span>
+        <NavLink to="news"
+          style={({ isActive }) => ({
+              color: isActive ? '#F59256' : '#000000',
+              textDecorationLine: isActive ? 'underline' : 'none',
+              fontWeight: isActive ? '500' : '',
+            })}
+          
+          onClick={() => {
+            setIsMobMenuOpen(false);
+            setIsRegActive(false);
+            console.log("isRegActive: ", isRegActive);
+
+          }}>
+          <MenuItem>News</MenuItem>
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="notices/sell" onClick={() => setIsMobMenuOpen(false)}>
-          <span>Find pet</span>
+        <NavLink to="notices/sell"
+          style={({ isActive }) => ({
+              color: isActive ? '#F59256' : '#000000',
+              textDecorationLine: isActive ? 'underline' : 'none',
+              fontWeight: isActive ? '500' : '',
+            })}
+          onClick={() => setIsMobMenuOpen(false)}>
+          <MenuItem>Find pet</MenuItem>
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="friends" onClick={() => setIsMobMenuOpen(false)}>
-          <span>Our friends</span>
-        </NavLink>
+        <NavLink to="friends"
+          style={({ isActive }) => ({
+              color: isActive ? '#F59256' : '#000000',
+              textDecorationLine: isActive ? 'underline' : 'none',
+              fontWeight: isActive ? '500' : '',
+            })}
+          onClick={() => setIsMobMenuOpen(false)}
+        >
+          <MenuItem>Our friends</MenuItem>
+        </NavLink>  
       </NavItem>
     </NavList>
   );

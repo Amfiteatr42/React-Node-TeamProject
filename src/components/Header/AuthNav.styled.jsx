@@ -12,10 +12,8 @@ margin-left: 335px;
 }
 
 @media (max-width: 767.99px) {
-        /* display: none; */
         margin-left: 0;
-  }
-    
+  }    
 `;
 
 export const LoginItem = styled.li`
@@ -39,10 +37,32 @@ export const LoginContainer = styled.div`
 
     width: 111px;
     height: 47px;
-    border-radius: 22px;
+    border-radius: 24px;
     border: none;
     background-color: #F59256;
+    color: #FFFFFF;
 
+    @media (max-width: 767.99px) {
+        width: 95px;
+        height: 35px;
+        border-radius: 17px;
+  } 
+`;
+
+export const LoginContainerNotActive = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin-right: 0;
+
+    width: 111px;
+    height: 47px;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    border: 2px solid #F59256;
+    color: inherit;
+  
     @media (max-width: 767.99px) {
         width: 95px;
         height: 35px;
@@ -61,7 +81,7 @@ export const RegContainer = styled.div`
     height: 47px;
     border-radius: 23px;
     
-    background-color: #FFFFFF;
+    background-color: inherit;
     border: 2px solid #F59256;
 
     @media (max-width: 767.99px) {
@@ -79,7 +99,7 @@ export const Text = styled.span`
     line-height: 27px;
 
     margin: 0, auto;
-    color: #FFFFFF;
+    color: inherit;
 
     @media (max-width: 767.99px) {
         font-size: 14px;
@@ -94,7 +114,7 @@ export const RegText = styled.span`
     line-height: 27px;
 
     margin: 0, auto;
-    color: #000000;
+    color: inherit;
 
     @media (max-width: 767.99px) {
         font-size: 14px;

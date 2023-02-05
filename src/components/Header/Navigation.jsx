@@ -22,12 +22,13 @@ import {
 
 export default function Navigation() {
   const [isMobMenuOpen, setIsMobMenuOpen] = useState(false);
+  const [isRegActive, setIsRegActive] = useState(false);
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
 
   return (
     <NavigationList>
       <NavigationItem>
-        <Nav setIsMobMenuOpen={setIsMobMenuOpen} />
+        <Nav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive} />
       </NavigationItem>
 
       {isMobMenuOpen === false ? (
@@ -38,7 +39,7 @@ export default function Navigation() {
             </UserNavBox>
           ) : (
             <UserNavBox>
-              <AuthNav setIsMobMenuOpen={setIsMobMenuOpen}/>
+                <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive}/>
             </UserNavBox>
           )}
         </NavigationItemUser>

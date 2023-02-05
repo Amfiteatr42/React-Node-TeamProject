@@ -12,7 +12,7 @@ import {
   Title,
   Text,
   Icon,
-  InputFile,
+  InputFile, TextError
 } from './ModalAddsPet.styled';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -29,19 +29,19 @@ const validationSchema = yup.object({
     .string()
     .min(2)
     .max(48)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   name: yup
     .string()
     .min(2)
     .max(16)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   breed: yup
     .string()
     .min(2)
     .max(36)
-    .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
+    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   dateOfBirth: yup
     .date()
@@ -71,41 +71,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
     dispatch(addPets(form));
     onCloseModal();
   };
-  /*  [avatarUsers.pending](state, action) {
-        state.isLoggedIn = true;
-  state.isRefreshing = false;
-    },
-    [avatarUsers.rejected]: handleRejected,
-    [avatarUsers.fulfilled](state, action) {
-       state.isLoggedIn = true;
-       state.user.avatarURL = { ...state.user.avatarURL, ...action.payload };
-      console.log(state.user.avatarURL);
-      state.error = null;
-    } 
-       [updateUserInfo.pending](state, action) {
-        state.isLoggedIn = true;
-  state.isRefreshing = false;
-    },
-    [updateUserInfo.rejected]: handleRejected,
-    [updateUserInfo.fulfilled](state, action) {
-//state.isLoggedIn = true;
-      state.user = { ...state.user, ...action.payload };
-      console.log( state.user)
-      state.error = null;
-    },
-    export const getAuthAvatar = state => state.auth.user.avatarURL.url;
-    export const avatarUsers = createAsyncThunk(
-  'users/avatar',
-  async (avatar, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.patch(`${BASEURL}avatar`, avatar);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.messsage);
-    }
-  }
-);
-    */
+ 
   return (
     <Formik
       onSubmit={handleSubmit}
@@ -118,7 +84,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
         petImg: '',
       }}
     >
-      {({ handleSubmit, handleChange, values, setFieldValue }) => (
+      {({ handleSubmit, handleChange, values, setFieldValue, errors }) => (
         <Form onSubmit={handleSubmit}>
           {page === 1 && (
             <>
@@ -131,7 +97,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder="Type name pet"
                 value={values.name}
                 onChange={handleChange}
-              />
+              />{errors.name && <TextError>{errors.name}</TextError>}
               <Label>Date of birth</Label>
               <Input
                 type="text"
@@ -140,7 +106,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type date of birth'}
                 value={values.dateOfBirth}
                 onChange={handleChange}
-              ></Input>
+              ></Input>{errors.dateOfBirth && <TextError>{errors.dateOfBirth}</TextError>}
               <Label>Breed</Label>
               <Input
                 type="text"
@@ -149,7 +115,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type breed'}
                 value={values.breed}
                 onChange={handleChange}
-              />
+              />{errors.breed && <TextError>{errors.breed}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={onCloseModal}>
                   Cancel
@@ -188,6 +154,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.comment}
                 onChange={handleChange}
               ></Textarea>
+              {errors.comment && <TextError>{errors.comment}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={() => setPage(1)}>
                   Back

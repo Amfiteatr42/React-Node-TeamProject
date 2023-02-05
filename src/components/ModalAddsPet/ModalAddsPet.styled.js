@@ -215,3 +215,12 @@ export const Icon = styled(AiOutlinePlus)`
 export const InputFile = styled.input`
 display:none;
 `
+export const TextError = styled.p`
+ font-family: 'Manrope';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.38;
+  text-align: center;
+  color: var(--accent);
+  margin-top: 5px;
+`

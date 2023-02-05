@@ -24,7 +24,7 @@ export const PetsList = () => {
  const handleDataFormat = date => {
     if (!date?.length) return;
     const d = date?.split('-');
-    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); // DD.MM.YYYY
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); 
   };
 
   useEffect(() => {

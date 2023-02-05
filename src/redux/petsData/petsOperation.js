@@ -41,7 +41,6 @@ export const removePets = createAsyncThunk(
   async (_id, { rejectWithValue }) => {
     try {
       const res = await axios.delete(`${URL}userspets/remove/${_id}`);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.messsage);

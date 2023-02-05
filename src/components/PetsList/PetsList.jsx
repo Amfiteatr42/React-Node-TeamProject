@@ -2,7 +2,7 @@ import { remove } from '../../assets/icons/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPets, removePets } from 'redux/petsData/petsOperation';
 import { getPets } from 'redux/petsData/petsSelector';
-
+//import noImg from '../../images/no-image-found.png'
 import {
   Box,
   Button,
@@ -13,7 +13,7 @@ import {
   Svg,
   Li,
   Content,
-  Icon, Div, Text
+ Div, Text
 } from './PetsList.styled';
 import { useEffect } from 'react';
 
@@ -39,7 +39,7 @@ export const PetsList = () => {
             ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (
               <Li key={idx}>
                 <Content>
-                  {imgURL ? <Img src={imgURL.url} /> : <Icon />}
+                 { imgURL && <Img src={imgURL.url} />}
                 </Content>
                 <List>
                   <Item>

@@ -26,7 +26,7 @@ import { parse } from 'date-fns';
 const today = new Date();
 
 const validationSchema = yup.object({
-  comment: yup.string().min(8).max(120),
+  comment: yup.string().min(8).max(120).required('Field is required!'),
   //.matches(/^[ а-яА-Яa-zA-Z0-9]+$/, 'Only alphabetic characters are allowed'),
   name: yup
     .string()
@@ -34,6 +34,7 @@ const validationSchema = yup.object({
     .max(16)
     .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
+    petImg: yup.mixed(),
   breed: yup
     .string()
     .min(2)
@@ -65,10 +66,12 @@ export const ModalAddsPet = ({ onCloseModal }) => {
   const [page, setPage] = useState(1);
 
   const handleSubmit = form => {
+
     dispatch(addPets(form));
     onCloseModal();
   };
 
+  
   return (
     <Formik
       onSubmit={handleSubmit}
@@ -81,13 +84,13 @@ export const ModalAddsPet = ({ onCloseModal }) => {
         petImg: '',
       }}
     >
-      {({ handleSubmit, handleChange, values, setFieldValue, errors }) => (
+      {({ handleSubmit, handleChange, values, setFieldValue, errors, touched, handleBlur }) => (
         <Form onSubmit={handleSubmit}>
           {page === 1 && (
             <>
               <Title>Add pet</Title>
               <Label>
-                Name pet
+                Name pet  </Label>
                 <Input
                   type="text"
                   name="name"
@@ -95,9 +98,10 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                   placeholder="Type name pet"
                   value={values.name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                {errors.name && <TextError>{errors.name}</TextError>}
-              </Label>
+                { touched.name && errors.name && <TextError>{errors.name}</TextError>}
+            
 
               <Label>Date of birth</Label>
               <Input
@@ -107,8 +111,9 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type date of birth'}
                 value={values.dateOfBirth}
                 onChange={handleChange}
+                onBlur={handleBlur}
               ></Input>
-              {errors.dateOfBirth && (
+              {touched.dateOfBirth && errors.dateOfBirth &&  (
                 <TextError>{errors.dateOfBirth}</TextError>
               )}
               <Label>Breed</Label>
@@ -119,13 +124,20 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type breed'}
                 value={values.breed}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
-              {errors.breed && <TextError>{errors.breed}</TextError>}
+              { touched.breed && errors.breed && <TextError>{errors.breed}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={onCloseModal}>
                   Cancel
                 </Button>
-                <AccentBtn type="button" onClick={() => setPage(2)}>
+                <AccentBtn type="button" onClick={() => {
+                  if (errors.breed || errors.name || errors.dateOfBirth) {
+                    setPage(1)
+                    return;
+                  }
+                    setPage(2)
+                }}>
                   Next
                 </AccentBtn>
               </ContainerButtons>
@@ -149,6 +161,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                   onChange={event => {
                     setFieldValue('petImg', event.currentTarget.files[0]);
                   }}
+                  onBlur={handleBlur}
                 />{' '}
               </LabelImg>
               <Label>Comments</Label>
@@ -158,8 +171,9 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type comments'}
                 value={values.comment}
                 onChange={handleChange}
+                onBlur={handleBlur}
               ></Textarea>
-              {errors.comment && <TextError>{errors.comment}</TextError>}
+              {touched.comment && errors.comment && <TextError>{errors.comment}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={() => setPage(1)}>
                   Back

@@ -6,7 +6,7 @@ export default function AuthNav({ setIsMobMenuOpen, setIsRegActive, isRegActive}
     return (
         <AuthList>
             <LoginItem>
-                <NavLink to="login" active='false'
+                <NavLink to="login"
                     style={({ isActive }) => ({
                         color: isActive ? '#FFFFFF' : '',
                         backgroundColor: isActive ? '#F59256' : '#F59256',

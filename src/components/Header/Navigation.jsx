@@ -67,10 +67,10 @@ export default function Navigation() {
         <MobMenuBox>
           <MobMenuContainer>
             <UserAuthNavBox>
-              {isLoggedIn === true ? <UserNav setIsMobMenuOpen={setIsMobMenuOpen} /> : <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} />}
+              {isLoggedIn === true ? <UserNav setIsMobMenuOpen={setIsMobMenuOpen} /> : <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive}/>}
             </UserAuthNavBox>
 
-            <Nav setIsMobMenuOpen={setIsMobMenuOpen} />
+            <Nav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive} />
           </MobMenuContainer>
         </MobMenuBox>
       ) : (

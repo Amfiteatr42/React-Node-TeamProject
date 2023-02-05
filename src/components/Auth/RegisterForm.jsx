@@ -75,7 +75,7 @@ const RegisterForm = ({
                     <Label>
                       <Input
                         name="city"
-                        type="city"
+                        type="text"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="City, region"
@@ -101,7 +101,7 @@ const RegisterForm = ({
                     </Label>
                   </Box>
                   <AuthButton type="submit" style={{ marginBottom: '16px' }}>
-                   Register
+                    Register
                   </AuthButton>
                 </>
               ) : (
@@ -154,7 +154,12 @@ const RegisterForm = ({
           )}
         </Formik>
       </div>
-      <AuthButton name="button" style={nextStyle} value={next} onClick={hendeLNext}>
+      <AuthButton
+        name="button"
+        style={nextStyle}
+        value={next}
+        onClick={hendeLNext}
+      >
         {next ? 'Back' : 'Next'}
       </AuthButton>
       <AuthTitleh3>

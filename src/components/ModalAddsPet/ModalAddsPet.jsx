@@ -12,7 +12,8 @@ import {
   Title,
   Text,
   Icon,
-  InputFile, TextError
+  InputFile,
+  TextError,
 } from './ModalAddsPet.styled';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -25,12 +26,8 @@ import { parse } from 'date-fns';
 const today = new Date();
 
 const validationSchema = yup.object({
-  comment: yup
-    .string()
-    .min(2)
-    .max(48)
-    .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
-    .required('Field is required!'),
+  comment: yup.string().min(8).max(120),
+  //.matches(/^[ а-яА-Яa-zA-Z0-9]+$/, 'Only alphabetic characters are allowed'),
   name: yup
     .string()
     .min(2)
@@ -40,7 +37,7 @@ const validationSchema = yup.object({
   breed: yup
     .string()
     .min(2)
-    .max(36)
+    .max(16)
     .matches(/^[a-zA-Z, а-яА-Я]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
   dateOfBirth: yup
@@ -71,7 +68,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
     dispatch(addPets(form));
     onCloseModal();
   };
- 
+
   return (
     <Formik
       onSubmit={handleSubmit}
@@ -89,15 +86,19 @@ export const ModalAddsPet = ({ onCloseModal }) => {
           {page === 1 && (
             <>
               <Title>Add pet</Title>
-              <Label>Name pet</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Type name pet"
-                value={values.name}
-                onChange={handleChange}
-              />{errors.name && <TextError>{errors.name}</TextError>}
+              <Label>
+                Name pet
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Type name pet"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <TextError>{errors.name}</TextError>}
+              </Label>
+
               <Label>Date of birth</Label>
               <Input
                 type="text"
@@ -106,7 +107,10 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type date of birth'}
                 value={values.dateOfBirth}
                 onChange={handleChange}
-              ></Input>{errors.dateOfBirth && <TextError>{errors.dateOfBirth}</TextError>}
+              ></Input>
+              {errors.dateOfBirth && (
+                <TextError>{errors.dateOfBirth}</TextError>
+              )}
               <Label>Breed</Label>
               <Input
                 type="text"
@@ -115,7 +119,8 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 placeholder={'Type breed'}
                 value={values.breed}
                 onChange={handleChange}
-              />{errors.breed && <TextError>{errors.breed}</TextError>}
+              />
+              {errors.breed && <TextError>{errors.breed}</TextError>}
               <ContainerButtons>
                 <Button type="button" onClick={onCloseModal}>
                   Cancel

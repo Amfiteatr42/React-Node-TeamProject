@@ -82,7 +82,7 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
     [updateUserInfo.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload };
+      state.user = { ...state.user, ...action.payload.data };
       state.error = null;
     },
     [updateAvatar.pending](state) {

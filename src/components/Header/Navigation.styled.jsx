@@ -9,7 +9,6 @@ export const NavigationList = styled.ul`
     }
 `;
 
-
 export const NavigationItem = styled.li`
     &:first-child{
         @media (max-width: 1279.99px) {

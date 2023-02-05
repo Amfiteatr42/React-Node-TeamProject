@@ -62,9 +62,13 @@ export const ButtonNews = styled.button`
   left: 87%;
   border: none;
   background-color: transparent;
+  color: var(--black);
+  transition: 300ms all ease;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
+    color: var(--active);
+    transition: 300ms all ease;
   }
 
   @media screen and (min-width: 1279px) {
@@ -79,8 +83,14 @@ export const ButtonDelete = styled.button`
   left: 87%;
   border: none;
   background-color: transparent;
-  transform: scale(1.1);
   cursor: pointer;
+  color: var(--black);
+  transition: 300ms all ease;
+  &:hover {
+    transform: scale(1.1);
+    color: var(--active);
+    transition: 300ms all ease;
+  }
   @media screen and (min-width: 1279px) {
     top: 25%;
     left: 71%;

@@ -26,7 +26,6 @@ const NewsList = () => {
     setLoading(true);
     data
       .then(({ data }) => {
-        console.log(data.data);
         setNews(data.data);
         setNews2(data.data);
       })

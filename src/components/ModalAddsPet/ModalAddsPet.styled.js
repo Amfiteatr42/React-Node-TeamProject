@@ -218,7 +218,7 @@ display:none;
 export const TextError = styled.p`
  font-family: 'Manrope';
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.38;
   text-align: center;
   color: var(--accent);

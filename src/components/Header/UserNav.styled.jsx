@@ -21,10 +21,10 @@ export const UserNavContainer = styled.div`
 
 export const UserNavBox = styled.div`
   margin-left: 499px;
-  @media (max-width: 1280px) {
+  @media (max-width: 1279px) {
     margin-left: 386px;
   }
-  @media (max-width: 767.99px) {
+  @media (max-width: 767px) {
     margin-left: 0;
   }
 `;

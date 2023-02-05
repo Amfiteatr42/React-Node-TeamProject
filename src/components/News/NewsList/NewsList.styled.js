@@ -83,7 +83,6 @@ export const ButtonDelete = styled.button`
   left: 87%;
   border: none;
   background-color: transparent;
-  /* transform: scale(1.1); */
   cursor: pointer;
   color: var(--black);
   transition: 300ms all ease;

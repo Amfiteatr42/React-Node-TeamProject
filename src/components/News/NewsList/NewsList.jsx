@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import NewsItem from '../NewsItem/NewsItem';
@@ -17,7 +18,7 @@ import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 const NewsList = () => {
   const [news, setNews] = useState([]);
   const [news2, setNews2] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [isCloseIcon, setIsCloseIcon] = useState(true);
 
@@ -63,8 +64,7 @@ const NewsList = () => {
     setIsCloseIcon(false);
   };
 
-  const searchDelete = e => {
-    e.preventDefault();
+  const searchDelete = ( )=> {
     setSearch('');
     setIsCloseIcon(true);
     setNews2(news2);
@@ -125,3 +125,15 @@ const NewsList = () => {
 };
 
 export default NewsList;
+
+NewsList.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      url: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      date: PropTypes.oneOfType([PropTypes.string]),
+    })
+  ),
+};

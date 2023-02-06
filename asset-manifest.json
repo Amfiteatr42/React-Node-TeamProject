@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/React-Node-TeamProject/static/css/main.689c45b2.css",
-    "main.js": "/React-Node-TeamProject/static/js/main.b80f4dc7.js",
+    "main.css": "/React-Node-TeamProject/static/css/main.d2047144.css",
+    "main.js": "/React-Node-TeamProject/static/js/main.9f741b6b.js",
     "static/css/151.7c6784e1.chunk.css": "/React-Node-TeamProject/static/css/151.7c6784e1.chunk.css",
-    "static/js/151.ef0e8ac1.chunk.js": "/React-Node-TeamProject/static/js/151.ef0e8ac1.chunk.js",
+    "static/js/151.6b35fc77.chunk.js": "/React-Node-TeamProject/static/js/151.6b35fc77.chunk.js",
     "static/js/805.20083694.chunk.js": "/React-Node-TeamProject/static/js/805.20083694.chunk.js",
     "static/media/hero-girl-tablet@2x.png": "/React-Node-TeamProject/static/media/hero-girl-tablet@2x.6500f4f40613c60a0661.png",
     "static/media/hero-girl-desk@2x.png": "/React-Node-TeamProject/static/media/hero-girl-desk@2x.ae9f2ee5925572cf3c81.png",
@@ -31,14 +31,14 @@
     "static/media/search.svg": "/React-Node-TeamProject/static/media/search.cb13bdd6b45133efdb444da1ea3b2aac.svg",
     "static/media/big-plus.svg": "/React-Node-TeamProject/static/media/big-plus.9697edc2757a8c2fdec9c9578b298e71.svg",
     "static/media/plus.svg": "/React-Node-TeamProject/static/media/plus.18dde0ab6d2ab0cd36f9fdac9bc7c4b1.svg",
-    "main.689c45b2.css.map": "/React-Node-TeamProject/static/css/main.689c45b2.css.map",
-    "main.b80f4dc7.js.map": "/React-Node-TeamProject/static/js/main.b80f4dc7.js.map",
+    "main.d2047144.css.map": "/React-Node-TeamProject/static/css/main.d2047144.css.map",
+    "main.9f741b6b.js.map": "/React-Node-TeamProject/static/js/main.9f741b6b.js.map",
     "151.7c6784e1.chunk.css.map": "/React-Node-TeamProject/static/css/151.7c6784e1.chunk.css.map",
-    "151.ef0e8ac1.chunk.js.map": "/React-Node-TeamProject/static/js/151.ef0e8ac1.chunk.js.map",
+    "151.6b35fc77.chunk.js.map": "/React-Node-TeamProject/static/js/151.6b35fc77.chunk.js.map",
     "805.20083694.chunk.js.map": "/React-Node-TeamProject/static/js/805.20083694.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.689c45b2.css",
-    "static/js/main.b80f4dc7.js"
+    "static/css/main.d2047144.css",
+    "static/js/main.9f741b6b.js"
   ]
 }

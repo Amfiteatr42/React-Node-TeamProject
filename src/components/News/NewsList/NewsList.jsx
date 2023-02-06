@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import NewsItem from '../NewsItem/NewsItem';
@@ -126,14 +125,3 @@ const NewsList = () => {
 
 export default NewsList;
 
-NewsList.propTypes = {
-  friends: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      url: PropTypes.string,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      date: PropTypes.oneOfType([PropTypes.string]),
-    })
-  ),
-};

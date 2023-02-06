@@ -1,21 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from './index.module.css';
 import * as yup from 'yup';
-// import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-import { parse } from 'date-fns';
 
 const today = new Date();
 
 const validationSchema = yup.object({
-  titleOfAd: yup
+  title: yup
     .string()
     .min(2)
     .max(48)
     .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
-  category: yup.string().required('Category is required!'),
-  namePet: yup
+  categoryId: yup.string().required('Category is required!'),
+  petname: yup
     .string()
     .min(2)
     .max(16)
@@ -27,29 +24,19 @@ const validationSchema = yup.object({
     .max(36)
     .matches(/^[a-zA-Z, ]*$/g, 'Only alphabetic characters are allowed')
     .required('Field is required!'),
-  dateOfBirth: yup
+  dateofbirth: yup
     .date()
     .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
       if (originalValue) {
         return originalValue.length === 10;
       }
     })
-    .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
-      return result;
-    })
     .typeError('Please enter a valid date')
     .required()
-    .min('1950-11-13', 'Date is too early')
     .max(today),
 });
 
 const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
-  // const [breedValue, setBreedValue] = useState(formData.breed);
-
   return (
     <div>
       <p className={s.text}>Write some information about your notice.</p>
@@ -70,8 +57,8 @@ const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
             <label className={s.wrapprerInput} htmlFor="lost/found">
               <Field
                 type="radio"
-                name="category"
-                value="lost/found"
+                name="categoryId"
+                value="2"
                 id="lost/found"
                 className={s.inputRadio}
               />
@@ -80,8 +67,8 @@ const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
             <label className={s.wrapprerInput} htmlFor="in_good_hands">
               <Field
                 type="radio"
-                name="category"
-                value="in good hands"
+                name="categoryId"
+                value="3"
                 id="in good hands"
                 className={s.inputRadio}
               />
@@ -90,8 +77,8 @@ const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
             <label className={s.wrapprerInput} htmlFor="sell">
               <Field
                 type="radio"
-                name="category"
-                value="sell"
+                name="categoryId"
+                value="1"
                 id="sell"
                 className={s.inputRadio}
               />
@@ -99,52 +86,52 @@ const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
             </label>
           </div>
           <ErrorMessage
-            name="category"
+            name="categoryId"
             render={msg => <div className={s.errorMsg}>{msg}</div>}
           />
           <div className={s.textFildWrap}>
-            <label htmlFor="titleOfAd" type="text" className={s.label}>
+            <label htmlFor="title" type="text" className={s.label}>
               Tittle of ad*:
             </label>
             <Field
-              id="titleOfAd"
-              name="titleOfAd"
+              id="title"
+              name="title"
               placeholder="Type name pet"
               className={s.inputText}
             />
             <ErrorMessage
-              name="titleOfAd"
+              name="title"
               render={msg => <div className={s.errorMsg}>{msg}</div>}
             />
           </div>
           <div className={s.textFildWrap}>
-            <label htmlFor="namePet" type="text" className={s.label}>
+            <label htmlFor="petname" type="text" className={s.label}>
               Name pet*:
             </label>
             <Field
-              id="namePet"
-              name="namePet"
+              id="petname"
+              name="petname"
               placeholder="Type name pet"
               className={s.inputText}
             />
             <ErrorMessage
-              name="namePet"
+              name="petname"
               render={msg => <div className={s.errorMsg}>{msg}</div>}
             />
           </div>
           <div className={s.textFildWrap}>
-            <label htmlFor="dateOfBirth" type="text" className={s.label}>
+            <label htmlFor="dateofbirth" type="text" className={s.label}>
               Date of birth*:
             </label>
             <Field
-              id="dateOfBirth"
-              name="dateOfBirth"
+              id="dateofbirth"
+              name="dateofbirth"
               placeholder="Type date of birth"
               className={s.inputText}
               data-pattern="**.**.****"
             />
             <ErrorMessage
-              name="dateOfBirth"
+              name="dateofbirth"
               render={msg => <div className={s.errorMsg}>{msg}</div>}
             />
           </div>

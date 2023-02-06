@@ -2,7 +2,6 @@ import EllipsisText from 'react-ellipsis-text';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAuthIsLoggedIn, getUserFavorite } from 'redux/auth/selectors';
-// import { noticesOperations } from 'redux/notices';
 import { addToFavorite, deleteFromFavorite } from 'redux/auth/operations';
 import ModalNotice from '../NoticeItemModal';
 import ModalPage from 'pages/ModalPage';
@@ -22,10 +21,6 @@ const NOTICE_ITEM_KEYS = [
     label: 'Breed:',
     key: 'breed',
   },
-  // {
-  //   label: 'Place:',
-  //   key: 'location',
-  // },
   {
     label: 'Date of birth',
     key: 'age',
@@ -34,7 +29,6 @@ const NOTICE_ITEM_KEYS = [
     label: 'Price:',
     key: 'price',
     category: 'sell',
-    // categoryId: '1',
   },
 ];
 

@@ -7,13 +7,11 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import AddNoticeModal from 'components/AddNoticeModal';
 import ModalPage from 'pages/ModalPage';
-// import { Modal } from '../Modal/Modal';
 
 export default function AddNoticeButton() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const text = 'Add pet';
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
-  // const isLoggedIn = false;
   const [isOpen, setOpen] = useState(false);
 
   const handleClick = () => {

@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { noticesOperations } from 'redux/notices';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthToken } from 'redux/auth/selectors';
+import { getAuthToken, getAuthUser } from 'redux/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Plus } from '../../images/svg/big-plus.svg';
 
@@ -18,18 +18,12 @@ const validationSchema = yup.object({
     .required('Field is required!'),
   price: yup
     .string()
-    .min(2)
+    .min(1)
     .max(6)
-    .matches(/^[1-9]+[0-9]*\$$/g, 'Only number characters and $ are allowed')
+
+    .matches(/^[0-9]/, 'Only number characters')
     .notRequired(),
-  image: yup.mixed(),
-  // .required('Image is Required!(jpg,jpeg,png)')
-  // .test(
-  //   'fileFormat',
-  //   'Unsupported file type',
-  //   value =>
-  //     value === null || (value && SUPPORTED_FORMATS.includes(value.type))
-  // ),
+  petImg: yup.mixed(),
   comments: yup
     .string()
     .min(4)
@@ -38,22 +32,20 @@ const validationSchema = yup.object({
     .required('Field is required!'),
 });
 
-// eslint-disable-next-line
-const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
-
 const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
   const [direction, setDirection] = useState('back');
-  const [fileInput, setFileInput] = useState(formData.image);
+  const [fileInput, setFileInput] = useState(formData.petImg);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(getAuthToken);
+  const user = useSelector(getAuthUser);
 
   const handleAddAvatar = (e, setFieldValue) => {
     const [file] = e.target.files;
     if (file) {
       setFileInput(file);
-      setFieldValue('image', file);
-      setFormData(values => ({ ...values, image: file }));
+      setFieldValue('petImg', file);
+      setFormData(values => ({ ...values, petImg: file }));
     }
   };
 
@@ -65,8 +57,8 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
         onSubmit={async values => {
           setFormData({
             ...values,
-            image: fileInput,
-            price: values.category !== 'sell' ? '1$' : values.price,
+            petImg: fileInput,
+            price: values.categoryId !== '1' ? 0 : values.price,
           });
           if (direction === 'back') {
             prevStep();
@@ -74,9 +66,8 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
           if (direction === 'forward') {
             try {
               await dispatch(
-                noticesOperations.createNotices({ values, token })
-              );
-              // .unwrap();
+                noticesOperations.createNotices({ values, token, user })
+              ).unwrap();
               navigate('/notices/own');
               onClose();
             } catch (error) {}
@@ -132,7 +123,7 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
                 render={msg => <div className={s.errorMsg}>{msg}</div>}
               />
             </div>
-            {formData.category === 'sell' && (
+            {formData.categoryId === '1' && (
               <div className={s.textFildWrap}>
                 <label htmlFor="price" type="text" className={s.label}>
                   Price*:
@@ -150,13 +141,13 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
                 />
               </div>
             )}
-            <label htmlFor="image" className={s.avatarLabel}>
+            <label htmlFor="petImg" className={s.avatarLabel}>
               Load the pet's image*:
             </label>
             <div className={s.addImage}>
               {fileInput ? (
                 <img
-                  id="image"
+                  id="petImg"
                   className={s.selectedAvatar}
                   src={URL.createObjectURL(fileInput)}
                   alt={fileInput.name}
@@ -168,13 +159,13 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
               <input
                 className={s.inputFile}
                 type="file"
-                id="image"
-                name="image"
+                id="petImg"
+                name="petImg"
                 accept=".jpg,.png"
                 onChange={e => handleAddAvatar(e, setFieldValue)}
               />
               <ErrorMessage
-                name="image"
+                name="petImg"
                 render={msg => <div className={s.errorMsg}>{msg}</div>}
               />
             </div>

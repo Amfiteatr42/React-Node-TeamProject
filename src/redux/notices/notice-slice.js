@@ -6,14 +6,13 @@ const noticesSlice = createSlice({
   initialState: {
     notices: [],
     userNotices: [],
-    isLoading: false,
   },
   extraReducers: {
     [noticesOperations.getNoticesCategories.pending](state) {
       state.isLoading = true;
     },
     [noticesOperations.getNoticesCategories.fulfilled](state, action) {
-      state.notices = action.payload;
+      state.notices = action.payload.reverse();
       state.isLoading = false;
     },
     [noticesOperations.getNoticesCategories.rejected](state) {
@@ -24,7 +23,7 @@ const noticesSlice = createSlice({
       state.isLoading = true;
     },
     [noticesOperations.getUserNotices.fulfilled](state, action) {
-      state.userNotices = action.payload;
+      state.userNotices = action.payload.data.reverse();
       state.isLoading = false;
     },
     [noticesOperations.getUserNotices.rejected](state) {
@@ -35,7 +34,8 @@ const noticesSlice = createSlice({
       state.isLoading = true;
     },
     [noticesOperations.createNotices.fulfilled](state, action) {
-      state.userNotices = action.payload;
+      state.userNotices = action.payload.data;
+      state.notice.push(action.payload.data);
       state.isLoading = false;
     },
     [noticesOperations.createNotices.rejected](state) {
@@ -46,7 +46,7 @@ const noticesSlice = createSlice({
       state.isLoading = true;
     },
     [noticesOperations.deleteUserNotices.fulfilled](state, action) {
-      state.userNotices = action.payload;
+      state.userNotices = action.payload.data;
       state.isLoading = false;
     },
     [noticesOperations.deleteUserNotices.rejected](state) {

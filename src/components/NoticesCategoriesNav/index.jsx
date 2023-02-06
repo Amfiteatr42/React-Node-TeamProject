@@ -17,7 +17,6 @@ const authButtonText = [
 
 export default function NoticesCategoriesNav() {
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
-  // const isLoading = false;
   const [btnList, setBtnList] = useState(
     isLoggedIn ? [...buttonText, ...authButtonText] : buttonText
   );

@@ -7,15 +7,15 @@ export default function AddNoticeModal({ onClose }) {
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState({
-    titleOfAd: '',
-    namePet: '',
+    title: '',
+    petname: '',
     breed: '',
     sex: '',
     location: '',
-    price: '1$',
-    category: '',
+    price: '',
+    categoryId: Number(''),
     comments: '',
-    dateOfBirth: '',
+    dateofbirth: '',
     image: '',
   });
 

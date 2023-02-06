@@ -11,7 +11,6 @@ export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [noticesData, setNoticesData] = useState([]);
-  // const [favoriteData, setFavoriteData] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);

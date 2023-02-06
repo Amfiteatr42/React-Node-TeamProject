@@ -16,25 +16,13 @@ export default function NoticesSearch() {
   const handleSubmit = evt => {
     evt.preventDefault();
     if (pathnameArr[2] === 'sell') {
-      dispatch(
-        noticesOperations.getNoticesCategories({ category: '1', query })
-      );
+      dispatch(noticesOperations.getNoticesCategories({ query }));
     }
     if (pathnameArr[2] === 'lost-found') {
-      dispatch(
-        noticesOperations.getNoticesCategories({
-          category: '2',
-          query,
-        })
-      );
+      dispatch(noticesOperations.getNoticesCategories({ query }));
     }
     if (pathnameArr[2] === 'for-free') {
-      dispatch(
-        noticesOperations.getNoticesCategories({
-          category: '3',
-          query,
-        })
-      );
+      dispatch(noticesOperations.getNoticesCategories({ query }));
     }
     setQuery('');
   };
@@ -51,8 +39,6 @@ export default function NoticesSearch() {
             placeholder="Search"
             value={query}
             onInput={e => setQuery(e.target.value)}
-            // autoFocus
-            // required
           />
           {!query ? (
             <button
@@ -63,24 +49,10 @@ export default function NoticesSearch() {
               <Clear />
             </button>
           ) : (
-            <button
-              className={s.SearchBtn}
-              type="submit"
-              // onClick={e => setQuery(e.target.value)}
-            >
+            <button className={s.SearchBtn} type="submit">
               <Search />
             </button>
           )}
-          {/* <button className={s.SearchBtn} type="submit">
-            <Search />
-          </button>
-          <button
-            className={s.ClearBtn}
-            type="submit"
-            onClick={() => setQuery('')}
-          >
-            <Clear />
-          </button> */}
         </form>
       </div>
     </>

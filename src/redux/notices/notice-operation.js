@@ -41,8 +41,10 @@ export const getUserNotices = createAsyncThunk(
 );
 export const createNotices = createAsyncThunk(
   'notices/createNotices',
-  async ({ values, token }, thunkAPI) => {
+  async ({ values, token, petImg, user }, thunkAPI) => {
     try {
+      const bodyFormData = new FormData();
+      bodyFormData.append('petImg', petImg);
       const header = {
         headers: {
           Accept: 'application/json',
@@ -51,7 +53,12 @@ export const createNotices = createAsyncThunk(
         },
       };
 
-      const { data } = await axios.post(`/notice/add`, values, header);
+      const { data } = await axios.post(
+        `/notice/add`,
+        { ...values, bodyFormData },
+        header,
+        user
+      );
       toast.success('New notice added!');
       return data;
     } catch (error) {

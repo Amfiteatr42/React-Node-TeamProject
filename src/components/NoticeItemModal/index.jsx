@@ -1,12 +1,13 @@
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
-import style from './modalNotice.module.css';
+// import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
-import ContactsModal from './contactsModal';
+// import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-// import { noticesOperations } from 'redux/notices';
-// import { getAuthUser } from 'redux/auth/selectors';
+import { noticesOperations } from 'redux/notices';
+import { getAuthUser } from 'redux/auth/selectors';
+// import { format } from 'date-fns';
 
 const PET_MODAL_KEYS = [
   {
@@ -30,11 +31,11 @@ const PET_MODAL_KEYS = [
     key: 'sex',
   },
   {
-    key: 'owner',
+    key: 'user',
     values: [
       {
         label: 'Owner:',
-        field: 'name',
+        field: 'userName',
       },
       {
         label: 'Phone:',
@@ -60,10 +61,17 @@ export default function ModalNotice({
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
 
-  // const user = useSelector(getAuthUser);
-  // const owner = user._id === petData.owner._id;
+  const user = useSelector(getAuthUser);
+  console.log(user);
+  // const owner = String(user._id) === petData.data.userId;
+
   // const ownerPhone = petData.owner.phone.replace(/\D/g, '');
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  // const owner = user._id;
+  // console.log(owner);
+
+  // const petAge = format(new Date(petData.dateofbirth), 'dd.MM.yyyy');
 
   const handleModalToggle = () => {
     setContactModalShow(!contactModalShow);
@@ -130,34 +138,43 @@ export default function ModalNotice({
           >
             Contact
           </button>
-          {/* {owner && (
-            <button
-              type="button"
-              className={s.deleteBtn}
-              onClick={() => {
-                dispatch(noticesOperations.deleteUserNotices(petData._id));
-              }}
-            >
-              delete
-            </button>
-          )} */}
+          {/* {owner && ( */}
+          <button
+            type="button"
+            className={s.deleteBtn}
+            onClick={() => {
+              dispatch(noticesOperations.deleteUserNotices(petData._id));
+            }}
+          >
+            delete
+          </button>
+          {/* )} */}
         </div>
       </div>
-      {contactModalShow && (
+      {/* {contactModalShow && (
         <ContactsModal onClose={handleModalToggle}>
           <div className={style.modalButtons}>
-            {/* <a href={`tel:+${ownerPhone}`} className={s.modalContactBtn}>
+            <a
+              href={
+                ''
+                // `tel:+${ownerPhone}`
+              }
+              className={s.modalContactBtn}
+            >
               to call
             </a>
             <a
-              href={`mailto:${petData.owner.email}`}
+              href={
+                ''
+                // `mailto:${petData.owner.email}`
+              }
               className={s.modalContactBtn}
-            > */}
-            send email
-            {/* </a> */}
+            >
+              send email
+            </a>
           </div>
         </ContactsModal>
-      )}
+      )} */}
     </>
   );
 }

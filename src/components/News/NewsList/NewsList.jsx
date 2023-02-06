@@ -16,57 +16,88 @@ import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
-  const [news2, setNews2] = useState([]);
+  // const [news2, setNews2] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [isCloseIcon, setIsCloseIcon] = useState(true);
 
-  useEffect(() => {
-    const data = axios.get('https://api-petly.onrender.com/api/news');
+  function fetchNews() {
     setLoading(true);
-    data
-      .then(({ data }) => {
-        setNews(data.data);
-        setNews2(data.data);
+    axios('https://api-petly.onrender.com/api/news')
+      .then(({ data }) => setNews(data.data))
+      .catch(error => {
+        toast.error('Some unexpected error happened :(');
+        console.log(error.message);
       })
-      .catch(error => console.log(error.message))
       .finally(() => {
         setLoading(false);
       });
-  }, [setNews, setNews2]);
+  }
+
+  useEffect(() => {
+    //const data = axios.get('https://api-petly.onrender.com/api/news');
+    //setLoading(true);
+    // data
+    //   .then(({ data }) => {
+    //     setNews(data.data);
+    // setNews2(data.data);
+    // })
+    // .catch(error => console.log(error.message))
+    // .finally(() => {
+    //   setLoading(false);
+    // });
+    fetchNews();
+  }, []);
 
   const handleSearchChange = e => {
+    if (e.currentTarget.value === '') {
+      fetchNews();
+      setIsCloseIcon(true);
+    }
+
     setSearch(e.currentTarget.value);
   };
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    if (search.toString() === '') {
+    const normalizedQuery = search.toLowerCase().trim();
+
+    if (normalizedQuery === '') {
       toast.error('The field cannot be empty');
       return;
     }
-    const normalizedFilter = search.toLowerCase();
 
-    const filteredNews = news.filter(item => {
-      return (
-        item.text.toLowerCase().includes(normalizedFilter) ||
-        item.title.toLowerCase().includes(normalizedFilter)
-      );
-    });
-    if (filteredNews.length === 0) {
-      toast.error('Not Found');
-      return;
-    }
+    // const filteredNews = news.filter(item => {
+    //   return (
+    //     item.text.toLowerCase().includes(normalizedFilter) ||
+    //     item.title.toLowerCase().includes(normalizedFilter)
+    //   );
+    // });
+    // if (filteredNews.length === 0) {
+    //   toast.error('Not Found');
+    //   return;
+    // }
 
-    setNews(filteredNews);
+    axios(`https://api-petly.onrender.com/api/news/search/${normalizedQuery}`)
+      .then(({ data: { data } }) => {
+        if (data.length === 0) {
+          toast.error("There's no news with your keyword");
+          return;
+        }
+        setNews(data);
+      })
+      .catch(err => toast.error(err.message));
+
+    // setNews(filteredNews);
     setLoading(false);
     setIsCloseIcon(false);
   };
 
-  const searchDelete = ( )=> {
+  const searchDelete = () => {
+    fetchNews();
     setSearch('');
     setIsCloseIcon(true);
-    setNews2(news2);
+    // setNews2(news2);
   };
 
   return (
@@ -90,7 +121,7 @@ const NewsList = () => {
       </FormNews>
       {loading && LoaderSpinner()}
       <UlNews>
-        {isCloseIcon
+        {/* {isCloseIcon
           ? news2
               .map(({ _id, link, title, text, date }) => {
                 return (
@@ -103,20 +134,20 @@ const NewsList = () => {
                   />
                 );
               })
-              .sort((a, b) => new Date(b.date) - new Date(a.date))
-          : news
-              .map(({ _id, link, title, text, date }) => {
-                return (
-                  <NewsItem
-                    key={_id}
-                    url={link}
-                    title={title}
-                    description={text}
-                    date={date}
-                  />
-                );
-              })
-              .sort((a, b) => new Date(b.date) - new Date(a.date))}
+              .sort((a, b) => new Date(b.date) - new Date(a.date)) */}
+        {news
+          .map(({ _id, link, title, text, date }) => {
+            return (
+              <NewsItem
+                key={_id}
+                url={link}
+                title={title}
+                description={text}
+                date={date}
+              />
+            );
+          })
+          .sort((a, b) => new Date(b.date) - new Date(a.date))}
       </UlNews>
       <ToastContainer />
     </>
@@ -124,4 +155,3 @@ const NewsList = () => {
 };
 
 export default NewsList;
-

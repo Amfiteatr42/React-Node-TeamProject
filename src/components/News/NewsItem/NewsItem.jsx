@@ -29,7 +29,6 @@ const NewsItem = ({ url, title, description, date }) => {
 export default NewsItem;
 
 NewsItem.propTypes = {
-  _id: PropTypes.string.isRequired,
   url: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,

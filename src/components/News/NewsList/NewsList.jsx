@@ -17,7 +17,7 @@ import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 const NewsList = () => {
   const [news, setNews] = useState([]);
   const [news2, setNews2] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [isCloseIcon, setIsCloseIcon] = useState(true);
 
@@ -63,8 +63,7 @@ const NewsList = () => {
     setIsCloseIcon(false);
   };
 
-  const searchDelete = e => {
-    e.preventDefault();
+  const searchDelete = ( )=> {
     setSearch('');
     setIsCloseIcon(true);
     setNews2(news2);
@@ -125,3 +124,4 @@ const NewsList = () => {
 };
 
 export default NewsList;
+

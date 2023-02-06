@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import {
   DateNews,
@@ -26,3 +27,10 @@ const NewsItem = ({ url, title, description, date }) => {
 };
 
 export default NewsItem;
+
+NewsItem.propTypes = {
+  url: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.string]),
+};

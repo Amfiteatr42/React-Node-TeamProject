@@ -13,16 +13,20 @@ import { format } from 'date-fns';
 import getPetAge from './getPetAge';
 
 const NOTICE_ITEM_KEYS = [
-  {
-    label: 'Name pet:',
-    key: 'petname',
-  },
+  // {
+  //   label: 'Name pet:',
+  //   key: 'petname',
+  // },
   {
     label: 'Breed:',
     key: 'breed',
   },
   {
-    label: 'Date of birth',
+    label: 'Place:',
+    key: 'location',
+  },
+  {
+    label: 'Age',
     key: 'age',
   },
   {

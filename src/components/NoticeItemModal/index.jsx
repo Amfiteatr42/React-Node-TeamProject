@@ -1,13 +1,20 @@
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  // useSelector,
+  useDispatch,
+} from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
 // import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
 // import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-import { noticesOperations } from 'redux/notices';
-import { getAuthUser } from 'redux/auth/selectors';
+import {
+  noticesOperations,
+  // noticesSelectors
+} from 'redux/notices';
+// import { getAuthUser } from 'redux/auth/selectors';
 // import { format } from 'date-fns';
+import { useLocation } from 'react-router-dom';
 
 const PET_MODAL_KEYS = [
   {
@@ -61,8 +68,19 @@ export default function ModalNotice({
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
 
-  const user = useSelector(getAuthUser);
-  console.log(user);
+  // const user = useSelector(getAuthUser);
+  // console.log(user);
+  // const userPetData = useSelector(noticesSelectors.getUserNotices);
+  // const userPetId = userPetData.map(id => id._id);
+  // console.log(userPetId);
+  // const noticesData = useSelector(noticesSelectors.getNoticesCategories);
+  // const noticesPetId = noticesData.map(id => id._id);
+  // console.log(noticesPetId);
+
+  const { pathname } = useLocation();
+  const pathnameArr = pathname.split('/');
+
+  // const owner =
   // const owner = String(user._id) === petData.data.userId;
 
   // const ownerPhone = petData.owner.phone.replace(/\D/g, '');
@@ -138,17 +156,17 @@ export default function ModalNotice({
           >
             Contact
           </button>
-          {/* {owner && ( */}
-          <button
-            type="button"
-            className={s.deleteBtn}
-            onClick={() => {
-              dispatch(noticesOperations.deleteUserNotices(petData._id));
-            }}
-          >
-            delete
-          </button>
-          {/* )} */}
+          {pathnameArr[2] === 'own' && (
+            <button
+              type="button"
+              className={s.deleteBtn}
+              onClick={() => {
+                dispatch(noticesOperations.deleteUserNotices(petData._id));
+              }}
+            >
+              delete
+            </button>
+          )}
         </div>
       </div>
       {/* {contactModalShow && (

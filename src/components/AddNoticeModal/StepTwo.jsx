@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { noticesOperations } from 'redux/notices';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthToken, getAuthUser } from 'redux/auth/selectors';
+import { getAuthToken } from 'redux/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Plus } from '../../images/svg/big-plus.svg';
 
@@ -38,7 +38,6 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(getAuthToken);
-  const user = useSelector(getAuthUser);
 
   const handleAddAvatar = (e, setFieldValue) => {
     const [file] = e.target.files;
@@ -66,8 +65,9 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
           if (direction === 'forward') {
             try {
               await dispatch(
-                noticesOperations.createNotices({ values, token, user })
-              ).unwrap();
+                noticesOperations.createNotices({ values, token })
+              );
+              // .unwrap();
               navigate('/notices/own');
               onClose();
             } catch (error) {}

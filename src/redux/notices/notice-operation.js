@@ -41,7 +41,7 @@ export const getUserNotices = createAsyncThunk(
 );
 export const createNotices = createAsyncThunk(
   'notices/createNotices',
-  async ({ values, token, petImg, user }, thunkAPI) => {
+  async ({ values, token, petImg }, thunkAPI) => {
     try {
       const bodyFormData = new FormData();
       bodyFormData.append('petImg', petImg);
@@ -56,8 +56,7 @@ export const createNotices = createAsyncThunk(
       const { data } = await axios.post(
         `/notice/add`,
         { ...values, bodyFormData },
-        header,
-        user
+        header
       );
       toast.success('New notice added!');
       return data;

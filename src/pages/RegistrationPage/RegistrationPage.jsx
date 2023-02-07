@@ -16,7 +16,7 @@ const RegistrationPage = () => {
 
   const nav = useNavigate();
 
-  const hendelPassword = (password, cPassword,email) => {
+  const hendelPassword = (password, cPassword, email) => {
     const good = { width: '100%', backgroundColor: '#24cca7' };
     const normally = { width: '45%', backgroundColor: 'orange' };
     const badly = { width: '25%', backgroundColor: 'red' };
@@ -33,8 +33,8 @@ const RegistrationPage = () => {
     if (password.length >= 12 && password.length <= 32) {
       setChek(good);
     }
-    setUserPassword({ password, cPassword,email });
-    if (!hendelPasswordOn(password, cPassword,email)) {
+    setUserPassword({ password, cPassword, email });
+    if (!hendelPasswordOn(password, cPassword, email)) {
       setNextStyle({ backgroundColor: 'red' });
       return;
     }
@@ -47,23 +47,25 @@ const RegistrationPage = () => {
     );
   };
 
-  const hendelPasswordOn = (password, cPassword,email) => {
-    const str = /^([a-zA-Z0-9]{1}[\w\-.]{0,}[a-zA-Z0-9]{1})+@([\w-]+.)+[\w]{2,4}$/
-    if(!str.test(email)){
-      return
+  const hendelPasswordOn = (password, cPassword, email) => {
+    const str =
+      /^([a-zA-Z0-9]{1}[\w\-.]{0,}[a-zA-Z0-9]{1})+@([\w-]+.)+[\w]{2,4}$/;
+
+    if (!str.test(email)) {
+      return;
     }
     if (password === undefined) {
       return;
     }
-    if (password === cPassword) {
+    if (password === cPassword && password.length > 7) {
       return true;
     }
   };
 
   const hendeLNext = e => {
     const open = e.target.value;
-    const { password, cPassword ,email} = userPassword;
-    if (hendelPasswordOn(password, cPassword,email)) {
+    const { password, cPassword, email } = userPassword;
+    if (hendelPasswordOn(password, cPassword, email)) {
       open === 'true' ? setNext(false) : setNext(true);
     }
   };

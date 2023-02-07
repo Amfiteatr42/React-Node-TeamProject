@@ -1,9 +1,9 @@
-import HomePage from 'pages/HomePage/HomePage';
-import LoginPage from 'pages/LoginPage/LoginPage';
-import NewsPage from 'pages/NewsPage/NewsPage';
-import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
-import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
-import UserPage from 'pages/UserPage/UserPage';
+// import HomePage from 'pages/HomePage/HomePage';
+// import LoginPage from 'pages/LoginPage/LoginPage';
+// import NewsPage from 'pages/NewsPage/NewsPage';
+// import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
+// import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
+// import UserPage from 'pages/UserPage/UserPage';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -16,6 +16,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from 'redux/auth/operations';
 import { getAuthisRefreshingUser } from 'redux/auth/selectors';
 const NoticesPage = lazy(() => import('../pages/NoticesPage/NoticesPage'));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const NewsPage = lazy(() => import('../pages/NewsPage/NewsPage'));
+const OurFriendsPage = lazy(() =>
+  import('../pages/OurFriendsPage/OurFriendsPage')
+);
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
+const UserPage = lazy(() => import('../pages/UserPage/UserPage'));
 
 export function App() {
   const isRefreshingUser = useSelector(getAuthisRefreshingUser);

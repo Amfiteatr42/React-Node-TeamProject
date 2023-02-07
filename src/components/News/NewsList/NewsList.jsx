@@ -10,13 +10,12 @@ import {
 } from './NewsList.styled';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { RxCrossCircled } from 'react-icons/rx';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { LoaderSpinner } from '../../LoaderSpinner/LoaderSpinner';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
-  // const [news2, setNews2] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [isCloseIcon, setIsCloseIcon] = useState(true);
@@ -35,17 +34,6 @@ const NewsList = () => {
   }
 
   useEffect(() => {
-    //const data = axios.get('https://api-petly.onrender.com/api/news');
-    //setLoading(true);
-    // data
-    //   .then(({ data }) => {
-    //     setNews(data.data);
-    // setNews2(data.data);
-    // })
-    // .catch(error => console.log(error.message))
-    // .finally(() => {
-    //   setLoading(false);
-    // });
     fetchNews();
   }, []);
 
@@ -67,17 +55,6 @@ const NewsList = () => {
       return;
     }
 
-    // const filteredNews = news.filter(item => {
-    //   return (
-    //     item.text.toLowerCase().includes(normalizedFilter) ||
-    //     item.title.toLowerCase().includes(normalizedFilter)
-    //   );
-    // });
-    // if (filteredNews.length === 0) {
-    //   toast.error('Not Found');
-    //   return;
-    // }
-
     axios(`https://api-petly.onrender.com/api/news/search/${normalizedQuery}`)
       .then(({ data: { data } }) => {
         if (data.length === 0) {
@@ -88,7 +65,6 @@ const NewsList = () => {
       })
       .catch(err => toast.error(err.message));
 
-    // setNews(filteredNews);
     setLoading(false);
     setIsCloseIcon(false);
   };
@@ -97,7 +73,6 @@ const NewsList = () => {
     fetchNews();
     setSearch('');
     setIsCloseIcon(true);
-    // setNews2(news2);
   };
 
   return (
@@ -119,37 +94,25 @@ const NewsList = () => {
           </ButtonDelete>
         )}
       </FormNews>
-      {loading && LoaderSpinner()}
-      <UlNews>
-        {/* {isCloseIcon
-          ? news2
-              .map(({ _id, link, title, text, date }) => {
-                return (
-                  <NewsItem
-                    key={_id}
-                    url={link}
-                    title={title}
-                    description={text}
-                    date={date}
-                  />
-                );
-              })
-              .sort((a, b) => new Date(b.date) - new Date(a.date)) */}
-        {news
-          .map(({ _id, link, title, text, date }) => {
-            return (
-              <NewsItem
-                key={_id}
-                url={link}
-                title={title}
-                description={text}
-                date={date}
-              />
-            );
-          })
-          .sort((a, b) => new Date(b.date) - new Date(a.date))}
-      </UlNews>
-      <ToastContainer />
+      {loading ? (
+        LoaderSpinner()
+      ) : (
+        <UlNews>
+          {news
+            .map(({ _id, link, title, text, date }) => {
+              return (
+                <NewsItem
+                  key={_id}
+                  url={link}
+                  title={title}
+                  description={text}
+                  date={date}
+                />
+              );
+            })
+            .sort((a, b) => new Date(b.date) - new Date(a.date))}
+        </UlNews>
+      )}
     </>
   );
 };

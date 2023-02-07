@@ -33,7 +33,7 @@ export const PetsList = () => {
 
   return (
     <>
-      <Box>
+      <Box pets={pets.length>2}>
         {pets.length > 0 &&
           pets.map(
             ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (

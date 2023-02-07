@@ -28,7 +28,12 @@ export const Li = styled.li`
     margin-bottom: 0;
   }
 `;
-export const Box = styled.ul``;
+export const Box = styled.ul`
+ ${({ pets }) => pets && `
+ display: block;
+    overflow-y: auto;
+    max-height: 540px;`}
+`;
 export const List = styled.ul``;
 export const Img = styled.img`
   width: 240px;

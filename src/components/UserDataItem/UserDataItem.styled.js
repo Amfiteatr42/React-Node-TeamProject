@@ -91,3 +91,8 @@ export const SvgUpdate = styled(MdDone)`
   height: 20px;
   fill: var(--active);
 `
+export const ErrorText = styled.p`
+    color: red;
+    font-size: 12px;
+    text-align: center;
+`

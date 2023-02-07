@@ -12,7 +12,7 @@ export const getNoticesCategories = createAsyncThunk(
       if (query) {
         data = await axios.get(`/notice/search/${query}`);
       } else {
-        data = await axios.get(`/notice/?categoryId=${category}`);
+        data = await axios.get(`/notice?categoryId=${category}`);
       }
       return data.data.data;
     } catch (error) {

@@ -1,9 +1,3 @@
-// import HomePage from 'pages/HomePage/HomePage';
-// import LoginPage from 'pages/LoginPage/LoginPage';
-// import NewsPage from 'pages/NewsPage/NewsPage';
-// import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
-// import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
-// import UserPage from 'pages/UserPage/UserPage';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -26,6 +20,7 @@ const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
 const UserPage = lazy(() => import('../pages/UserPage/UserPage'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 export function App() {
   const isRefreshingUser = useSelector(getAuthisRefreshingUser);
@@ -62,6 +57,7 @@ export function App() {
               path="user"
               element={<PrivateRoute element={<UserPage />} />}
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
         <ToastContainer

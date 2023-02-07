@@ -69,7 +69,7 @@ export const HeroContainer = styled.div`
   }
 
   @media screen and (min-width: 1279px) {
-    height: 92vh;
+    height: 768px;
     max-width: 1280px;
     padding-top: 92px;
     background-image: url(${girlDesk}), url(${wavesBigDesk}),

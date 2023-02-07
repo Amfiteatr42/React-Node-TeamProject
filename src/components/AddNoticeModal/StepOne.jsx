@@ -1,8 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from './index.module.css';
 import * as yup from 'yup';
+import { parse } from 'date-fns';
+import { format } from 'date-fns';
 
-const today = new Date();
+const today = format(new Date(), 'dd.MM.yyyy');
 
 const validationSchema = yup.object({
   title: yup
@@ -26,12 +28,10 @@ const validationSchema = yup.object({
     .required('Field is required!'),
   dateofbirth: yup
     .date()
-    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
-      if (originalValue) {
-        return originalValue.length === 10;
-      }
-    })
-    .typeError('Please enter a valid date')
+    .transform((value, originalValue) =>
+      parse(originalValue, 'dd.MM.yyyy', new Date())
+    )
+    .typeError('Please enter a valid date DD.MM.YYYY')
     .required()
     .max(today),
 });

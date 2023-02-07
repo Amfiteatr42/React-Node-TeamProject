@@ -9,14 +9,9 @@ import s from './modalItem.module.css';
 import { toast } from 'react-toastify';
 import modalImage from '../../images/no-image-found.png';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-import { format } from 'date-fns';
 import getPetAge from './getPetAge';
 
 const NOTICE_ITEM_KEYS = [
-  // {
-  //   label: 'Name pet:',
-  //   key: 'petname',
-  // },
   {
     label: 'Breed:',
     key: 'breed',
@@ -39,15 +34,13 @@ const NOTICE_ITEM_KEYS = [
 export default function NoticeItem({ petData }) {
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
   const favoriteArr = useSelector(getUserFavorite);
-  let inFavorites = false;
+  let inFavorites = '';
   // eslint-disable-next-line
   for (const el of favoriteArr) {
     inFavorites = favoriteArr.some(el => el === petData._id);
   }
 
-  const petAge = petData.dateofbirth
-    ? getPetAge(format(new Date(petData.dateofbirth), 'dd.MM.yyyy'))
-    : `missing info`;
+  const petAge = getPetAge(petData.dateofbirth);
 
   const dispatch = useDispatch();
 

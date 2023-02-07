@@ -1,19 +1,11 @@
-import {
-  // useSelector,
-  useDispatch,
-} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
-// import style from './modalNotice.module.css';
+import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
-// import ContactsModal from './contactsModal';
+import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-import {
-  noticesOperations,
-  // noticesSelectors
-} from 'redux/notices';
-// import { getAuthUser } from 'redux/auth/selectors';
-// import { format } from 'date-fns';
+import { noticesOperations } from 'redux/notices';
 import { useLocation } from 'react-router-dom';
 
 const PET_MODAL_KEYS = [
@@ -38,7 +30,7 @@ const PET_MODAL_KEYS = [
     key: 'sex',
   },
   {
-    key: 'user',
+    key: 'owner',
     values: [
       {
         label: 'Owner:',
@@ -68,28 +60,10 @@ export default function ModalNotice({
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
 
-  // const user = useSelector(getAuthUser);
-  // console.log(user);
-  // const userPetData = useSelector(noticesSelectors.getUserNotices);
-  // const userPetId = userPetData.map(id => id._id);
-  // console.log(userPetId);
-  // const noticesData = useSelector(noticesSelectors.getNoticesCategories);
-  // const noticesPetId = noticesData.map(id => id._id);
-  // console.log(noticesPetId);
-
   const { pathname } = useLocation();
   const pathnameArr = pathname.split('/');
 
-  // const owner =
-  // const owner = String(user._id) === petData.data.userId;
-
-  // const ownerPhone = petData.owner.phone.replace(/\D/g, '');
   const dispatch = useDispatch();
-
-  // const owner = user._id;
-  // console.log(owner);
-
-  // const petAge = format(new Date(petData.dateofbirth), 'dd.MM.yyyy');
 
   const handleModalToggle = () => {
     setContactModalShow(!contactModalShow);
@@ -169,30 +143,24 @@ export default function ModalNotice({
           )}
         </div>
       </div>
-      {/* {contactModalShow && (
+      {contactModalShow && (
         <ContactsModal onClose={handleModalToggle}>
           <div className={style.modalButtons}>
             <a
-              href={
-                ''
-                // `tel:+${ownerPhone}`
-              }
+              href={`tel:+${petData.owner.phone}`}
               className={s.modalContactBtn}
             >
               to call
             </a>
             <a
-              href={
-                ''
-                // `mailto:${petData.owner.email}`
-              }
+              href={`mailto:${petData.owner.email}`}
               className={s.modalContactBtn}
             >
               send email
             </a>
           </div>
         </ContactsModal>
-      )} */}
+      )}
     </>
   );
 }

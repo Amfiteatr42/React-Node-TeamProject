@@ -24,7 +24,7 @@ export default function NoticesSearch() {
     if (pathnameArr[2] === 'for-free') {
       dispatch(noticesOperations.getNoticesCategories({ query }));
     }
-    setQuery('');
+    setQuery();
   };
 
   return (

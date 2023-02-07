@@ -6,6 +6,7 @@ const noticesSlice = createSlice({
   initialState: {
     notices: [],
     userNotices: [],
+    allNotices: [],
   },
   extraReducers: {
     [noticesOperations.getNoticesCategories.pending](state) {
@@ -36,6 +37,7 @@ const noticesSlice = createSlice({
     [noticesOperations.createNotices.fulfilled](state, action) {
       state.userNotices = action.payload.data;
       state.notice.push(action.payload.data);
+      state.allNotices.push(action.payload.data);
       state.isLoading = false;
     },
     [noticesOperations.createNotices.rejected](state) {
@@ -48,6 +50,7 @@ const noticesSlice = createSlice({
     [noticesOperations.deleteUserNotices.fulfilled](state, action) {
       state.userNotices = action.payload.data;
       state.isLoading = false;
+      state.allNotices.filter(el => el !== action.payload.data);
     },
     [noticesOperations.deleteUserNotices.rejected](state) {
       state.isLoading = false;

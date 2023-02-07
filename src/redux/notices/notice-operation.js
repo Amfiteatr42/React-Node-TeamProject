@@ -6,7 +6,7 @@ axios.defaults.baseURL = 'https://api-petly.onrender.com/';
 
 export const getNoticesCategories = createAsyncThunk(
   '/notice/?categoryId',
-  async ({ category, query = '' }) => {
+  async ({ category, query }) => {
     try {
       let data;
       if (query) {

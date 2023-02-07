@@ -22,7 +22,7 @@ const RegisterForm = ({
   hendeLNext,
   next,
   chek,
-  nextStyle,
+  validationError,
 }) => {
   return (
     <AuthBox>
@@ -38,8 +38,8 @@ const RegisterForm = ({
             cPassword: '',
           }}
           validate={e => {
-            if (e.password) {
-              hendelPassword(e.password, e.cPassword,e.email);
+            if (e.password || e.email) {
+              hendelPassword(e.password, e.cPassword, e.email);
             }
             return;
           }}
@@ -87,7 +87,6 @@ const RegisterForm = ({
                     </Label>
                     <Label>
                       <Input
-                        style={{ marginBottom: '0px' }}
                         name="phone"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -156,9 +155,10 @@ const RegisterForm = ({
       </div>
       <AuthButton
         name="button"
-        style={nextStyle}
         value={next}
         onClick={hendeLNext}
+        next={next}
+        validationError={validationError}
       >
         {next ? 'Back' : 'Next'}
       </AuthButton>

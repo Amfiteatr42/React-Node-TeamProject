@@ -18,7 +18,6 @@ import {
   DataBox,
 } from './Friends.styled';
 
-
 const Friends = ({ friends }) => {
   const {
     name,
@@ -110,11 +109,11 @@ const Friends = ({ friends }) => {
           <Img src={logo}></Img>
         </WrapperIMG>
         <WrapperContent>
-          <DataBox>
+          <DataBox newWorkDays={newWorkDays}>
             <P> Time:</P>
             <Data>
               {newWorkDays ? timeOne(newWorkDays) : '-----------------------'}
-              <WrapperTimeHover>
+              <WrapperTimeHover className="time-wrapper">
                 <ListFullTime>
                   {fullTime(newWorkDays ? newWorkDays : week)}
                 </ListFullTime>

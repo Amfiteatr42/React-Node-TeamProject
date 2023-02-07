@@ -11,14 +11,12 @@ export const link = {
 };
 
 export const margin = {
-  marginTop: "15px"
-
+  marginTop: '15px',
 };
 
 export const AuthTitleh2 = styled.h2`
-  font-family: 'Manrope';
-  font-style: normal;
   margin-bottom: 40px;
+
   @media screen and (min-width: 320px) {
     font-weight: 700;
     font-size: 24px;
@@ -34,28 +32,22 @@ export const AuthTitleh2 = styled.h2`
 `;
 
 export const AuthTitleh3 = styled.h3`
-  font-family: 'Manrope';
-  font-style: normal;
   color: rgba(17, 17, 17, 0.6);
-  @media screen and (min-width: 320px) {
-    margin-top: 40px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-  }
+  margin-top: 40px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+
   @media screen and (min-width: 767px) {
-    margin-top: 40px;
     padding-bottom: 60px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
   }
 `;
 
 export const Error = styled.h3`
-  font-family: 'Manrope';
-  font-style: normal;
+  margin-top: -16px;
   color: red;
+
   @media screen and (min-width: 320px) {
     font-weight: 400;
     font-size: 12px;
@@ -69,8 +61,6 @@ export const Error = styled.h3`
 `;
 export const Box = styled.div`
   margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
 `;
 export const AuthBox = styled.div`
   position: relative;
@@ -109,15 +99,23 @@ export const BoxAuth = styled.div`
   display: flex;
 `;
 export const AuthButton = styled.button`
-
-  border: none;
-  color: #ffffff;
-  font-family: 'Manrope';
-  font-style: normal;
-  background: #f59256;
+  border: ${({ next }) =>
+    next ? '2px solid var(--active)' : '2px solid transparent'};
+  color: ${({ next }) => (next ? 'var(--active)' : 'var(--white)')};
+  background-color: ${({ next }) => (next ? 'var(--white)' : 'var(--active)')};
   border-radius: 40px;
   justify-content: center;
   align-items: center;
+  transition: var(--transition);
+
+  &:hover {
+    color: ${({ next }) => (next ? 'var(--white)' : 'var(--active)')};
+    background-color: ${({ next }) =>
+      next ? 'var(--active)' : 'var(--white)'};
+    border: 2px solid var(--active);
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 320px) {
     width: 280px;
     height: 44px;
@@ -149,6 +147,7 @@ export const Input = styled.input`
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
+  margin-bottom: 16px;
   @media screen and (min-width: 320px) {
     width: 280px;
     height: 40px;
@@ -160,46 +159,44 @@ export const Input = styled.input`
 `;
 
 export const AutContainer = styled.div`
-width: 100%;
-margin: 0 auto;
-background-repeat: no-repeat;
-background-position: bottom;
-background-size: 620px;
-@media screen and (min-width: 320px) {
-  background-image:  url(${wavesMob2x});
-  max-width:  620px;
-  margin-top:-150px;
-  height:470px;
-  position:relative;
-  background-size: 280px;
-}
+  width: 100%;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 620px;
+  @media screen and (min-width: 320px) {
+    background-image: url(${wavesMob2x});
+    max-width: 620px;
+    margin-top: -150px;
+    height: 470px;
+    position: relative;
+    background-size: 280px;
+  }
 
-@media screen and (min-width: 767px) {
-  max-width: 768px;
-  margin-top:-250px;
-  height:538px;
-  background-image:  url(${AuthTablet2x});
-  background-size: 768px;
-}
-@media screen and (min-width: 1279px) {
-  margin-top:-250px;
-  height:538px;
-  max-width: 1280px;
-  background-image: url(${AuthDesk1x});
-   background-size:  auto;
-}
+  @media screen and (min-width: 767px) {
+    max-width: 768px;
+    margin-top: -250px;
+    height: 538px;
+    background-image: url(${AuthTablet2x});
+    background-size: 768px;
+  }
+  @media screen and (min-width: 1279px) {
+    margin-top: -250px;
+    height: 538px;
+    max-width: 1280px;
+    background-image: url(${AuthDesk1x});
+    background-size: auto;
+  }
 `;
 
 export const BoxChek = styled.div`
-height: 5px;
-margin-top: 5px;
-border-radius: 40px;
-`
+  height: 5px;
+  margin-top: 5px;
+  border-radius: 40px;
+`;
 export const Chek = styled.div`
-
-width: 0px;
-transform: 3ms;
-height: 5px;
-transform-style: 5ms;
-`
-
+  width: 0px;
+  transform: 3ms;
+  height: 5px;
+  transform-style: 5ms;
+`;

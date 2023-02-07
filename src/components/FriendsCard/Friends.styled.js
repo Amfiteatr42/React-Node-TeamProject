@@ -9,7 +9,7 @@ export const Container = styled.div`
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     width: 335px;
     margin-top: 0px;
     display: flex;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     height: 100%;
     justify-content: flex-start;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     width: 392px;
   }
 `;
@@ -31,12 +31,18 @@ export const Title = styled.a`
   text-decoration-line: underline;
   color: #f59256;
   overflow-wrap: break-word;
-  @media screen and (min-width: 768px) {
+  transition: color var(--transition);
+
+  &:hover {
+    color: var(--black-3);
+  }
+
+  @media screen and (min-width: 767px) {
     padding-top: 0px;
     margin-top: 16px;
     font-size: 16px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;
@@ -45,17 +51,17 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 
 export const WrapperIMG = styled.div`
   flex-grow: 0;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 
@@ -67,10 +73,10 @@ export const WrapperContent = styled.div`
   color: #111111;
   width: 150px;
   overflow-wrap: break-word;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;
@@ -82,14 +88,14 @@ export const Img = styled.img`
   margin-top: 40px;
   margin-left: 4px;
   margin-right: 12px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     margin-top: 54px;
     margin-left: 4px;
     margin-right: 14px;
     width: 120px;
     height: 85px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     width: 158px;
     height: 112px;
     margin-top: 59px;
@@ -108,9 +114,9 @@ export const SpanWeek = styled.span`
   display: inline-block;
   width: 19px;
   margin-right: 12px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 export const ListFullTime = styled.ul`
@@ -124,9 +130,9 @@ export const ListFullTime = styled.ul`
   line-height: 1.38;
   text-align: center;
   color: #000000;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 
@@ -135,30 +141,30 @@ export const ItemTime = styled.li`
   &:nth-child(1) {
     margin-top: 0px;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 
 export const Data = styled.div`
   position: relative;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;
 
 export const DataBox = styled.div`
-  div {
-  }
+  transition: color var(--transition);
   &:hover {
     color: #f59256;
-    div {
-      display: block;
+    cursor: pointer;
+    .time-wrapper {
+      display: ${props => (!!props.newWorkDays ? 'block' : 'none')};
     }
   }
 `;
@@ -168,14 +174,14 @@ export const P = styled.p`
   &:nth-child(1) {
     margin-top: 12px;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
     margin-top: 8px;
     &:nth-child(1) {
       margin-top: 16px;
     }
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
     margin-top: 12px;
     &:nth-child(1) {
@@ -198,10 +204,10 @@ export const Address = styled.a`
   :hover {
     color: #ff6101;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;
@@ -209,9 +215,9 @@ export const Address = styled.a`
 export const IconAddress = styled(GoLocation)`
   fill: #f59256;
   margin-left: 10px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
   }
 `;
 
@@ -226,10 +232,10 @@ export const Email = styled.a`
   :hover {
     color: #ff6101;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;
@@ -246,10 +252,10 @@ export const Phone = styled.a`
   :hover {
     color: #ff6101;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     font-size: 14px;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     font-size: 16px;
   }
 `;

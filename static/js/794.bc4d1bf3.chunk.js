@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpetly_react_node_teamproject=self.webpackChunkpetly_react_node_teamproject||[]).push([[794],{1794:function(e,t,n){n.r(t);var o=n(3329),r=n(1087).NavLink;t.default=function(){return(0,o.jsxs)("div",{style:{marginTop:"100px",textAlign:"center"},children:[(0,o.jsx)("h1",{style:{marginBottom:"40px"},children:"Such page does not exist :("}),(0,o.jsx)(r,{to:"/",style:{color:"var(--accent)",fontSize:"20px",textDecoration:"underline"},children:"Go to homepage"})]})}}}]);
+//# sourceMappingURL=794.bc4d1bf3.chunk.js.map

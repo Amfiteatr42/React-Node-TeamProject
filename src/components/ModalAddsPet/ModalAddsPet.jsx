@@ -21,9 +21,9 @@ import { addPets } from 'redux/petsData/petsOperation';
 import { AddPhoto } from './AddPhoto';
 
 import * as yup from 'yup';
-import { parse } from 'date-fns';
+import { parse, format } from 'date-fns';
 
-const today = new Date();
+const today = format(new Date(), 'dd.MM.yyyy');
 
 const validationSchema = yup.object({
   comment: yup.string().min(8).max(120).required('Field is required!'),
@@ -44,21 +44,18 @@ const validationSchema = yup.object({
   dateOfBirth: yup
     .date()
     .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
-      if (originalValue) {
+      if (originalValue){
         return originalValue.length === 10;
       }
     })
     .transform(function (value, originalValue) {
-      if (this.isType(value)) {
-        return value;
-      }
+     
       const result = parse(originalValue, 'dd.MM.yyyy', new Date());
       return result;
     })
-    .typeError('Please enter a valid date')
-    .required()
-    .min('1950-11-13', 'Date is too early')
-    .max(today),
+    .typeError('Please enter a valid date dd.MM.yyyy')
+    .required().max(today)
+  ,
 });
 
 export const ModalAddsPet = ({ onCloseModal }) => {
@@ -112,6 +109,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.dateOfBirth}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                 data-pattern="**.**.****"
               ></Input>
               {touched.dateOfBirth && errors.dateOfBirth &&  (
                 <TextError>{errors.dateOfBirth}</TextError>

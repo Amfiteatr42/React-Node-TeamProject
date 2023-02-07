@@ -39,7 +39,7 @@ const RegisterForm = ({
           }}
           validate={e => {
             if (e.password) {
-              hendelPassword(e.password, e.cPassword);
+              hendelPassword(e.password, e.cPassword,e.email);
             }
             return;
           }}

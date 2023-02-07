@@ -10,15 +10,15 @@ import {
   SvgUpdate,ErrorText
 } from './UserDataItem.styled';
 import { useOutClick } from '../../hooks/outClick';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { useEffect } from 'react';
-
 const emailValid =
   /^([a-zA-Z0-9]{1}[\w\-.]{0,}[a-zA-Z0-9]{1})+@([\w-]+.)+[\w]{2,4}$/;
 const cityValid =
   /^(?:[A-Za-z]{2,}(?:(\.\s|'s\s|\s?-\s?|\s)?(?=[A-Za-z]+))){1,2}(?:[A-Za-z]+)?$/;
 const phoneValid = /^\+380[0-9]{9}$/;
 const nameValid = /^[a-zA-Z, а-яА-Я]*$/g;
+//const birthdayValid =/^\d{1, 2}\-\d{1, 2}\-\d{4}$/
 export const User = ({ label, name, user, active, setActive }) => {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
@@ -35,7 +35,6 @@ export const User = ({ label, name, user, active, setActive }) => {
   };
 
   useOutClick(wrapperRef, handelClick);
-
  
 
   const handleChange = e => {
@@ -43,6 +42,7 @@ export const User = ({ label, name, user, active, setActive }) => {
 
     if (name === 'userName') {
       if (!value.match(nameValid)) {
+        console.log(!value.match(nameValid))
         setDisable(true);
         setError('Name is not valid');
       } else if (error) {
@@ -88,11 +88,18 @@ export const User = ({ label, name, user, active, setActive }) => {
       setValue(value);
     }
   };
+   const handleDataFormat = date => {
+     if (!date?.length) return;
+    
+     const d = date?.split('-');
+  return d.join(''); 
+  };
 
   const udateInput = name => () => {
     const valid =
-      name === 'birthday' ? format(new Date(value), 'yyyy.MM.dd') : value;
+      name === 'birthday' ?   handleDataFormat(value) : value;
     setActive('');
+    console.log(valid)
     dispatch(updateUserInfo({ [name]: valid }));
   };
 
@@ -102,16 +109,15 @@ export const User = ({ label, name, user, active, setActive }) => {
     <>
       <Item ref={active === name ? wrapperRef : null}>
         <Label>{label}</Label>
-        <Input
+     <Input
           active={active === name}
           disabled={active !== name}
-          type={name === 'birthday' ? 'date' : 'text'}
+          type={ 'text'}
           name={name}
-          value={ value}
+          value={value}
           onChange={handleChange}
           minlength="2"
-          required
-        />
+          required/>
         {active === name ? (
           <Button disabled={disable} onClick={udateInput(name)}>
             {' '}

@@ -23,7 +23,7 @@ import { AddPhoto } from './AddPhoto';
 import * as yup from 'yup';
 import { parse, format } from 'date-fns';
 
-const today = format(new Date(), 'dd.MM.yyyy');
+const today = format(new Date(), 'MM.dd.yyyy');
 
 const validationSchema = yup.object({
   comment: yup.string().min(8).max(120).required('Field is required!'),
@@ -43,17 +43,17 @@ const validationSchema = yup.object({
     .required('Field is required!'),
   dateOfBirth: yup
     .date()
-    .test('len', 'Must be exactly DD.MM.YYYY', (value, { originalValue }) => {
+    .test('len', 'Must be exactly MM.DD.YYYY', (value, { originalValue }) => {
       if (originalValue){
         return originalValue.length === 10;
       }
     })
     .transform(function (value, originalValue) {
      
-      const result = parse(originalValue, 'dd.MM.yyyy', new Date());
+      const result = parse(originalValue, 'MM.dd.yyyy', new Date());
       return result;
     })
-    .typeError('Please enter a valid date dd.MM.yyyy')
+    .typeError('Please enter a valid date MM.dd.yyyy')
     .required().max(today)
   ,
 });

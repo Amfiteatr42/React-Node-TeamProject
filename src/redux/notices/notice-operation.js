@@ -2,17 +2,17 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://api-petly.onrender.com/';
+axios.defaults.baseURL = 'https://api-petly.onrender.com/api';
 
 export const getNoticesCategories = createAsyncThunk(
-  '/notice/?categoryId',
+  '/notice?categoryId',
   async ({ category, query }) => {
     try {
       let data;
       if (query) {
         data = await axios.get(`/notice/search/${query}`);
       } else {
-        data = await axios.get(`/notice/?categoryId=${category}`);
+        data = await axios.get(`/notice?categoryId=${category}`);
       }
       return data.data.data;
     } catch (error) {

@@ -57,7 +57,7 @@ const RegistrationPage = () => {
     if (password === undefined) {
       return;
     }
-    if (password === cPassword && password.length > 7) {
+    if (password === cPassword && password.length >= 7) {
       return true;
     }
   };

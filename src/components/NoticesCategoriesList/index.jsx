@@ -16,7 +16,7 @@ export default function NoticesCategoriesList() {
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
-  const allNotices = useSelector(noticesSelectors.getAllNotices);
+  // const allNotices = useSelector(noticesSelectors.getAllNotices);
   // console.log(allNotices);
 
   const inFavorite = useSelector(getUserFavorite);

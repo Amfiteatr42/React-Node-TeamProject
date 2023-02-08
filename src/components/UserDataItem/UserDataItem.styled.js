@@ -45,11 +45,13 @@ export const Input = styled.input`
   width: 159px;
   padding: 4px 0 4px 18px;
   margin-right: 14px;
- border:none;
+  border: none;
   color: var(--black);
   background-color: var(--white);
   outline: none;
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
   background-color: var(--bg-basic);
   border: var(--border-3);
   border-radius: var(--radius);
@@ -72,6 +74,13 @@ export const Button = styled.button`
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    background-color: var(--active);
+    transition: var(--transition);
+  }
   @media screen and (min-width: 767px) {
     width: 32px;
     height: 32px;
@@ -81,18 +90,28 @@ export const Svg = styled(MdEdit)`
   width: 20px;
   height: 20px;
   fill: var(--active);
-   ${({ active }) => active && `
+
+  &:hover {
+    fill: white;
+    transition: var(--transition);
+  }
+  ${({ active }) =>
+    active &&
+    `
 fill: var(--gary-2)
 `}
-  
 `;
 export const SvgUpdate = styled(MdDone)`
- width: 20px;
+  width: 20px;
   height: 20px;
   fill: var(--active);
-`
+  &:hover {
+    fill: white;
+    transition: var(--transition);
+  }
+`;
 export const ErrorText = styled.p`
-    color: red;
-    font-size: 12px;
-    text-align: center;
-`
+  color: red;
+  font-size: 12px;
+  text-align: center;
+`;

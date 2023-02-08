@@ -11,6 +11,14 @@ export const Button = styled.div`
   justify-content: flex-end;
   color: var(--gray-2);
   background-color: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    transform: scale(1.1);
+    transition: var(--transition);
+    color: var(--active);
+  }
 
   @media screen and (min-width: 767px) {
     justify-content: flex-start;

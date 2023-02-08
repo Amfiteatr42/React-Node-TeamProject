@@ -60,8 +60,12 @@ export const NavItem = styled.li`
 export const MenuItem = styled.span`
   &:hover {
     color: #f59256;
-    text-decoration-line: underline;
     font-weight: 500;
-    transition: 300ms;
+    transition: var(--transition);
+  }
+  &:active,
+  &:focus {
+    text-decoration-line: underline;
+    transition: var(--transition);
   }
 `;

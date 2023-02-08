@@ -120,6 +120,7 @@ export const Text = styled.span`
     line-height: 19px;
   }
 `;
+
 export const RegText = styled.span`
   font-family: 'Manrope';
   font-weight: 500;

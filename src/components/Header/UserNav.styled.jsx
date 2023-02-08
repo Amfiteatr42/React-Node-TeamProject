@@ -11,11 +11,19 @@ export const UserNavContainer = styled.div`
   border-radius: 22px;
   border: none;
   background-color: #f59256;
+  color: #FFFFFF;
 
   @media (max-width: 767px) {
     margin-left: 0;
     height: 35px;
     border-radius: 17px;
+  }
+
+  &:hover{
+    background-color: #FDF7F2;
+    border: 2px solid #f59256;
+    color: #f59256;
+    transition: 300ms
   }
 `;
 
@@ -26,7 +34,7 @@ export const UserNavBox = styled.div`
   }
   @media (max-width: 767px) {
     margin-left: 0;
-  }
+  } 
 `;
 
 export const SvgIcon = styled.svg`
@@ -41,10 +49,13 @@ export const Text = styled.span`
   line-height: 22px;
   letter-spacing: 0.04em;
 
-  color: #ffffff;
+  color: inherit;
   margin: 0, auto;
+
   @media (max-width: 767px) {
     font-size: 14px;
     line-height: 19px;
   }
+
+ 
 `;

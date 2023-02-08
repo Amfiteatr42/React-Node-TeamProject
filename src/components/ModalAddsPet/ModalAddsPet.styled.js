@@ -63,11 +63,10 @@ export const ContainerButtons = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-     margin-top: 40px;
+  margin-top: 40px;
   @media screen and (min-width: 767px) {
     flex-direction: row;
     justify-content: center;
- 
   }
 `;
 export const Button = styled.button`
@@ -75,15 +74,15 @@ export const Button = styled.button`
   width: 240px;
   font-family: 'Manrope';
   font-style: normal;
-   font-size: 20px;
-    line-height: 1.38;
+  font-size: 20px;
+  line-height: 1.38;
   letter-spacing: 0.04em;
   color: var(--black);
   background-color: var(--white);
   border: var(--border);
   border-radius: var(--radius);
   cursor: pointer;
-  padding:7px 0 7px 0;
+  padding: 7px 0 7px 0;
   @media screen and (max-width: 767px) {
     &:not(:last-child) {
       margin-top: 12px;
@@ -92,10 +91,16 @@ export const Button = styled.button`
 
   @media screen and (min-width: 767px) {
     width: 180px;
-  
+
     &:first-child {
       margin-right: 20px;
     }
+  }
+  &:hover {
+    transition: var(--transition);
+    color: var(--white);
+    background-color: var(--active);
+    border: var(--border);
   }
 `;
 
@@ -113,9 +118,15 @@ export const AccentBtn = styled.button`
   border: var(--border);
   border-radius: var(--radius);
   cursor: pointer;
-  padding:7px 0 7px 0;
+  padding: 7px 0 7px 0;
   @media screen and (min-width: 767px) {
     width: 180px;
+  }
+  &:hover {
+    border: var(--border);
+    transition: var(--transition);
+    background-color: var(--bg-basic);
+    color: var(--black);
   }
 `;
 export const Text = styled.p`
@@ -144,7 +155,7 @@ export const LabelImg = styled.label`
   margin-right: auto;
   cursor: pointer;
   margin-bottom: 20px;
-   position: relative;
+  position: relative;
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
     width: 182px;
@@ -206,21 +217,20 @@ export const Icon = styled(AiOutlinePlus)`
   height: 71px;
   fill: var(--gray-2);
   @media screen and (min-width: 768px) {
-      top: 50px;
-    left: 60px;}
+    top: 50px;
+    left: 60px;
+  }
 `;
 
-
-
 export const InputFile = styled.input`
-display:none;
-`
+  display: none;
+`;
 export const TextError = styled.p`
- font-family: 'Manrope';
+  font-family: 'Manrope';
   font-style: normal;
   font-size: 14px;
   line-height: 1.38;
   text-align: center;
   color: var(--accent);
   margin-top: 5px;
-`
+`;

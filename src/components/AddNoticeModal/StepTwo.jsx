@@ -67,7 +67,6 @@ const StepTwo = ({ formData, setFormData, prevStep, onClose }) => {
               await dispatch(
                 noticesOperations.createNotices({ values, token })
               );
-              // .unwrap();
               navigate('/notices/own');
               onClose();
             } catch (error) {}

@@ -6,7 +6,7 @@
   top: 500px;
   z-index: 10;
   cursor: pointer;
-  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition)
 }
 @media screen and (min-width: 768px) {
   .btnWrapper {
@@ -34,7 +34,7 @@
   border-radius: 50%;
   background-color: var(--active);
   color: #fff;
-  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition)
 }
 .btn:hover,
 .btn:focus {
@@ -52,7 +52,7 @@
   height: 21.33px;
   margin-bottom: 5px;
   transform: scale(1);
-  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition)
 }
 
 .btn:hover .icon,

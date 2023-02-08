@@ -10,7 +10,7 @@ export const getNoticesCategories = createAsyncThunk(
     try {
       let data;
       if (query) {
-        data = await axios.get(`/notice/search/${query}`);
+        data = await axios.get(`notice/search/${query}`);
       } else {
         data = await axios.get(`/notice?categoryId=${category}`);
       }

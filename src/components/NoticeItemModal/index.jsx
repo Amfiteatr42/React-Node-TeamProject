@@ -68,7 +68,17 @@ export default function ModalNotice({
   const handleModalToggle = () => {
     setContactModalShow(!contactModalShow);
   };
-
+  const categoryItem = () => {
+    if (petData.categoryId === 1) {
+      return 'Sell';
+    }
+    if (petData.categoryId === 2) {
+      return 'Lost/Found';
+    }
+    if (petData.categoryId === 3) {
+      return 'In good hands';
+    }
+  };
   return (
     <>
       <div className={s.container}>
@@ -80,7 +90,7 @@ export default function ModalNotice({
               height="100%"
               style={{ objectFit: 'cover' }}
             />
-            <div className={s.categoryLabel}>{petData.category}</div>
+            <div className={s.categoryLabel}>{categoryItem()}</div>
             <button
               type="button"
               className={s.heartBtn}
@@ -94,7 +104,7 @@ export default function ModalNotice({
             </button>
           </div>
           <div className={s.info}>
-            <h3 className={s.title}>{petData.titleOfAd}</h3>
+            <h3 className={s.title}>{petData.title}</h3>
             <ul>
               {PET_MODAL_KEYS.map(({ label, key, category, values }) => {
                 if (category && category !== petData.category) return null;

@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
 import style from './modalNotice.module.css';
@@ -6,7 +6,8 @@ import modalImage from '../../images/no-image-found.png';
 import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
 import { noticesOperations } from 'redux/notices';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import { getAuthUser } from 'redux/auth/selectors';
 
 const PET_MODAL_KEYS = [
   {
@@ -36,20 +37,20 @@ const PET_MODAL_KEYS = [
         label: 'Owner:',
         field: 'userName',
       },
-      {
-        label: 'Phone:',
-        field: 'phone',
-      },
-      {
-        label: 'Email:',
-        field: 'email',
-      },
+      // {
+      //   label: 'Phone:',
+      //   field: 'phone',
+      // },
+      // {
+      //   label: 'Email:',
+      //   field: 'email',
+      // },
     ],
   },
   {
     label: 'Price:',
     key: 'price',
-    category: 'sell',
+    categoryId: 1,
   },
 ];
 
@@ -60,9 +61,10 @@ export default function ModalNotice({
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
 
-  const { pathname } = useLocation();
-  const pathnameArr = pathname.split('/');
-
+  // const { pathname } = useLocation();
+  // const pathnameArr = pathname.split('/');
+  const userData = useSelector(getAuthUser);
+  // console.log(userData);
   const dispatch = useDispatch();
 
   const handleModalToggle = () => {
@@ -91,9 +93,9 @@ export default function ModalNotice({
               style={{ objectFit: 'cover' }}
             />
             <div className={s.categoryLabel}>{categoryItem()}</div>
-            <button
+            {/* <button
               type="button"
-              className={s.heartBtn}
+              className={s.deleteBtn}
               onClick={handleFavoriteToggle}
             >
               {favorite ? (
@@ -101,13 +103,14 @@ export default function ModalNotice({
               ) : (
                 <HeartBtnM className={s.heartItemBtn} />
               )}
-            </button>
+            </button> */}
           </div>
           <div className={s.info}>
             <h3 className={s.title}>{petData.title}</h3>
             <ul>
-              {PET_MODAL_KEYS.map(({ label, key, category, values }) => {
-                if (category && category !== petData.category) return null;
+              {PET_MODAL_KEYS.map(({ label, key, categoryId, values }) => {
+                if (categoryId && categoryId !== petData.categoryId)
+                  return null;
                 if (values) {
                   return values.map(({ field, label }) => (
                     <li key={label} className={s.infoList}>
@@ -126,6 +129,19 @@ export default function ModalNotice({
                 );
               })}
             </ul>
+            <div className={s.infoList}>
+              <span className={s.label}>Phone:</span>
+              <a href={`tel:+${petData.owner.phone}`} className={s.leballink}>
+                {petData.owner.phone}
+              </a>
+            </div>
+
+            <div className={s.infoList}>
+              <span className={s.label}>Email:</span>
+              <a href={`mailto:${petData.owner.email}`} className={s.leballink}>
+                {petData.owner.email}
+              </a>
+            </div>
           </div>
         </div>
         <div className={s.commentsWrapper}>
@@ -140,7 +156,19 @@ export default function ModalNotice({
           >
             Contact
           </button>
-          {pathnameArr[2] === 'own' && (
+          <button
+            type="button"
+            className={s.deleteBtn}
+            onClick={handleFavoriteToggle}
+          >
+            Add to{' '}
+            {favorite ? (
+              <HeartBtnM className={s.heartItemBtnActive} />
+            ) : (
+              <HeartBtnM className={s.heartItemBtn} />
+            )}
+          </button>
+          {/* {userData.email === petData.owner.email && (
             <button
               type="button"
               className={s.deleteBtn}
@@ -150,7 +178,7 @@ export default function ModalNotice({
             >
               delete
             </button>
-          )}
+          )} */}
         </div>
       </div>
       {contactModalShow && (

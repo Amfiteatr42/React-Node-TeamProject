@@ -40,7 +40,7 @@ export default function NoticesSearch() {
             value={query}
             onInput={e => setQuery(e.target.value)}
           />
-          {!query ? (
+          {query ? (
             <button
               className={s.SearchBtn}
               type="submit"

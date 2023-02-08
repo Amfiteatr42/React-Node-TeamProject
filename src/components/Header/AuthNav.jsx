@@ -25,6 +25,7 @@ export default function AuthNav({
             backgroundColor: isActive ? '#F59256' : '#F59256',
             border: isActive ? '2px' : '',
             borderColor: isActive ? '#F59256' : '#000000',
+            
           })}
           onClick={() => {
             setIsMobMenuOpen(false);

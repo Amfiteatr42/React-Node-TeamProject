@@ -1,13 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import s from './modalNotice.module.css';
 import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
 import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
-import { noticesOperations } from 'redux/notices';
-// import { useLocation } from 'react-router-dom';
-import { getAuthUser } from 'redux/auth/selectors';
 
 const PET_MODAL_KEYS = [
   {
@@ -37,14 +33,6 @@ const PET_MODAL_KEYS = [
         label: 'Owner:',
         field: 'userName',
       },
-      // {
-      //   label: 'Phone:',
-      //   field: 'phone',
-      // },
-      // {
-      //   label: 'Email:',
-      //   field: 'email',
-      // },
     ],
   },
   {
@@ -60,12 +48,6 @@ export default function ModalNotice({
   favorite,
 }) {
   const [contactModalShow, setContactModalShow] = useState(false);
-
-  // const { pathname } = useLocation();
-  // const pathnameArr = pathname.split('/');
-  const userData = useSelector(getAuthUser);
-  // console.log(userData);
-  const dispatch = useDispatch();
 
   const handleModalToggle = () => {
     setContactModalShow(!contactModalShow);
@@ -93,17 +75,6 @@ export default function ModalNotice({
               style={{ objectFit: 'cover' }}
             />
             <div className={s.categoryLabel}>{categoryItem()}</div>
-            {/* <button
-              type="button"
-              className={s.deleteBtn}
-              onClick={handleFavoriteToggle}
-            >
-              {favorite ? (
-                <HeartBtnM className={s.heartItemBtnActive} />
-              ) : (
-                <HeartBtnM className={s.heartItemBtn} />
-              )}
-            </button> */}
           </div>
           <div className={s.info}>
             <h3 className={s.title}>{petData.title}</h3>
@@ -168,17 +139,6 @@ export default function ModalNotice({
               <HeartBtnM className={s.heartItemBtn} />
             )}
           </button>
-          {/* {userData.email === petData.owner.email && (
-            <button
-              type="button"
-              className={s.deleteBtn}
-              onClick={() => {
-                dispatch(noticesOperations.deleteUserNotices(petData._id));
-              }}
-            >
-              delete
-            </button>
-          )} */}
         </div>
       </div>
       {contactModalShow && (

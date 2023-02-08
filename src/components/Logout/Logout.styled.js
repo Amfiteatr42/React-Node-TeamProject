@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { IoLogOutOutline } from 'react-icons/io5';
-export const Button = styled.div`
+export const Button = styled.button`
   font-family: 'Manrope';
   font-weight: 500;
   font-size: 16px;
@@ -11,7 +11,9 @@ export const Button = styled.div`
   justify-content: flex-end;
   color: var(--gray-2);
   background-color: transparent;
-
+  border: none;
+  outline: none;
+  cursor: pointer;
   @media screen and (min-width: 767px) {
     justify-content: flex-start;
     margin-right: auto;
@@ -23,4 +25,8 @@ export const Svg = styled(IoLogOutOutline)`
   height: 22px;
   color: var(--active);
   margin-right: 8px;
+  &:hover {
+    transition: var(--transition);
+    color: var(--accent);
+  }
 `;

@@ -56,6 +56,9 @@ const noticesSlice = createSlice({
     [noticesOperations.deleteUserNotices.rejected](state) {
       state.isLoading = false;
     },
+    [noticesOperations.fetchAllNotices.fulfilled](state, { payload }) {
+      state.allNotices = payload;
+    },
   },
 });
 

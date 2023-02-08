@@ -21,6 +21,17 @@ export const getNoticesCategories = createAsyncThunk(
   }
 );
 
+export const fetchAllNotices = createAsyncThunk('notice/fetchAll', async () => {
+  try {
+    console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+    const data = await axios.get(`/notice`);
+    console.log('data.data.data', data.data.data);
+    return data.data.data;
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+});
+
 export const getUserNotices = createAsyncThunk(
   'notices/getUserNotices',
   async ({ token }) => {

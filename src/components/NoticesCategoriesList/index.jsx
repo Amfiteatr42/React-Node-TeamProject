@@ -6,6 +6,7 @@ import { noticesOperations, noticesSelectors } from '../../redux/notices';
 import s from './index.module.css';
 import { RotatingLines } from 'react-loader-spinner';
 import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
+import { fetchAllNotices } from 'redux/notices/notice-operation';
 // import { getFavorite } from 'redux/auth/operations';
 
 export default function NoticesCategoriesList() {
@@ -16,11 +17,13 @@ export default function NoticesCategoriesList() {
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
-  // const allNotices = useSelector(noticesSelectors.getAllNotices);
+  const allNotices = useSelector(noticesSelectors.getAllNotices);
   // console.log(allNotices);
 
   const inFavorite = useSelector(getUserFavorite);
-  const favorite = inFavorite.map(i => category.find(elem => elem._id === i));
+  const favorite = inFavorite.map(favId =>
+    allNotices.find(notice => notice._id === favId)
+  );
 
   const token = useSelector(getAuthToken);
   const pathnameArr = pathname.split('/');
@@ -33,6 +36,10 @@ export default function NoticesCategoriesList() {
   useEffect(() => {
     setNoticesData(category);
   }, [category]);
+
+  useEffect(() => {
+    dispatch(fetchAllNotices());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   if (pathnameArr[2] === 'favorite') {

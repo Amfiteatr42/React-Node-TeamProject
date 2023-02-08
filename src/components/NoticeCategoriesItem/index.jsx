@@ -36,9 +36,9 @@ export default function NoticeItem({ petData }) {
   const favoriteArr = useSelector(getUserFavorite);
   let inFavorites = '';
   // eslint-disable-next-line
-  for (const el of favoriteArr) {
-    inFavorites = favoriteArr.some(el => el === petData._id);
-  }
+
+  inFavorites = favoriteArr.some(el => el === petData._id);
+  // console.log('inFavorites', inFavorites);
 
   const petAge = getPetAge(petData.dateofbirth);
 

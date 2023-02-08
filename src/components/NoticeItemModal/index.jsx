@@ -37,14 +37,14 @@ const PET_MODAL_KEYS = [
         label: 'Owner:',
         field: 'userName',
       },
-      {
-        label: 'Phone:',
-        field: 'phone',
-      },
-      {
-        label: 'Email:',
-        field: 'email',
-      },
+      // {
+      //   label: 'Phone:',
+      //   field: 'phone',
+      // },
+      // {
+      //   label: 'Email:',
+      //   field: 'email',
+      // },
     ],
   },
   {
@@ -129,6 +129,19 @@ export default function ModalNotice({
                 );
               })}
             </ul>
+            <div className={s.infoList}>
+              <span className={s.label}>Phone:</span>
+              <a href={`tel:+${petData.owner.phone}`} className={s.leballink}>
+                {petData.owner.phone}
+              </a>
+            </div>
+
+            <div className={s.infoList}>
+              <span className={s.label}>Email:</span>
+              <a href={`mailto:${petData.owner.email}`} className={s.leballink}>
+                {petData.owner.email}
+              </a>
+            </div>
           </div>
         </div>
         <div className={s.commentsWrapper}>

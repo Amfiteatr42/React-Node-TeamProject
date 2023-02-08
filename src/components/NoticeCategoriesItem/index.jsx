@@ -1,7 +1,11 @@
 import EllipsisText from 'react-ellipsis-text';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAuthIsLoggedIn, getUserFavorite } from 'redux/auth/selectors';
+import {
+  getAuthIsLoggedIn,
+  getUserFavorite,
+  getAuthUser,
+} from 'redux/auth/selectors';
 import { addToFavorite, deleteFromFavorite } from 'redux/auth/operations';
 import ModalNotice from '../NoticeItemModal';
 import ModalPage from 'pages/ModalPage';
@@ -10,6 +14,7 @@ import { toast } from 'react-toastify';
 import modalImage from '../../images/no-image-found.png';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
 import getPetAge from './getPetAge';
+import { noticesOperations } from 'redux/notices';
 
 const NOTICE_ITEM_KEYS = [
   {
@@ -34,6 +39,8 @@ const NOTICE_ITEM_KEYS = [
 export default function NoticeItem({ petData, removeFromFavArray }) {
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
   const favoriteArr = useSelector(getUserFavorite);
+  const userData = useSelector(getAuthUser);
+
   let inFavorites = '';
   // eslint-disable-next-line
 
@@ -131,6 +138,17 @@ export default function NoticeItem({ petData, removeFromFavArray }) {
           </ul>
         </div>
         <div className={s.learnMoreBtnCont}>
+          {userData.email === petData.owner.email && (
+            <button
+              type="button"
+              className={s.deleteBtn}
+              onClick={() => {
+                dispatch(noticesOperations.deleteUserNotices(petData._id));
+              }}
+            >
+              Delete
+            </button>
+          )}
           <button
             type="button"
             className={s.learnMoreBtn}

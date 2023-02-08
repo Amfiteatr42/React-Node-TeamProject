@@ -6,13 +6,16 @@
   top: 500px;
   z-index: 10;
   cursor: pointer;
-  transition: var(--transition)
+  transition: var(--transition);
 }
 @media screen and (min-width: 768px) {
   .btnWrapper {
     position: relative;
     right: 0;
     top: 0;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -25,6 +28,8 @@
   color: var(--active);
 }
 .btn {
+  border: none;
+  outline: none;
   width: 80px;
   height: 80px;
   display: flex;
@@ -34,7 +39,8 @@
   border-radius: 50%;
   background-color: var(--active);
   color: #fff;
-  transition: var(--transition)
+  transition: var(--transition);
+  cursor: pointer;
 }
 .btn:hover,
 .btn:focus {
@@ -52,7 +58,7 @@
   height: 21.33px;
   margin-bottom: 5px;
   transform: scale(1);
-  transition: var(--transition)
+  transition: var(--transition);
 }
 
 .btn:hover .icon,

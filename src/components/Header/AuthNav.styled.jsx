@@ -17,12 +17,29 @@ export const AuthList = styled.ul`
 
 export const LoginItem = styled.li`
   margin-right: 20px;
+
   @media (max-width: 1279px) {
     margin-right: 12px;
   }
+
+  &:hover {
+    .log-btn {
+      border: 2px solid var(--active);
+      background-color: var(--white);
+      color: var(--active);
+    }
+  }
 `;
 
-export const RegItem = styled.li``;
+export const RegItem = styled.li`
+  &:hover {
+    .reg-btn {
+      border: 2px solid transparent;
+      background-color: #f59256;
+      color: var(--white);
+    }
+  }
+`;
 
 export const LoginContainer = styled.div`
   display: flex;
@@ -34,9 +51,10 @@ export const LoginContainer = styled.div`
   width: 111px;
   height: 47px;
   border-radius: 24px;
-  border: none;
+  border: 2px solid #f59256;
   background-color: #f59256;
   color: #ffffff;
+  transition: var(--transition);
 
   @media (max-width: 767px) {
     width: 95px;
@@ -79,6 +97,7 @@ export const RegContainer = styled.div`
 
   background-color: inherit;
   border: 2px solid #f59256;
+  transition: var(--transition);
 
   @media (max-width: 767px) {
     width: 144px;

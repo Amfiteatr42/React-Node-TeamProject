@@ -18,7 +18,6 @@ export default function NoticesCategoriesList() {
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
   const allNotices = useSelector(noticesSelectors.getAllNotices);
-  // console.log(allNotices);
 
   const inFavorite = useSelector(getUserFavorite);
   const favorite = inFavorite.map(favId =>
@@ -73,6 +72,11 @@ export default function NoticesCategoriesList() {
     }
   };
 
+  function removeFromFavArray(favId) {
+    const updatedFav = favorite.filter(item => item._id !== favId);
+    setNoticesData(updatedFav);
+  }
+
   return (
     <>
       {isLoading ? (
@@ -96,10 +100,14 @@ export default function NoticesCategoriesList() {
         <div className={s.NoticeList}>
           {noticesData.length ? (
             noticesData.map(item => (
-              <NoticeItem key={item._id} petData={item} />
+              <NoticeItem
+                key={item._id}
+                petData={item}
+                removeFromFavArray={removeFromFavArray}
+              />
             ))
           ) : (
-            <p className={s.NoticeText}>Not notices</p>
+            <p className={s.NoticeText}>No notices</p>
           )}
         </div>
       )}

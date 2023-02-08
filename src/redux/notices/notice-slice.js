@@ -35,9 +35,8 @@ const noticesSlice = createSlice({
       state.isLoading = true;
     },
     [noticesOperations.createNotices.fulfilled](state, action) {
-      state.userNotices = action.payload.data;
-      // state.allNotices = action.payload.data;
-      state.notice.push(action.payload.data);
+      state.userNotices.push(action.payload.data);
+      state.notices.push(action.payload.data);
       state.allNotices.push(action.payload.data);
       state.isLoading = false;
     },

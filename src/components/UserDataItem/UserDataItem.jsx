@@ -2,22 +2,21 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getAuthUser } from 'redux/auth/selectors';
 import { User } from './User';
-import { Package
-} from './UserDataItem.styled';
+import { Package } from './UserDataItem.styled';
 
 export const UserDataItem = () => {
   const [active, setActive] = useState('');
   const user = useSelector(getAuthUser);
-   const handleDataFormat = date => {
+  const handleDataFormat = date => {
     if (!date?.length) return;
     const d = date?.split('-');
-   
+
     return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.'));
   };
 
   return (
     <Package>
-     <User
+      <User
         active={active}
         setActive={setActive}
         name={'userName'}

@@ -11,15 +11,15 @@ import {
   ErrorText,
 } from './UserDataItem.styled';
 import { useOutClick } from '../../hooks/outClick';
-//import { format, parse } from 'date-fns';
 import { useEffect } from 'react';
+
 const emailValid =
   /^([a-zA-Z0-9]{1}[\w\-.]{0,}[a-zA-Z0-9]{1})+@([\w-]+.)+[\w]{2,4}$/;
 const cityValid =
   /^(?:[A-Za-z]{2,}(?:(\.\s|'s\s|\s?-\s?|\s)?(?=[A-Za-z]+))){1,2}(?:[A-Za-z]+)?$/;
 const phoneValid = /^\+380[0-9]{9}$/;
 const nameValid = /^[a-zA-Z, а-яА-Я]*$/g;
-//const birthdayValid =/^\d{1, 2}\-\d{1, 2}\-\d{4}$/
+
 export const User = ({ label, name, user, active, setActive }) => {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
@@ -98,7 +98,6 @@ export const User = ({ label, name, user, active, setActive }) => {
   const udateInput = name => () => {
     const valid = name === 'birthday' ? handleDataFormat(value) : value;
     setActive('');
-    console.log(valid);
     dispatch(updateUserInfo({ [name]: valid }));
   };
 
@@ -124,7 +123,7 @@ export const User = ({ label, name, user, active, setActive }) => {
             <SvgUpdate />{' '}
           </Button>
         ) : (
-          <Button onClick={activeBtn(name)}>
+          <Button type="button" onClick={activeBtn(name)}>
             {' '}
             <Svg active={active} />
           </Button>

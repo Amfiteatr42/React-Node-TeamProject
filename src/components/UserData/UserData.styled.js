@@ -33,6 +33,7 @@ export const Button = styled.label`
   padding: 0;
   background-color: transparent;
   border: none;
+  cursor: pointer;
   @media screen and (min-width: 767px) and (max-width: 1279px) {
     position: absolute;
     top: 500px;
@@ -55,6 +56,10 @@ export const Svg = styled(HiCamera)`
   width: 20px;
   height: 20px;
   fill: var(--active);
+  &:hover {
+    transition: var(--transition);
+    color: var(--accent);
+  }
 `;
 export const Img = styled.img`
   width: 233px;

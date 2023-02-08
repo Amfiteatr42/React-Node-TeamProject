@@ -9,7 +9,7 @@ export const UserNavContainer = styled.div`
   width: 164px;
   height: 44px;
   border-radius: 22px;
-  border: none;
+  border: 2px solid #f59256;
   background-color: #f59256;
   color: #FFFFFF;
 

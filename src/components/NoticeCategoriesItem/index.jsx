@@ -24,14 +24,14 @@ const NOTICE_ITEM_KEYS = [
     label: 'Age',
     key: 'age',
   },
-  {
-    label: 'Price:',
-    key: 'price',
-    category: 'sell',
-  },
+  // {
+  //   label: 'Price:',
+  //   key: 'price',
+  //   category: 'sell',
+  // },
 ];
 
-export default function NoticeItem({ petData }) {
+export default function NoticeItem({ petData, removeFromFavArray }) {
   const isLoggedIn = useSelector(getAuthIsLoggedIn);
   const favoriteArr = useSelector(getUserFavorite);
   let inFavorites = '';
@@ -60,6 +60,7 @@ export default function NoticeItem({ petData }) {
     if (favorite === true) {
       try {
         dispatch(deleteFromFavorite(petData._id));
+        removeFromFavArray(petData._id);
         return toast.success('remove from favorite');
       } catch (e) {
         toast.error(e.message);
@@ -117,6 +118,16 @@ export default function NoticeItem({ petData }) {
                 </li>
               );
             })}
+            {petData.categoryId === 1 && (
+              <li className={s.infoList}>
+                <span className={s.Price}>Price:</span>
+                <EllipsisText
+                  text={petData.price}
+                  length={20}
+                  className={s.lebalText}
+                ></EllipsisText>
+              </li>
+            )}
           </ul>
         </div>
         <div className={s.learnMoreBtnCont}>

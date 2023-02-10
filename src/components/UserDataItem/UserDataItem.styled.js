@@ -75,11 +75,12 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: var(--transition);
+
   &:hover {
-    border: var(--border);
+    background-color: var(--active);
     transition: var(--transition);
   }
-
   @media screen and (min-width: 767px) {
     width: 32px;
     height: 32px;
@@ -89,6 +90,11 @@ export const Svg = styled(MdEdit)`
   width: 20px;
   height: 20px;
   fill: var(--active);
+
+  &:hover {
+    fill: white;
+    transition: var(--transition);
+  }
   ${({ active }) =>
     active &&
     `
@@ -99,6 +105,10 @@ export const SvgUpdate = styled(MdDone)`
   width: 20px;
   height: 20px;
   fill: var(--active);
+  &:hover {
+    fill: white;
+    transition: var(--transition);
+  }
 `;
 export const ErrorText = styled.p`
   color: red;

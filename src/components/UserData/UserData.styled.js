@@ -17,6 +17,12 @@ export const Text = styled.p`
   letter-spacing: 0.04em;
   margin-left: 5px;
   color: var(--black);
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--active);
+    transition: var(--transition);
+  }
 `;
 export const Icon = styled(AiOutlinePlus)`
   position: absolute;

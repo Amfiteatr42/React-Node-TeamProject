@@ -10,9 +10,9 @@ export const getNoticesCategories = createAsyncThunk(
     try {
       let data;
       if (query) {
-        data = await axios.get(`notice/search/${query}`);
+        data = await axios(`notice/search/${query}`);
       } else {
-        data = await axios.get(`/notice?categoryId=${category}`);
+        data = await axios(`/notice?categoryId=${category}`);
       }
       return data.data.data;
     } catch (error) {
@@ -23,7 +23,7 @@ export const getNoticesCategories = createAsyncThunk(
 
 export const fetchAllNotices = createAsyncThunk('notice/fetchAll', async () => {
   try {
-    const data = await axios.get(`/notice`);
+    const data = await axios(`/notice`);
     return data.data.data;
   } catch (error) {
     toast.error(error.response.data.message);
@@ -41,7 +41,7 @@ export const getUserNotices = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.get(`/notice/my`, header);
+      const { data } = await axios(`/notice/my`, header);
       return data;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -81,7 +81,7 @@ export const deleteUserNotices = createAsyncThunk(
   async petId => {
     try {
       await axios.delete(`notice/remove/${petId}`);
-      const { data } = await axios.get('/notice/my');
+      const { data } = await axios('/notice/my');
       toast.success('Notice deleted!');
       return data;
     } catch (error) {
@@ -89,5 +89,3 @@ export const deleteUserNotices = createAsyncThunk(
     }
   }
 );
-
-///////////////////////////////////////////////////

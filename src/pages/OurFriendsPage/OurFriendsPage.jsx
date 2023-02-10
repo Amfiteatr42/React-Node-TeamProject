@@ -9,8 +9,6 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api-petly.onrender.com/api/';
-
 const OurFriendsPage = () => {
   const [friends, setFriends] = useState([]);
 

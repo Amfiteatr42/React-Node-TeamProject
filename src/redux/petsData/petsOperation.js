@@ -1,13 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const URL = 'https://api-petly.onrender.com/api/';
-
 export const fetchPets = createAsyncThunk(
   'userpets/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${URL}userspets`);
+      const res = await axios('/userspets');
       return res.data.data;
     } catch (error) {
       return rejectWithValue(error.messsage);
@@ -24,7 +22,7 @@ export const addPets = createAsyncThunk(
 
       const res = await axios({
         method: 'post',
-        url: `${URL}userspets/add`,
+        url: `/userspets/add`,
         data: { ...pet, bodyFormData },
         headers: { 'Content-Type': 'multipart/form-data' },
       });
@@ -39,7 +37,7 @@ export const removePets = createAsyncThunk(
   'userspets/remove',
   async (_id, { rejectWithValue }) => {
     try {
-      const res = await axios.delete(`${URL}userspets/remove/${_id}`);
+      const res = await axios.delete(`/userspets/remove/${_id}`);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.messsage);

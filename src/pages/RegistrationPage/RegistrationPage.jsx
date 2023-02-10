@@ -12,7 +12,6 @@ const RegistrationPage = () => {
   const [next, setNext] = useState(false);
   const [chek, setChek] = useState({});
   const [userPassword, setUserPassword] = useState({});
-  // const [nextStyle, setNextStyle] = useState({ backgroundColor: '#f59256' });
   const [validationError, setValidationError] = useState(false);
 
   const nav = useNavigate();
@@ -35,13 +34,6 @@ const RegistrationPage = () => {
       setChek(good);
     }
     setUserPassword({ password, cPassword, email });
-    // if (!hendelPasswordOn(password, cPassword, email)) {
-    //   // setNextStyle({ backgroundColor: 'red' });
-    //   setValidationError(true);
-    //   return;
-    // }
-    // setValidationError(false);
-    // // setNextStyle({ backgroundColor: '#f59256' });
   };
 
   const hendeLSumdit = ({ password, email, userName, city, phone }) => {
@@ -78,7 +70,6 @@ const RegistrationPage = () => {
     <Container>
       <BoxAuth>
         <RegisterForm
-          // nextStyle={nextStyle}
           validationError={validationError}
           userPassword={userPassword}
           chek={chek}

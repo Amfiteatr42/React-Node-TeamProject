@@ -22,7 +22,6 @@ export const addPets = createAsyncThunk(
       const bodyFormData = new FormData();
       bodyFormData.append('petImg', pet.petImg);
 
-      // const res = await axios.post(`${URL}userspets/add`, pet);
       const res = await axios({
         method: 'post',
         url: `${URL}userspets/add`,

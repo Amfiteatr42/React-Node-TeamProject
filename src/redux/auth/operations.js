@@ -54,7 +54,6 @@ export const updateUserInfo = createAsyncThunk(
   async (info, { rejectWithValue }) => {
     try {
       const { data } = await axios.patch(`${BASEURL}update`, info);
-      // token.set(data.longToken);
       return data;
     } catch (error) {
       return rejectWithValue(error.messsage);
@@ -115,7 +114,7 @@ export const getFavorite = createAsyncThunk('/favorite', async () => {
     const { data } = await axios.get(`${BASEURL}favorite`);
     return data;
   } catch (error) {
-    // toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
   }
 });
 export const addToFavorite = createAsyncThunk(

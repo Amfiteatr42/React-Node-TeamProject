@@ -2,7 +2,6 @@ import { remove } from '../../assets/icons/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPets, removePets } from 'redux/petsData/petsOperation';
 import { getPets } from 'redux/petsData/petsSelector';
-//import noImg from '../../images/no-image-found.png'
 import {
   Box,
   Button,
@@ -13,7 +12,8 @@ import {
   Svg,
   Li,
   Content,
- Div, Text
+  Div,
+  Text,
 } from './PetsList.styled';
 import { useEffect } from 'react';
 
@@ -21,10 +21,10 @@ export const PetsList = () => {
   const pets = useSelector(getPets);
   const dispatch = useDispatch();
 
- const handleDataFormat = date => {
+  const handleDataFormat = date => {
     if (!date?.length) return;
     const d = date?.split('-');
-    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.')); 
+    return ([d[0], d[1], d[2]] = [d[2].slice(0, 2), d[1], d[0]].join('.'));
   };
 
   useEffect(() => {
@@ -33,14 +33,12 @@ export const PetsList = () => {
 
   return (
     <>
-      <Box pets={pets.length>2}>
+      <Box pets={pets.length > 2}>
         {pets.length > 0 &&
           pets.map(
             ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (
               <Li key={idx}>
-                <Content>
-                 { imgURL && <Img src={imgURL.url} />}
-                </Content>
+                <Content>{imgURL && <Img src={imgURL.url} />}</Content>
                 <List>
                   <Item>
                     <Span>Name:</Span> {name}
@@ -67,7 +65,12 @@ export const PetsList = () => {
             )
           )}
       </Box>
-      {pets.length === 0 && <><Text>I don`t have pet</Text><Div></Div> </>}
+      {pets.length === 0 && (
+        <>
+          <Text>I don`t have pet</Text>
+          <Div></Div>{' '}
+        </>
+      )}
     </>
   );
 };

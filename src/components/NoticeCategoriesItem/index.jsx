@@ -29,11 +29,6 @@ const NOTICE_ITEM_KEYS = [
     label: 'Age',
     key: 'age',
   },
-  // {
-  //   label: 'Price:',
-  //   key: 'price',
-  //   category: 'sell',
-  // },
 ];
 
 export default function NoticeItem({ petData, removeFromFavArray }) {
@@ -42,10 +37,8 @@ export default function NoticeItem({ petData, removeFromFavArray }) {
   const userData = useSelector(getAuthUser);
 
   let inFavorites = '';
-  // eslint-disable-next-line
 
   inFavorites = favoriteArr.some(el => el === petData._id);
-  // console.log('inFavorites', inFavorites);
 
   const petAge = getPetAge(petData.dateofbirth);
 

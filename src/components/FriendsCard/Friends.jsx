@@ -88,8 +88,6 @@ const Friends = ({ friends }) => {
   };
 
   const timeOne = arr => {
-    // const result = arr?.find(item => item.isOpen);
-
     return true ? (
       <p>
         {arr[0]?.from}- {arr[0]?.to}

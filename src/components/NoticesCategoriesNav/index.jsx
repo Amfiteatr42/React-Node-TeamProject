@@ -22,23 +22,20 @@ export default function NoticesCategoriesNav() {
   );
   const location = useLocation();
 
-  useEffect(
-    () => {
-      const locationArr = location.pathname.split('/');
-      let newBtnList;
-      if (isLoggedIn) {
-        newBtnList = [...buttonText, ...authButtonText].map(item => {
-          return { ...item, active: locationArr[2] === item.id ? true : false };
-        });
-      } else {
-        newBtnList = btnList.map(item => {
-          return { ...item, active: locationArr[2] === item.id ? true : false };
-        });
-      }
-      setBtnList(newBtnList);
-    }, // eslint-disable-next-line
-    [location, isLoggedIn]
-  );
+  useEffect(() => {
+    const locationArr = location.pathname.split('/');
+    let newBtnList;
+    if (isLoggedIn) {
+      newBtnList = [...buttonText, ...authButtonText].map(item => {
+        return { ...item, active: locationArr[2] === item.id ? true : false };
+      });
+    } else {
+      newBtnList = btnList.map(item => {
+        return { ...item, active: locationArr[2] === item.id ? true : false };
+      });
+    }
+    setBtnList(newBtnList);
+  }, [location, isLoggedIn, btnList]);
 
   return (
     <div className={s.wrapper}>

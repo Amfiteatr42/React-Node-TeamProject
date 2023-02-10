@@ -7,13 +7,11 @@ import s from './index.module.css';
 import { RotatingLines } from 'react-loader-spinner';
 import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
 import { fetchAllNotices } from 'redux/notices/notice-operation';
-// import { getFavorite } from 'redux/auth/operations';
 
 export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [noticesData, setNoticesData] = useState([]);
-  // const [Favorite, setFavorite] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
@@ -25,12 +23,30 @@ export default function NoticesCategoriesList() {
   );
 
   const token = useSelector(getAuthToken);
-  const pathnameArr = pathname.split('/');
+  const pathFrom = pathname.split('/')[2];
+
+  const resetNoticesData = async pathFrom => {
+    if (pathFrom === 'sell') {
+      dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
+    }
+    if (pathFrom === 'lost-found') {
+      dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
+    }
+    if (pathFrom === 'for-free') {
+      dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
+    }
+    if (pathFrom === 'favorite') {
+      setNoticesData(favorite);
+    }
+    if (pathFrom === 'own') {
+      dispatch(noticesOperations.getUserNotices({ token }));
+    }
+  };
 
   useEffect(() => {
-    resetNoticesData(pathnameArr);
+    resetNoticesData(pathFrom);
     // eslint-disable-next-line
-  }, [pathname]);
+  }, [pathFrom]);
 
   useEffect(() => {
     setNoticesData(category);
@@ -40,37 +56,11 @@ export default function NoticesCategoriesList() {
     dispatch(fetchAllNotices());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (pathnameArr[2] === 'favorite') {
-  //     setNoticesData(favorite);
-  //   } // eslint-disable-next-line
-  // }, [favorite]);
-
   useEffect(() => {
-    if (pathnameArr[2] === 'own') {
+    if (pathFrom === 'own') {
       setNoticesData(userNotices);
-    } // eslint-disable-next-line
-  }, [userNotices]);
-
-  const resetNoticesData = async pathnameArr => {
-    if (pathnameArr[2] === 'sell') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
     }
-    if (pathnameArr[2] === 'lost-found') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
-    }
-    if (pathnameArr[2] === 'for-free') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
-    }
-    if (pathnameArr[2] === 'favorite') {
-      // dispatch(getFavorite());
-      setNoticesData(favorite);
-    }
-    if (pathnameArr[2] === 'own') {
-      dispatch(noticesOperations.getUserNotices({ token }));
-      // setNoticesData(userNotices);
-    }
-  };
+  }, [userNotices, pathFrom]);
 
   function removeFromFavArray(favId) {
     const updatedFav = favorite.filter(item => item._id !== favId);

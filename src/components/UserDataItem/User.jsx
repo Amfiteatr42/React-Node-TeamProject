@@ -42,7 +42,6 @@ export const User = ({ label, name, user, active, setActive }) => {
 
     if (name === 'userName') {
       if (!value.match(nameValid)) {
-        console.log(!value.match(nameValid));
         setDisable(true);
         setError('Name is not valid');
       } else if (error) {

@@ -4,7 +4,7 @@ import { PetsList } from 'components/PetsList/PetsList';
 import { useState } from 'react';
 import { Container, Button, Text, Box, Icon } from './PetsData.styled';
 export const PetsData = () => {
-   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <Box>
@@ -12,11 +12,15 @@ export const PetsData = () => {
       </Box>
       <Container>
         <Text>Add pet</Text>
-        <Button onClick={()=>setIsModalOpen(true)}>
+        <Button onClick={() => setIsModalOpen(true)}>
           <Icon />
         </Button>
       </Container>
-      {isModalOpen &&  <Modal onCloseModal={() => setIsModalOpen(false)}><ModalAddsPet onCloseModal={() => setIsModalOpen(false)}/> </Modal>}
+      {isModalOpen && (
+        <Modal onCloseModal={() => setIsModalOpen(false)}>
+          <ModalAddsPet onCloseModal={() => setIsModalOpen(false)} />
+        </Modal>
+      )}
     </>
   );
 };

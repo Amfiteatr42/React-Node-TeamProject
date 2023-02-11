@@ -61,5 +61,4 @@ const noticesSlice = createSlice({
   },
 });
 
-// export default noticesSlice.reducer;
 export const noticesReducer = noticesSlice.reducer;

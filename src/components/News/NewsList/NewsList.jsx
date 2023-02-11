@@ -22,7 +22,7 @@ const NewsList = () => {
 
   function fetchNews() {
     setLoading(true);
-    axios('https://api-petly.onrender.com/api/news')
+    axios('/news')
       .then(({ data }) => setNews(data.data))
       .catch(error => {
         toast.error('Some unexpected error happened :(');
@@ -55,7 +55,7 @@ const NewsList = () => {
       return;
     }
 
-    axios(`https://api-petly.onrender.com/api/news/search/${normalizedQuery}`)
+    axios(`/news/search/${normalizedQuery}`)
       .then(({ data: { data } }) => {
         if (data.length === 0) {
           toast.error("There's no news with your keyword");

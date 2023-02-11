@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addPets, fetchPets, removePets } from './petsOperation';
 
-// заглушка Slice
 const handelPending = state => {
   state.isLoading = true;
 };

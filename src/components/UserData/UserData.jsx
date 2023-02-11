@@ -1,16 +1,11 @@
 import { InputFile } from 'components/ModalAddsPet/ModalAddsPet.styled';
 import { UserDataItem } from 'components/UserDataItem/UserDataItem';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  // avatarUsers,
-  updateAvatar,
-  // updateUserInfo,
-} from 'redux/auth/operations';
+import { updateAvatar } from 'redux/auth/operations';
 import { getAuthUser } from 'redux/auth/selectors';
 import { Content, Text, Icon, Button, Div, Svg, Img } from './UserData.styled';
 export const UserData = () => {
-  //  const [photo, setPhoto] = useState('');
-    const userPhoto = useSelector(getAuthUser)
+  const userPhoto = useSelector(getAuthUser);
   const dispatch = useDispatch();
   const handleChange = e => {
     const formData = new FormData();
@@ -18,23 +13,17 @@ export const UserData = () => {
     dispatch(updateAvatar(formData));
   };
 
-  //    const handleChanges = e => {
-  //    const formData = new FormData();
-  //    formData.append('avatar', e.target.files[0]);
-  //    dispatch(avatarUsers(formData));
-  //  };
-  //
-  //
-
   return (
     <>
       {' '}
       <Div>
-        {userPhoto.avatarURL ? <Img src={userPhoto.avatarURL.url} /> :
+        {userPhoto.avatarURL ? (
+          <Img src={userPhoto.avatarURL.url} />
+        ) : (
           <Content>
-
             <Icon />
-          </Content>}
+          </Content>
+        )}
         <Button>
           <InputFile
             onChange={handleChange}

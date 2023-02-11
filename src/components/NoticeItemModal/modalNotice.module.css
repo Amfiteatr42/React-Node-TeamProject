@@ -4,7 +4,6 @@
 @media screen and (min-width: 768px) {
   .container {
     width: 704px;
-    /* padding: 32px 20px; */
   }
   .infoWrapper {
     display: inline-flex;
@@ -146,6 +145,11 @@
   color: var(--white);
   transition: var(--transition);
 }
+.contactBtn:hover{
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--active);
+}
 .deleteBtn,
 .modalContactBtn {
   color: inherit;
@@ -164,9 +168,10 @@
 }
 .deleteBtn:hover,
 .modalContactBtn:hover {
-  color: #ff6101;
-  border: 2px solid #ff6101;
+  color: var(--white);
+  background-color: var(--active);
   transition: var(--transition);
+  cursor: pointer;
 }
 .modalButtons {
   display: flex;
@@ -202,12 +207,18 @@
 .heartBtn:hover {
   background: rgba(253, 247, 242, 1);
   transition: var(--transition);
+  cursor: pointer;
 }
 
 .heartItemBtnActive {
   background: none;
   fill: var(--active);
   border-radius: 50%;
+  transition: var(--transition);
+}
+
+.deleteBtn:hover .heartItemBtnActive {
+  fill: var(--white)
 }
 
 .heartItemBtn {

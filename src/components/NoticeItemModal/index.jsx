@@ -2,8 +2,8 @@ import { useState } from 'react';
 import s from './modalNotice.module.css';
 import style from './modalNotice.module.css';
 import modalImage from '../../images/no-image-found.png';
-import ContactsModal from './contactsModal';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
+import { Modal } from 'components/Modal/Modal';
 
 const PET_MODAL_KEYS = [
   {
@@ -142,7 +142,7 @@ export default function ModalNotice({
         </div>
       </div>
       {contactModalShow && (
-        <ContactsModal onClose={handleModalToggle}>
+        <Modal onCloseModal={handleModalToggle}>
           <div className={style.modalButtons}>
             <a
               href={`tel:+${petData.owner.phone}`}
@@ -157,7 +157,7 @@ export default function ModalNotice({
               send email
             </a>
           </div>
-        </ContactsModal>
+        </Modal>
       )}
     </>
   );

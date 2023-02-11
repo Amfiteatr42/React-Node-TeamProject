@@ -1,14 +1,10 @@
-.container {
-  padding: 60px 20px 40px;
-}
-
 .infoWrapper {
   margin-bottom: 28px;
 }
 @media screen and (min-width: 768px) {
   .container {
     width: 704px;
-    padding: 32px 20px;
+    /* padding: 32px 20px; */
   }
   .infoWrapper {
     display: inline-flex;

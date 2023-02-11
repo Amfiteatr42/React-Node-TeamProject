@@ -8,13 +8,14 @@ import {
 } from 'redux/auth/selectors';
 import { addToFavorite, deleteFromFavorite } from 'redux/auth/operations';
 import ModalNotice from '../NoticeItemModal';
-import ModalPage from 'pages/ModalPage';
+// import ModalPage from 'pages/ModalPage';
 import s from './modalItem.module.css';
 import { toast } from 'react-toastify';
 import modalImage from '../../images/no-image-found.png';
 import { ReactComponent as HeartBtnM } from '../../images/svg/heartBtnM.svg';
 import getPetAge from './getPetAge';
 import { noticesOperations } from 'redux/notices';
+import { Modal } from 'components/Modal/Modal';
 
 const NOTICE_ITEM_KEYS = [
   {
@@ -85,6 +86,7 @@ export default function NoticeItem({ petData, removeFromFavArray }) {
       return 'In good hands';
     }
   };
+
   return (
     <>
       <div className={s.container}>
@@ -163,13 +165,13 @@ export default function NoticeItem({ petData, removeFromFavArray }) {
         </button>
       </div>
       {modalShow && (
-        <ModalPage onClose={handleModalToggle}>
+        <Modal onCloseModal={() => setModalShow(false)} learnMoreModal>
           <ModalNotice
             petData={petData}
             handleFavoriteToggle={handleFavoriteToggle}
             favorite={favorite}
           />
-        </ModalPage>
+        </Modal>
       )}
     </>
   );

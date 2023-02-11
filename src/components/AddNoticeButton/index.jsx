@@ -6,7 +6,7 @@ import { ReactComponent as Plus } from '../../images/svg/plus.svg';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import AddNoticeModal from 'components/AddNoticeModal';
-import ModalPage from 'pages/ModalPage';
+import { Modal } from 'components/Modal/Modal';
 
 export default function AddNoticeButton() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -31,8 +31,8 @@ export default function AddNoticeButton() {
         </button>
       </div>
       {isOpen && (
-        <ModalPage
-          onClose={() => {
+        <Modal
+          onCloseModal={() => {
             setOpen(false);
           }}
         >
@@ -41,7 +41,7 @@ export default function AddNoticeButton() {
               setOpen(false);
             }}
           />
-        </ModalPage>
+        </Modal>
       )}
     </>
   );

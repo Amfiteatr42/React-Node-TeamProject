@@ -18,13 +18,15 @@ export const ModalWindow = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 40px 20px;
+  padding: ${({ learnMoreModal }) =>
+    learnMoreModal ? '60px 20px 40px' : ' 40px 20px'};
   transform: translate(-50%, -50%) scale(1);
   min-width: 280px;
   border-radius: 20px;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: 767px) {
-    padding: 40px 80px;
+    padding: ${({ learnMoreModal }) =>
+      learnMoreModal ? '32px 20px' : ' 40px 80px'};
     border-radius: var(--radius);
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   }
@@ -43,6 +45,7 @@ export const CloseBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   @media screen and (min-width: 767px) {
     width: 44px;
     height: 44px;

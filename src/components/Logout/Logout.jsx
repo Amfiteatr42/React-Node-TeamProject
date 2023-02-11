@@ -12,7 +12,7 @@ export const Logout = () => {
       </Button>
       {isModalOpen && (
         <Modal onCloseModal={() => setIsModalOpen(false)}>
-          <ModalLogout onCloseModal={() => setIsModalOpen(false)}/>{' '}
+          <ModalLogout onCloseModal={() => setIsModalOpen(false)} />
         </Modal>
       )}
     </>

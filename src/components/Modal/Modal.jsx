@@ -16,8 +16,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Backdrop, CloseBtn, ModalWindow, Svg } from './Modal.styled';
 
-
-export function Modal({ children, onCloseModal }) {
+export function Modal({ children, onCloseModal, learnMoreModal }) {
   useEffect(() => {
     function closeOnESC(e) {
       if (e.keyCode === 27) {
@@ -40,7 +39,7 @@ export function Modal({ children, onCloseModal }) {
 
   return createPortal(
     <Backdrop onClick={closeOnBackdropClick}>
-      <ModalWindow>
+      <ModalWindow learnMoreModal={learnMoreModal}>
         <CloseBtn type="button" onClick={onCloseModal}>
           <Svg />
         </CloseBtn>

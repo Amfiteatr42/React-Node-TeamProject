@@ -132,11 +132,16 @@ export default function ModalNotice({
             className={s.deleteBtn}
             onClick={handleFavoriteToggle}
           >
-            Add to{' '}
             {favorite ? (
-              <HeartBtnM className={s.heartItemBtnActive} />
+              <>
+                Remove
+                <HeartBtnM className={s.heartItemBtnActive} />
+              </>
             ) : (
-              <HeartBtnM className={s.heartItemBtn} />
+              <>
+                Add to
+                <HeartBtnM className={s.heartItemBtn} />
+              </>
             )}
           </button>
         </div>

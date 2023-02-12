@@ -14,28 +14,25 @@ export const UserData = () => {
   };
 
   return (
-    <>
-      {' '}
-      <Div>
-        {userPhoto.avatarURL ? (
-          <Img src={userPhoto.avatarURL.url} />
-        ) : (
-          <Content>
-            <Icon />
-          </Content>
-        )}
-        <Button>
-          <InputFile
-            onChange={handleChange}
-            type="file"
-            name="avatar"
-            accept=".png, .jpg, .jpeg"
-          />
-          <Svg />
-          <Text>Edit photo</Text>
-        </Button>
-        <UserDataItem />
-      </Div>
-    </>
+    <Div>
+      {userPhoto.avatarURL ? (
+        <Img src={userPhoto.avatarURL.url} />
+      ) : (
+        <Content>
+          <Icon />
+        </Content>
+      )}
+      <Button>
+        <InputFile
+          onChange={handleChange}
+          type="file"
+          name="avatar"
+          accept=".png, .jpg, .jpeg"
+        />
+        <Svg />
+        <Text>Edit photo</Text>
+      </Button>
+      <UserDataItem />
+    </Div>
   );
 };

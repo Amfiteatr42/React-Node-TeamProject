@@ -106,7 +106,7 @@
 .deleteBtn:focus,
 .learnMoreBtn:hover,
 .learnMoreBtn:focus {
-  background: var(--active);
+  background-color: var(--active);
   color: var(--white);
   border: 2px solid var(--active);
   transition: var(--transition);
@@ -121,21 +121,25 @@
   padding: 0;
   border: 0;
   font-size: 0;
-  background: rgba(253, 247, 242, 0.5);
+  background-color: rgba(253, 247, 242, 0.5);
   border-radius: 50%;
+  transition: var(--transition);
 }
 .heartBtn:hover {
-  background: rgba(253, 247, 242, 1);
-  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background-color: rgba(253, 247, 242, 1);
 }
 .heartItemBtnActive {
-  background: none;
+  background-color: none;
   fill: var(--active);
   border-radius: 50%;
 }
+.heartBtn:hover .heartItemBtn {
+  fill: var(--active);
+}
 
 .heartItemBtn {
-  background: none;
   fill: rgba(175, 177, 184, 0.1);
   border-radius: 50%;
+  transition: var(--transition);
 }

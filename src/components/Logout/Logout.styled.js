@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { IoLogOutOutline } from 'react-icons/io5';
 export const Button = styled.button`
-  font-family: 'Manrope';
   font-weight: 500;
   font-size: 16px;
   line-height: 1.3;
@@ -11,11 +10,11 @@ export const Button = styled.button`
   justify-content: flex-end;
   color: var(--gray-2);
   background-color: transparent;
+  border: none;
   cursor: pointer;
   transition: var(--transition);
 
   &:hover {
-    transform: scale(1.1);
     transition: var(--transition);
     color: var(--active);
   }

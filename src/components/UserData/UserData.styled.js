@@ -40,6 +40,7 @@ export const Button = styled.label`
   background-color: transparent;
   border: none;
   cursor: pointer;
+
   @media screen and (min-width: 767px) and (max-width: 1279px) {
     position: absolute;
     top: 500px;

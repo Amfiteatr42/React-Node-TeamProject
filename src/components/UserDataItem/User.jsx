@@ -118,12 +118,10 @@ export const User = ({ label, name, user, active, setActive }) => {
         />
         {active === name ? (
           <Button disabled={disable} onClick={udateInput(name)}>
-            {' '}
-            <SvgUpdate />{' '}
+            <SvgUpdate />
           </Button>
         ) : (
           <Button type="button" onClick={activeBtn(name)}>
-            {' '}
             <Svg active={active} />
           </Button>
         )}

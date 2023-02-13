@@ -8,7 +8,6 @@ import {
 } from 'redux/auth/selectors';
 import { addToFavorite, deleteFromFavorite } from 'redux/auth/operations';
 import ModalNotice from '../NoticeItemModal';
-// import ModalPage from 'pages/ModalPage';
 import s from './modalItem.module.css';
 import { toast } from 'react-toastify';
 import modalImage from '../../images/no-image-found.png';

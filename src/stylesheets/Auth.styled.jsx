@@ -181,7 +181,7 @@ export const AutContainer = styled.div`
     background-size: 768px;
   }
   @media screen and (min-width: 1279px) {
-    margin-top: -250px;
+    margin-top: -400px;
     height: 538px;
     max-width: 1280px;
     background-image: url(${AuthDesk1x});

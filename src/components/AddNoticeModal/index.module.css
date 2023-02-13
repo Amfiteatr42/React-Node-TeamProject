@@ -54,13 +54,13 @@
 .inputRadio:hover + .radioBtn,
 .inputRadio:focus + .radioBtn {
   background-color: var(--active);
-  color: var(--black);
+  color: var(--white);
 }
 .textFildWrap {
   position: relative;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   width: 100%;
   margin-bottom: 16px;
   font-size: 18px;
@@ -94,6 +94,7 @@
   width: 2px;
 }
 .label {
+  text-align: left;
   margin-bottom: 8px;
 }
 .submitBtnWrapp {
@@ -105,7 +106,10 @@
 
 .errorMsg {
   color: red;
-  text-align: left;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: -23px;
+  margin-top: -3px;
 }
 .submitBtn {
   width: 240px;
@@ -124,7 +128,7 @@
 .submitBtn:hover,
 .submitBtn:active,
 .submitBtn:focus {
-  /* color: var(--btn-color-hover-active); */
+  color: var(--white);
   background: var(--active);
 }
 

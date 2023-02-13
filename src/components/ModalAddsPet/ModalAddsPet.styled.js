@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
 export const Form = styled.form``;
 export const Title = styled.h2`
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 1.38;
@@ -17,8 +15,6 @@ export const Title = styled.h2`
 `;
 export const Label = styled.label`
   display: block;
-  font-family: 'Manrope';
-  font-style: normal;
   font-size: 18px;
   line-height: 1.44;
   margin-bottom: 8px;
@@ -72,8 +68,6 @@ export const ContainerButtons = styled.div`
 export const Button = styled.button`
   display: block;
   width: 240px;
-  font-family: 'Manrope';
-  font-style: normal;
   font-size: 20px;
   line-height: 1.38;
   letter-spacing: 0.04em;
@@ -107,8 +101,6 @@ export const Button = styled.button`
 export const AccentBtn = styled.button`
   display: block;
   width: 240px;
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 500;
   font-size: 20px;
   line-height: 1.38;
@@ -130,8 +122,6 @@ export const AccentBtn = styled.button`
   }
 `;
 export const Text = styled.p`
-  font-family: 'Manrope';
-  font-style: normal;
   font-size: 16px;
   line-height: 1.38;
   text-align: center;
@@ -226,11 +216,10 @@ export const InputFile = styled.input`
   display: none;
 `;
 export const TextError = styled.p`
-  font-family: 'Manrope';
-  font-style: normal;
   font-size: 14px;
   line-height: 1.38;
   text-align: center;
   color: var(--accent);
   margin-top: 5px;
+  margin-bottom: -24px;
 `;

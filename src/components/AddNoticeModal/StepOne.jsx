@@ -101,7 +101,7 @@ const StepOne = ({ formData, setFormData, nextStep, onClose }) => {
             />
             <ErrorMessage
               name="title"
-              render={msg => <div className={s.errorMsg}>{msg}</div>}
+              render={msg => <p className={s.errorMsg}>{msg}</p>}
             />
           </div>
           <div className={s.textFildWrap}>

@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { noticesOperations, noticesSelectors } from '../../redux/notices';
 import s from './index.module.css';
-import { RotatingLines } from 'react-loader-spinner';
 import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
 import { fetchAllNotices } from 'redux/notices/notice-operation';
+import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
 
 export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
@@ -18,9 +18,11 @@ export default function NoticesCategoriesList() {
   const allNotices = useSelector(noticesSelectors.getAllNotices);
 
   const inFavorite = useSelector(getUserFavorite);
-  const favorite = inFavorite.map(favId =>
-    allNotices.find(notice => notice._id === favId)
-  );
+  console.log('inFavorite', inFavorite);
+  const favorite = inFavorite.map(favId => {
+    console.log('favorite');
+    return allNotices.find(notice => notice._id === favId);
+  });
 
   const token = useSelector(getAuthToken);
   const pathFrom = pathname.split('/')[2];
@@ -70,22 +72,7 @@ export default function NoticesCategoriesList() {
   return (
     <>
       {isLoading ? (
-        <div
-          style={{
-            marginTop: '50px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <RotatingLines
-            strokeColor="#F59256"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="150"
-            visible={true}
-          />
-        </div>
+        <LoaderSpinner />
       ) : (
         <div className={s.NoticeList}>
           {noticesData.length ? (

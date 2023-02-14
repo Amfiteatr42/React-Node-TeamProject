@@ -12,15 +12,19 @@ const [isModalOpen, setIsModalOpen] = useState(false);
   )} 
 */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Backdrop, CloseBtn, ModalWindow, Svg } from './Modal.styled';
 
 export function Modal({ children, onCloseModal, learnMoreModal }) {
+  const [fadeType, setFadeType] = useState(null);
+
   useEffect(() => {
+    setFadeType('in');
+
     function closeOnESC(e) {
       if (e.keyCode === 27) {
-        onCloseModal();
+        setFadeType('out');
         return;
       }
     }
@@ -29,18 +33,29 @@ export function Modal({ children, onCloseModal, learnMoreModal }) {
     return () => {
       document.body.removeEventListener('keydown', closeOnESC);
     };
-  }, [onCloseModal]);
+  }, []);
 
   function closeOnBackdropClick(e) {
     if (e.currentTarget === e.target) {
+      setFadeType('out');
+    }
+  }
+
+  function transitionEnd(e) {
+    if (e.propertyName !== 'opacity' || fadeType === 'in') return;
+    if (fadeType === 'out') {
       onCloseModal();
     }
   }
 
   return createPortal(
-    <Backdrop onClick={closeOnBackdropClick}>
-      <ModalWindow learnMoreModal={learnMoreModal}>
-        <CloseBtn type="button" onClick={onCloseModal}>
+    <Backdrop
+      onClick={closeOnBackdropClick}
+      onTransitionEnd={transitionEnd}
+      fadeType={fadeType}
+    >
+      <ModalWindow learnMoreModal={learnMoreModal} fadeType={fadeType}>
+        <CloseBtn type="button" onClick={() => setFadeType('out')}>
           <Svg />
         </CloseBtn>
         {children}

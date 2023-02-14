@@ -34,7 +34,7 @@ const validationSchema = yup.object({
     .max(16)
     .matches(/^[a-zA-Z]*$/g, 'Only alphabetic characters are allowed a-zA-Z')
     .required('Field is required!'),
-    petImg: yup.mixed(),
+  petImg: yup.mixed(),
   breed: yup
     .string()
     .min(2)
@@ -44,18 +44,17 @@ const validationSchema = yup.object({
   dateOfBirth: yup
     .date()
     .test('len', 'Must be exactly MM.DD.YYYY', (value, { originalValue }) => {
-      if (originalValue){
+      if (originalValue) {
         return originalValue.length === 10;
       }
     })
     .transform(function (value, originalValue) {
-     
       const result = parse(originalValue, 'MM.dd.yyyy', new Date());
       return result;
     })
     .typeError('Please enter a valid date MM.dd.yyyy')
-    .required().max(today)
-  ,
+    .required()
+    .max(today),
 });
 
 export const ModalAddsPet = ({ onCloseModal }) => {
@@ -63,14 +62,13 @@ export const ModalAddsPet = ({ onCloseModal }) => {
   const [page, setPage] = useState(1);
 
   const handleSubmit = form => {
-
     dispatch(addPets(form));
     onCloseModal();
   };
 
-  
   return (
     <Formik
+      validateOnBlur
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
       initialValues={{
@@ -81,24 +79,35 @@ export const ModalAddsPet = ({ onCloseModal }) => {
         petImg: '',
       }}
     >
-      {({ handleSubmit, handleChange, values, setFieldValue, errors, touched, handleBlur }) => (
+      {({
+        handleSubmit,
+        handleChange,
+        values,
+        setFieldValue,
+        errors,
+        touched,
+        handleBlur,
+        validateForm,
+        validateField,
+        setTouched,
+      }) => (
         <Form onSubmit={handleSubmit}>
           {page === 1 && (
             <>
               <Title>Add pet</Title>
-              <Label>
-                Name pet  </Label>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Type name pet"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                { touched.name && errors.name && <TextError>{errors.name}</TextError>}
-            
+              <Label>Name pet </Label>
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Type name pet"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {touched.name && errors.name && (
+                <TextError>{errors.name}</TextError>
+              )}
 
               <Label>Date of birth</Label>
               <Input
@@ -109,9 +118,9 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 value={values.dateOfBirth}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                 data-pattern="**.**.****"
+                data-pattern="**.**.****"
               ></Input>
-              {touched.dateOfBirth && errors.dateOfBirth &&  (
+              {touched.dateOfBirth && errors.dateOfBirth && (
                 <TextError>{errors.dateOfBirth}</TextError>
               )}
               <Label>Breed</Label>
@@ -124,18 +133,27 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              { touched.breed && errors.breed && <TextError>{errors.breed}</TextError>}
+              {touched.breed && errors.breed && (
+                <TextError>{errors.breed}</TextError>
+              )}
               <ContainerButtons>
                 <Button type="button" onClick={onCloseModal}>
                   Cancel
                 </Button>
-                <AccentBtn type="button" onClick={() => {
-                  if (errors.breed || errors.name || errors.dateOfBirth) {
-                    setPage(1)
-                    return;
-                  }
-                    setPage(2)
-                }}>
+                <AccentBtn
+                  type="button"
+                  onClick={() => {
+                    validateForm().then(({ name, dateOfBirth, breed }) => {
+                      if (!name && !dateOfBirth && !breed) return setPage(2);
+                      setTouched({
+                        name: true,
+                        dateOfBirth: true,
+                        breed: true,
+                      });
+                      setPage(1);
+                    });
+                  }}
+                >
                   Next
                 </AccentBtn>
               </ContainerButtons>
@@ -171,7 +189,9 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               ></Textarea>
-              {touched.comment && errors.comment && <TextError>{errors.comment}</TextError>}
+              {touched.comment && errors.comment && (
+                <TextError>{errors.comment}</TextError>
+              )}
               <ContainerButtons>
                 <Button type="button" onClick={() => setPage(1)}>
                   Back

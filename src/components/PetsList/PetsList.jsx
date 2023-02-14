@@ -2,6 +2,7 @@ import { remove } from '../../assets/icons/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPets, removePets } from 'redux/petsData/petsOperation';
 import { getPets } from 'redux/petsData/petsSelector';
+import notFoundImage from '../../images/no-image-found.png';
 import {
   Box,
   Button,
@@ -38,7 +39,12 @@ export const PetsList = () => {
           pets.map(
             ({ _id, imgURL, name, dateOfBirth, breed, comment }, idx) => (
               <Li key={idx}>
-                <Content>{imgURL && <Img src={imgURL.url} />}</Content>
+                <Content>
+                  <Img
+                    src={imgURL?.url || notFoundImage}
+                    alt={"Image of user's pet"}
+                  />
+                </Content>
                 <List>
                   <Item>
                     <Span>Name:</Span> {name}

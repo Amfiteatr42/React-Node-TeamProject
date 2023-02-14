@@ -15,8 +15,8 @@ const handlePending = state => {
   state.isLoggedIn = false;
 };
 
-const handleRejected = (state, action) => {
-  state.error = action.payload;
+const handleRejected = (state, { payload }) => {
+  state.error = payload;
   state.isLoggedIn = false;
   state.isRefreshing = false;
 };
@@ -34,22 +34,22 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [Login.pending]: handlePending,
-    [Login.rejected](state, action) {
-      state.isLoginError = action.payload;
+    [Login.rejected](state, { payload }) {
+      state.isLoginError = payload;
       state.isLoggedIn = false;
     },
-    [Login.fulfilled](state, action) {
-      state.user = action.payload.data.data;
-      state.token = action.payload.data.longToken;
+    [Login.fulfilled](state, { payload }) {
+      state.user = payload.data.data;
+      state.token = payload.data.longToken;
       state.isLoggedIn = true;
       state.isLoginError = null;
-      state.favorite = action.payload.data.favoriteAds;
+      state.favorite = payload.data.data.favoriteAds;
     },
     [Register.pending]: handlePending,
     [Register.rejected]: handleRejected,
-    [Register.fulfilled](state, action) {
-      state.user = action.payload.data.data;
-      state.token = action.payload.data.longToken;
+    [Register.fulfilled](state, { payload }) {
+      state.user = payload.data.data;
+      state.token = payload.data.longToken;
       state.isLoggedIn = true;
       state.error = null;
     },
@@ -68,45 +68,45 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     },
     [fetchCurrentUser.rejected]: handleRejected,
-    [fetchCurrentUser.fulfilled](state, action) {
+    [fetchCurrentUser.fulfilled](state, { payload }) {
       state.isLoggedIn = true;
       state.isRefreshing = false;
-      state.user = action.payload.data;
+      state.user = payload.data;
       state.error = null;
-      state.favorite = action.payload.data.favoriteAds;
+      state.favorite = payload.data.favoriteAds;
     },
-    [updateUserInfo.pending](state, action) {
+    [updateUserInfo.pending](state) {
       state.isLoggedIn = true;
     },
-    [updateUserInfo.rejected](state, action) {
+    [updateUserInfo.rejected](state, { payload }) {
       state.isLoggedIn = true;
-      state.error = action.payload;
+      state.error = payload;
     },
-    [updateUserInfo.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload.data };
+    [updateUserInfo.fulfilled](state, { payload }) {
+      state.user = { ...state.user, ...payload.data };
       state.error = null;
     },
     [updateAvatar.pending](state) {
       state.isLoggedIn = true;
     },
-    [updateAvatar.rejected](state, action) {
-      state.error = action.payload;
+    [updateAvatar.rejected](state, { payload }) {
+      state.error = payload;
     },
-    [updateAvatar.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload };
+    [updateAvatar.fulfilled](state, { payload }) {
+      state.user = { ...state.user, ...payload };
       state.error = null;
     },
-    [getFavorite.fulfilled](state, action) {
-      state.favorite = action.payload.favorite;
+    [getFavorite.fulfilled](state, { payload }) {
+      state.favorite = payload.favorite;
     },
-    [addToFavorite.fulfilled](state, action) {
-      state.favorite = action.payload.data.favoriteAds;
+    [addToFavorite.fulfilled](state, { payload }) {
+      state.favorite = payload.data.favoriteAds;
     },
-    [deleteFromFavorite.fulfilled](state, action) {
+    [deleteFromFavorite.fulfilled](state, { payload }) {
       state.favorite = state.favorite.filter(
-        el => el !== action.payload.data.favoriteAds
+        el => el !== payload.data.favoriteAds
       );
-      state.favorite = action.payload.data.favoriteAds;
+      state.favorite = payload.data.favoriteAds;
     },
   },
 });

@@ -28,54 +28,70 @@ export default function Navigation() {
   return (
     <NavigationList>
       <NavigationItem>
-        <Nav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive} />
+        <Nav
+          setIsMobMenuOpen={setIsMobMenuOpen}
+          setIsRegActive={setIsRegActive}
+          isRegActive={isRegActive}
+        />
       </NavigationItem>
 
-      {isMobMenuOpen === false ? (
+      {!isMobMenuOpen && (
         <NavigationItemUser>
-          {isLoggedIn === true ? (
+          {isLoggedIn ? (
             <UserNavBox>
               <UserNav setIsMobMenuOpen={setIsMobMenuOpen} />
             </UserNavBox>
           ) : (
             <UserNavBox>
-                <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive}/>
+              <AuthNav
+                setIsMobMenuOpen={setIsMobMenuOpen}
+                setIsRegActive={setIsRegActive}
+                isRegActive={isRegActive}
+              />
             </UserNavBox>
           )}
         </NavigationItemUser>
-      ) : (
-        <></>
       )}
 
       <BurgerBtnItem>
-        {isMobMenuOpen === false ? (
-          <BurgerBtn type="button" onClick={() => setIsMobMenuOpen(true)}>
-            <SvgBurger>
-              <use href={`${sprite}#icon-burger2`}></use>
-            </SvgBurger>
-          </BurgerBtn>
-        ) : (
+        {isMobMenuOpen ? (
           <CloseBtn type="button" onClick={() => setIsMobMenuOpen(false)}>
             <SvgClose>
               <use href={`${sprite}#icon-close3`}></use>
             </SvgClose>
           </CloseBtn>
+        ) : (
+          <BurgerBtn type="button" onClick={() => setIsMobMenuOpen(true)}>
+            <SvgBurger>
+              <use href={`${sprite}#icon-burger2`}></use>
+            </SvgBurger>
+          </BurgerBtn>
         )}
       </BurgerBtnItem>
 
-      {isMobMenuOpen === true ? (
-        <MobMenuBox>
-          <MobMenuContainer>
-            <UserAuthNavBox>
-              {isLoggedIn === true ? <UserNav setIsMobMenuOpen={setIsMobMenuOpen} /> : <AuthNav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive}/>}
-            </UserAuthNavBox>
+      {/* {isMobMenuOpen && ( */}
+      <MobMenuBox isMobMenuOpen={isMobMenuOpen}>
+        <MobMenuContainer>
+          <UserAuthNavBox>
+            {isLoggedIn ? (
+              <UserNav setIsMobMenuOpen={setIsMobMenuOpen} />
+            ) : (
+              <AuthNav
+                setIsMobMenuOpen={setIsMobMenuOpen}
+                setIsRegActive={setIsRegActive}
+                isRegActive={isRegActive}
+              />
+            )}
+          </UserAuthNavBox>
 
-            <Nav setIsMobMenuOpen={setIsMobMenuOpen} setIsRegActive={setIsRegActive} isRegActive={isRegActive} />
-          </MobMenuContainer>
-        </MobMenuBox>
-      ) : (
-        <></>
-      )}
+          <Nav
+            setIsMobMenuOpen={setIsMobMenuOpen}
+            setIsRegActive={setIsRegActive}
+            isRegActive={isRegActive}
+          />
+        </MobMenuContainer>
+      </MobMenuBox>
+      {/* )} */}
     </NavigationList>
   );
 }

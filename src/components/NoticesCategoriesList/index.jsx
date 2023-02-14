@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { noticesOperations, noticesSelectors } from '../../redux/notices';
 import s from './index.module.css';
-import { RotatingLines } from 'react-loader-spinner';
 import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
 import { fetchAllNotices } from 'redux/notices/notice-operation';
+import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
 
 export default function NoticesCategoriesList() {
   const { pathname } = useLocation();
@@ -18,28 +18,32 @@ export default function NoticesCategoriesList() {
   const allNotices = useSelector(noticesSelectors.getAllNotices);
 
   const inFavorite = useSelector(getUserFavorite);
-  const favorite = inFavorite.map(favId =>
-    allNotices.find(notice => notice._id === favId)
-  );
+  const favorite = inFavorite.map(favId => {
+    return allNotices.find(notice => notice._id === favId);
+  });
 
   const token = useSelector(getAuthToken);
   const pathFrom = pathname.split('/')[2];
 
   const resetNoticesData = async pathFrom => {
-    if (pathFrom === 'sell') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
-    }
-    if (pathFrom === 'lost-found') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
-    }
-    if (pathFrom === 'for-free') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
-    }
-    if (pathFrom === 'favorite') {
-      setNoticesData(favorite);
-    }
-    if (pathFrom === 'own') {
-      dispatch(noticesOperations.getUserNotices({ token }));
+    switch (pathFrom) {
+      case 'sell':
+        dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
+        break;
+      case 'lost-found':
+        dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
+        break;
+      case 'for-free':
+        dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
+        break;
+      case 'favorite':
+        setNoticesData(favorite);
+        break;
+      case 'own':
+        dispatch(noticesOperations.getUserNotices({ token }));
+        break;
+      default:
+        break;
     }
   };
 
@@ -70,22 +74,7 @@ export default function NoticesCategoriesList() {
   return (
     <>
       {isLoading ? (
-        <div
-          style={{
-            marginTop: '50px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <RotatingLines
-            strokeColor="#F59256"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="150"
-            visible={true}
-          />
-        </div>
+        <LoaderSpinner />
       ) : (
         <div className={s.NoticeList}>
           {noticesData.length ? (

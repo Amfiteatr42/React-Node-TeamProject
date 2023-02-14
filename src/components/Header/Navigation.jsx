@@ -69,7 +69,6 @@ export default function Navigation() {
         )}
       </BurgerBtnItem>
 
-      {/* {isMobMenuOpen && ( */}
       <MobMenuBox isMobMenuOpen={isMobMenuOpen}>
         <MobMenuContainer>
           <UserAuthNavBox>
@@ -91,7 +90,6 @@ export default function Navigation() {
           />
         </MobMenuContainer>
       </MobMenuBox>
-      {/* )} */}
     </NavigationList>
   );
 }

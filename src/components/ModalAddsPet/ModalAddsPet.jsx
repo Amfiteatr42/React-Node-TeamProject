@@ -68,7 +68,6 @@ export const ModalAddsPet = ({ onCloseModal }) => {
 
   return (
     <Formik
-      validateOnBlur
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
       initialValues={{
@@ -88,7 +87,6 @@ export const ModalAddsPet = ({ onCloseModal }) => {
         touched,
         handleBlur,
         validateForm,
-        validateField,
         setTouched,
       }) => (
         <Form onSubmit={handleSubmit}>
@@ -178,7 +176,7 @@ export const ModalAddsPet = ({ onCloseModal }) => {
                     setFieldValue('petImg', event.currentTarget.files[0]);
                   }}
                   onBlur={handleBlur}
-                />{' '}
+                />
               </LabelImg>
               <Label>Comments</Label>
               <Textarea

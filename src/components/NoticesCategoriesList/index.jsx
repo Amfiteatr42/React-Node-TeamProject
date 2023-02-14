@@ -18,9 +18,7 @@ export default function NoticesCategoriesList() {
   const allNotices = useSelector(noticesSelectors.getAllNotices);
 
   const inFavorite = useSelector(getUserFavorite);
-  console.log('inFavorite', inFavorite);
   const favorite = inFavorite.map(favId => {
-    console.log('favorite');
     return allNotices.find(notice => notice._id === favId);
   });
 
@@ -28,20 +26,24 @@ export default function NoticesCategoriesList() {
   const pathFrom = pathname.split('/')[2];
 
   const resetNoticesData = async pathFrom => {
-    if (pathFrom === 'sell') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
-    }
-    if (pathFrom === 'lost-found') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
-    }
-    if (pathFrom === 'for-free') {
-      dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
-    }
-    if (pathFrom === 'favorite') {
-      setNoticesData(favorite);
-    }
-    if (pathFrom === 'own') {
-      dispatch(noticesOperations.getUserNotices({ token }));
+    switch (pathFrom) {
+      case 'sell':
+        dispatch(noticesOperations.getNoticesCategories({ category: '1' }));
+        break;
+      case 'lost-found':
+        dispatch(noticesOperations.getNoticesCategories({ category: '2' }));
+        break;
+      case 'for-free':
+        dispatch(noticesOperations.getNoticesCategories({ category: '3' }));
+        break;
+      case 'favorite':
+        setNoticesData(favorite);
+        break;
+      case 'own':
+        dispatch(noticesOperations.getUserNotices({ token }));
+        break;
+      default:
+        break;
     }
   };
 

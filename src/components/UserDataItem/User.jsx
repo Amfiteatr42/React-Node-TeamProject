@@ -100,11 +100,12 @@ export const User = ({ label, name, user, active, setActive }) => {
     dispatch(updateUserInfo({ [name]: valid }));
   };
 
-  const activeBtn = name => () => setActive(name);
+  const activeBtn = name => () => setActive(name);  
+  
 
   return (
     <>
-      <Item ref={active === name ? wrapperRef : null}>
+      <Item>
         <Label>{label}</Label>
         <Input
           active={active === name}
@@ -121,7 +122,7 @@ export const User = ({ label, name, user, active, setActive }) => {
             <SvgUpdate />
           </Button>
         ) : (
-          <Button type="button" onClick={activeBtn(name)}>
+          <Button type="button"  disabled={active} onClick={activeBtn(name)}>
             <Svg active={active} />
           </Button>
         )}

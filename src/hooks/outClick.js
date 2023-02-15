@@ -8,9 +8,10 @@ export const useOutClick = (ref, cb) => {
       }
     }
 
-    document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
+   document.addEventListener('mousedown', handleClick);
+return () => {
+  document.removeEventListener('mousedown', handleClick);
+};
   }, [ref, cb]);
+  
 };

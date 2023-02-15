@@ -7,24 +7,31 @@ import s from './index.module.css';
 import { getAuthToken, getUserFavorite } from 'redux/auth/selectors';
 import { fetchAllNotices } from 'redux/notices/notice-operation';
 import { LoaderSpinner } from 'components/LoaderSpinner/LoaderSpinner';
+import { deleteFromFavorite } from 'redux/auth/operations';
 
 export default function NoticesCategoriesList() {
+  const [noticesData, setNoticesData] = useState([]);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const [noticesData, setNoticesData] = useState([]);
   const category = useSelector(noticesSelectors.getNoticesCategories);
   const userNotices = useSelector(noticesSelectors.getUserNotices);
   const isLoading = useSelector(noticesSelectors.getIsLoadingNotices);
   const allNotices = useSelector(noticesSelectors.getAllNotices);
-
   const inFavorite = useSelector(getUserFavorite);
-  const favorite = inFavorite.map(favId => {
-    return allNotices.find(notice => notice._id === favId);
-  });
-
   const token = useSelector(getAuthToken);
   const pathFrom = pathname.split('/')[2];
 
+  const favorite = [];
+  if (allNotices.length && pathFrom === 'favorite') {
+    let counter = 1;
+    for (const favId of inFavorite) {
+      const result = allNotices.find(notice => notice._id === favId);
+      console.log('result', counter, ' === ', result);
+      counter += 1;
+      result ? favorite.push(result) : dispatch(deleteFromFavorite(favId));
+    }
+  }
+  console.log('render');
   const resetNoticesData = async pathFrom => {
     switch (pathFrom) {
       case 'sell':
